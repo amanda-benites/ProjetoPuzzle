@@ -4,6 +4,7 @@ import StyleGlobal, { TelaInteira } from "./styleGlobal";
 
 import Cover from "./page/cover/Cover"
 import Auth from "./page/auth/Auth"
+import CreateAccount from "./page/create_account/CreateAccount";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Routes>
             <Route path="/" Component={Cover}/>
             <Route path="/auth" Component={Auth}/>
+            <Route path="/create" Component={CreateAccount}/>
           </Routes>
         </BrowserRouter>
       </TelaInteira>

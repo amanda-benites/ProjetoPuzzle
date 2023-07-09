@@ -18,8 +18,11 @@ export const DivButton = styled.div`
     justify-content: center;
 `
 
-export const AnchorContainer = styled.a`
+export const AnchorContainer = styled.button`
+    background: none;
+    border: none;
     color: #2CBFAE;
     text-decoration: none;
     font-weight: bold;
+    font-size: medium;
 `

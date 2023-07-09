@@ -8,7 +8,7 @@ export const AuthHeaderContainer = styled.header`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 60vw;
+    gap: 55vw;
 `
 
 export const AnchorColor = styled(AnchorContainer)`

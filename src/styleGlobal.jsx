@@ -1,11 +1,11 @@
 import { createGlobalStyle, styled } from "styled-components";
 
-
 export default createGlobalStyle`
+*{
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-`
+}`;
 
 export const CorFundo = styled.div`
     background: white;
@@ -26,6 +26,7 @@ export const FontAlatsiContainer = styled.label`
     font-family: Alatsi, Arial, Helvetica, sans-serif;
 `
 
+// alterando a fonte dos h1
 export const FontH1Container = styled.h1`
     font-family: Archivo, Arial, Helvetica, sans-serif;
 `

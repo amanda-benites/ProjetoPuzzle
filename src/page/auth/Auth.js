@@ -2,8 +2,16 @@ import Input from "../../components/auth_input/Input"
 import AuthHeader from "../../components/auth_header/AuthHeader"
 import { FontH1Container } from "../../styleGlobal"
 import { AuthBodyContainer, AuthButtonColor, DivButtonAuthContainer, DivTitleContainer, ForgetPasswordContainer, FormAuthContainer, LabelColor } from "./style"
+import { useNavigate } from "react-router-dom"
 
 function Auth() {
+    
+    const navigate = useNavigate()
+
+    function goToCoverPage() {
+        navigate("/home");
+    }
+
     return(
         <>
             <AuthHeader/>
@@ -18,7 +26,7 @@ function Auth() {
                     <Input/>
                 </FormAuthContainer>
                 <DivButtonAuthContainer>
-                    <AuthButtonColor>Entrar</AuthButtonColor>
+                    <AuthButtonColor onClick={goToCoverPage} >Entrar</AuthButtonColor>
                     <ForgetPasswordContainer>Esqueceu a senha?</ForgetPasswordContainer>
                 </DivButtonAuthContainer>
             </AuthBodyContainer>

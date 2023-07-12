@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import Input from "../../components/auth_input/Input"
 import CreateHeader from "../../components/create_header/CreateHeader"
 import { FontH1Container } from "../../styleGlobal"
@@ -5,6 +6,13 @@ import { CreateBodyContainer, CreateButtonColor, CreateDivTitle, CreateFormConta
 
 
 function CreateAccount() {
+
+    const navigate = useNavigate()
+
+    function goToCoverPage() {
+        navigate("/home");
+    }
+
     return(
         <>
             <CreateHeader/>
@@ -26,7 +34,7 @@ function CreateAccount() {
                     <Input/>
                 </CreateFormContainer>
                 <DivCreateButtonContainer>
-                    <CreateButtonColor>Criar conta</CreateButtonColor>
+                    <CreateButtonColor onClick={goToCoverPage} >Criar conta</CreateButtonColor>
                 </DivCreateButtonContainer>
             </CreateBodyContainer>
         </>

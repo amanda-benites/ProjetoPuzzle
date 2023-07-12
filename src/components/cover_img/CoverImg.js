@@ -4,7 +4,7 @@ import logo from '../../assets/logo.svg'
 function CoverImg() {
     return(
         <DivImgContainer>
-            <ImgContainer src={logo} alt=""></ImgContainer>
+            <ImgContainer src={logo} alt="Logo"></ImgContainer>
         </DivImgContainer>
     )
 }

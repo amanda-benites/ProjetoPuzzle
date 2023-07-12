@@ -13,7 +13,7 @@ function ButtonBack() {
     }
 
     return(
-        <ButtonBackContainer onClick={goToCoverPage}><ImgBackContainer src={back}/></ButtonBackContainer>
+        <ButtonBackContainer onClick={goToCoverPage}><ImgBackContainer src={back} alt="Ícone de voltar"/></ButtonBackContainer>
     )
 }
 

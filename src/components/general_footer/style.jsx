@@ -1,12 +1,20 @@
 import styled from "styled-components";
+import { ButtonHeaderContainer } from "../home_header/style";
 
-export const FooterContainer = styled.div`
+export const FooterContainer = styled.footer`
     display: grid;
     grid-template-columns: 33vw 33vw 33vw;
     grid-template-rows: 8vh;
     grid-template-areas: 'ImgContactsContainer ImgAddContainer ImgChatContainer';
 
+    position: absolute;
+    bottom: 0;
+    
     border-top: 1px lightgray solid;
+`
+
+export const ButtonFooterContainer = styled(ButtonHeaderContainer)`
+    
 `
 
 export const ImgContactsContainer = styled.div`
@@ -14,8 +22,6 @@ export const ImgContactsContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
-    background-color: aqua;
 `
 
 export const ImgAddContainer = styled.div`
@@ -23,8 +29,6 @@ export const ImgAddContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
-    background-color: blue;
 `
 
 export const ImgChatContainer = styled.div`
@@ -32,6 +36,4 @@ export const ImgChatContainer = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    
-    background-color: purple;
 `

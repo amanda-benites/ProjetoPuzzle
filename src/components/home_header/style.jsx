@@ -11,6 +11,7 @@ export const HomeHeaderContainer = styled.header`
 `
 
 export const LogoHeaderContainer = styled.div`
+    grid-area: LogoHeaderContainer;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -18,6 +19,7 @@ export const LogoHeaderContainer = styled.div`
 `
 
 export const ButtonDivHeaderContainer = styled.div`
+    grid-area: ButtonHeaderContainer;
     display: flex;
     flex-direction: row;
     align-items: center;

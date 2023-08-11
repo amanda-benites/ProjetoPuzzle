@@ -3,7 +3,7 @@ import { ButtonHeaderContainer } from "../../components/home_header/style";
 
 export const BodyHomeContainer = styled.body`
     width: 100vw;
-    font-family: Amiko, Arial, Helvetica, sans-serif;;
+    font-family: Amiko, Arial, Helvetica, sans-serif;
 `
 
 export const MainHomeContainer = styled.main`
@@ -23,7 +23,7 @@ export const DivProfileAccess = styled.div`
     background-color: aqua;
 `
 export const ButtonUserContainer = styled(ButtonHeaderContainer)`
-    
+    font-weight: bold;
 `
 
 export const MyPicture = styled.div`
@@ -34,4 +34,8 @@ export const MyPicture = styled.div`
 export const MyProfile = styled.div`
     grid-area: MyProfile;
     background-color: purple;
+`
+
+export const MyNameText = styled.p`
+    
 `

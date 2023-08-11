@@ -17,6 +17,7 @@ function Home() {
                     </MyPicture>
                     <MyProfile>
                         <ButtonUserContainer>Meu Perfil</ButtonUserContainer>
+                        <p>Amanda Moraes Benites</p>
                     </MyProfile>
                 </DivProfileAccess>
                 <PostCard/>

@@ -18,11 +18,35 @@ export const HeaderPost = styled.div`
     grid-area: HeaderPost;
     border-radius: 10px 10px 0px 0px;
 
+    display: grid;
+    grid-template-columns: 12vw 71vw 10vw;
+    grid-template-rows: 6vh;
+    grid-template-areas: 'ImgHeader ProfileButton ThreePoints';
+`
+
+export const ImgHeader = styled.div`
+    grid-area: ImgHeader;
     display: flex;
     flex-direction: row;
+    justify-content: right;
     align-items: center;
-    gap: 2vw;
-    padding-left: 3vw;
+`
+
+export const ProfileButton = styled.div`
+    grid-area: ProfileButton;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    padding-left: 2vw;
+`
+
+export const ThreePoints = styled.div`
+    grid-area: ThreePoints;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
 `
 
 export const BodyPost = styled.div`
@@ -48,4 +72,8 @@ export const ButtonIconsPost = styled(ButtonHeaderContainer)`
 
 export const ImgPostContainer = styled.img`
     width: 85vw;
+`
+
+export const ImgThreePoints = styled.img`
+      transform: rotate(90deg);
 `

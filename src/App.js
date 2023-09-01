@@ -14,7 +14,7 @@ function App() {
         <StyledGlobal/>
         <BrowserRouter>
           <Routes>
-            <Route path="/" Component={Cover}/>
+            <Route index Component={Cover}/>
             <Route path="/auth" Component={Auth}/>
             <Route path="/create" Component={CreateAccount}/>
             <Route path="/home" Component={Home}/>

@@ -77,3 +77,8 @@ export const ImgPostContainer = styled.img`
 export const ImgThreePoints = styled.img`
       transform: rotate(90deg);
 `
+
+export const MenuContainer = styled.ul`
+    background-color: blue;
+    position: absolute;
+`

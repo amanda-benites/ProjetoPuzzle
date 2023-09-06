@@ -19,14 +19,17 @@ function PostCard() {
                     </ButtonIconsPost>
                 </ProfileButton>
                 <ThreePoints>
-                    <ButtonIconsPost onClick={() => {}} >
+                    <ButtonIconsPost onClick={() => {}}>
                         <ImgThreePoints src={threePoints} alt="Imagem de três pontos"/>
                     </ButtonIconsPost>
+                    <nav>
+                        <ul>
+                            <li>Editar publicação</li>
+                            <li>Excluir publicação</li>
+                        </ul>
+                    </nav>
+
                 </ThreePoints>
-                <div>
-                    <button></button>
-                    <button></button>
-                </div>
             </HeaderPost>
             <BodyPost>
                 <ImgPostContainer src={exemploImagem} alt="Imagem de teste"/>

@@ -17,7 +17,7 @@ export const useOutsideClick = (el, initialState) => {
     return () => {
       window.removeEventListener("click", onClick);
     }
-  }, [])
+  }, [isActive, el])
 
   return [isActive, setIsActive]
 }

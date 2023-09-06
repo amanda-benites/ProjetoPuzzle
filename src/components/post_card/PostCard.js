@@ -5,8 +5,15 @@ import MauricioExemplo from "../../assets/MauricioExemplo.svg"
 import likeImg from "../../assets/like_img.svg"
 import commentsImg from "../../assets/comments_post.svg"
 import threePoints from "../../assets/three-points.svg"
+import { useRef } from "react"
+import { useOutsideClick } from "./useOutsideClick"
 
 function PostCard() {
+    const dropDownRef = useRef(null);
+    const [isActive, setIsActive] = useOutsideClick(dropDownRef)
+
+    console.log(isActive)
+
     return(
         <DivPostContainer>
             <HeaderPost>
@@ -22,7 +29,9 @@ function PostCard() {
                     <ButtonIconsPost onClick={() => {}}>
                         <ImgThreePoints src={threePoints} alt="Imagem de três pontos"/>
                     </ButtonIconsPost>
-                    <nav>
+                    <nav
+                        ref={dropDownRef}
+                    >
                         <ul>
                             <li>Editar publicação</li>
                             <li>Excluir publicação</li>

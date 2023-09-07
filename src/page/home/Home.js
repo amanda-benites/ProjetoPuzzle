@@ -5,7 +5,28 @@ import { BodyHomeContainer, ButtonUserContainer, DivProfileAccess, MainHomeConta
 
 import userImg from "../../assets/user_img.svg"
 
+import exemploImagem from "../../assets/exemploImagem.svg"
+import MauricioExemplo from "../../assets/MauricioExemplo.svg"
+
 function Home() {
+    const postValues = {
+        user1: [MauricioExemplo, 'Maurício Costa', exemploImagem],
+        user2: [MauricioExemplo, 'Clara Machado', exemploImagem],
+        user3: [MauricioExemplo, 'Augusto Silva', exemploImagem],
+    }
+
+    let arrayValues = []
+
+    for(let i = 0; i < Object.keys(postValues).length; i++) {
+        arrayValues.push(
+            <PostCard
+              userImg={postValues[`user${i + 1}`][0]}
+              userName={postValues[`user${i + 1}`][1]}
+              ImgContent={postValues[`user${i + 1}`][2]}
+            />
+          );
+    }
+
     return(
         <BodyHomeContainer>    
             <HomeHeader/>
@@ -16,10 +37,10 @@ function Home() {
                     </MyPicture>
                     <MyProfile>
                         <ButtonUserContainer>Meu Perfil</ButtonUserContainer>
-                        <MyNameText>Amanda Moraes Benites</MyNameText>
+                        <MyNameText>Amanda Benites</MyNameText>
                     </MyProfile>
                 </DivProfileAccess>
-                <PostCard/>
+                {arrayValues}
             </MainHomeContainer>
             <GerenalFooter/>
         </BodyHomeContainer>

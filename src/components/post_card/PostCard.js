@@ -1,21 +1,19 @@
 import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, ImgPostContainer, ImgHeader, ProfileButton, ThreePoints, ImgThreePoints } from "./style"
 
-import exemploImagem from "../../assets/exemploImagem.svg"
-import MauricioExemplo from "../../assets/MauricioExemplo.svg"
 import likeImg from "../../assets/like_img.svg"
 import commentsImg from "../../assets/comments_post.svg"
 import threePoints from "../../assets/three-points.svg"
 
-function PostCard() {
+function PostCard(props) {
     return(
         <DivPostContainer>
             <HeaderPost>
                 <ImgHeader>
-                    <img src={MauricioExemplo} alt="Imagem de exemplo Maurício"/>
+                    <img src={props.userImg} alt="Imagem de exemplo Maurício"/>
                 </ImgHeader>
                 <ProfileButton>
                     <ButtonIconsPost>
-                        <p>Maurício Costa</p>
+                        <p>{props.userName}</p>
                     </ButtonIconsPost>
                 </ProfileButton>
                 <ThreePoints>
@@ -29,7 +27,7 @@ function PostCard() {
                 </div>
             </HeaderPost>
             <BodyPost>
-                <ImgPostContainer src={exemploImagem} alt="Imagem de teste"/>
+                <ImgPostContainer src={props.ImgContent} alt="Imagem de teste"/>
             </BodyPost>
             <FooterPost>
                 <ButtonIconsPost>

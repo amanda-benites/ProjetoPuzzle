@@ -11,11 +11,12 @@ export const MainHomeContainer = styled.main`
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 2vh;
 `
 
 export const DivProfileAccess = styled.div`
     width: 100vw;
-    height: 12vh;
+    height: 10vh;
     display: grid;
     grid-template-columns: 15vw 82vw;
     grid-template-rows: 10vh;

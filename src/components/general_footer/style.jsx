@@ -7,10 +7,12 @@ export const FooterContainer = styled.footer`
     grid-template-rows: 8vh;
     grid-template-areas: 'ImgContactsContainer ImgAddContainer ImgChatContainer';
 
-    position: absolute;
+    position: fixed;
     bottom: 0;
     
     border-top: 1px lightgray solid;
+
+    background-color: white;
 `
 
 export const ButtonFooterContainer = styled(ButtonHeaderContainer)`

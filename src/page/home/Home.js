@@ -20,6 +20,7 @@ function Home() {
     for(let i = 0; i < Object.keys(postValues).length; i++) {
         arrayValues.push(
             <PostCard
+              key={`user${i + 1}`}
               userImg={postValues[`user${i + 1}`][0]}
               userName={postValues[`user${i + 1}`][1]}
               ImgContent={postValues[`user${i + 1}`][2]}

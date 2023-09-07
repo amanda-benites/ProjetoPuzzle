@@ -3,12 +3,19 @@ import { ButtonFooterContainer, FooterContainer, ImgAddContainer, ImgChatContain
 import imgContacts from "../../assets/imgContacts.svg"
 import imgAdd from "../../assets/imgAdd.svg"
 import imgChat from "../../assets/imgChat.svg"
+import { useNavigate } from "react-router-dom"
 
 function GerenalFooter() {
+    const navigate = useNavigate()
+
+    function goToContactsPage() {
+        navigate("/contacts");
+    }
+
     return(
         <FooterContainer>
             <ImgContactsContainer>
-                <ButtonFooterContainer>
+                <ButtonFooterContainer onClick={goToContactsPage}>
                     <img src={imgContacts} alt="Imagem representativa dos contatos"/>
                 </ButtonFooterContainer>
             </ImgContactsContainer>

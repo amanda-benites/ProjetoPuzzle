@@ -6,6 +6,7 @@ import Cover from "./page/cover/Cover"
 import Auth from "./page/auth/Auth"
 import CreateAccount from "./page/create_account/CreateAccount";
 import Home from "./page/home/Home"
+import Contacts from "./page/contacts/Contacts";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/auth" Component={Auth}/>
             <Route path="/create" Component={CreateAccount}/>
             <Route path="/home" Component={Home}/>
+            <Route path="/contacts" Component={Contacts}/>
           </Routes>
         </BrowserRouter>
       </TelaInteira>

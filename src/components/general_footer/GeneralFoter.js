@@ -13,9 +13,9 @@ function GerenalFooter() {
                 </ButtonFooterContainer>
             </ImgContactsContainer>
             <ImgAddContainer>
-            <ButtonFooterContainer>
-                <img src={imgAdd} alt="Imagem representativa da adição de postagem"/>
-            </ButtonFooterContainer>
+                <ButtonFooterContainer>
+                    <img src={imgAdd} alt="Imagem representativa da adição de postagem"/>
+                </ButtonFooterContainer>
             </ImgAddContainer>
             <ImgChatContainer>
                 <ButtonFooterContainer>

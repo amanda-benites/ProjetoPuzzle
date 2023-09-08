@@ -62,3 +62,8 @@ export const FinalDiv = styled.div`
 export const FinalText = styled.p`
     color: lightgray;
 `
+
+export const DivNoPosts = styled.div`
+    width: 100vw;
+    height: 80vh;
+`

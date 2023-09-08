@@ -7,6 +7,8 @@ import Home from "./page/home/Home"
 import Contacts from "./page/contacts/Contacts";
 import Profile from "./page/profile/Profile";
 import CreatePost from "./page/create_post/CreatePost";
+import ContactProfile from "./page/contact_profile/ContactProfile";
+import FindPeople from "./page/find_people/FindPeople";
 
 function RoutesPage() {
   return(
@@ -19,6 +21,8 @@ function RoutesPage() {
         <Route path="contacts" Component={Contacts}/>
         <Route path="profile" Component={Profile}/>
         <Route path="create-post" Component={CreatePost}/>
+        <Route path="contact-profile" Component={ContactProfile}/>
+        <Route path="find" Component={FindPeople}/>
       </Routes>
     </BrowserRouter>
   )

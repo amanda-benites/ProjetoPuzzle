@@ -8,6 +8,7 @@ export const DivSearchContainerMain = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    font-family: Amiko, Arial, Helvetica, sans-serif;
 `
 
 export const DivSearchContainer = styled.div`

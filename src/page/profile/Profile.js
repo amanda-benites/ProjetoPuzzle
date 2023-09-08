@@ -6,8 +6,15 @@ import { ButtonSeeMore, ImgInputDiv, InputImgProfile, PostsProfile, PostsProfile
 import imgExemp from "../../assets/user_img.svg"
 import InfoProfile from "../../components/info_profile/InfoProfile"
 import exemplePost from "../../assets/exemploImagem.svg"
+import { useNavigate } from "react-router"
 
 function Profile() {
+
+    const navigate = useNavigate()
+
+    function goToPostsPage() {
+        navigate("/profile-posts");
+    }
 
     function changePassword(password, changeCharacter) {
         changeCharacter = '*'
@@ -100,7 +107,7 @@ function Profile() {
                         <InfoProfile 
                             topicProfile={topicIdent.identPosts}
                         />
-                        <ButtonSeeMore>
+                        <ButtonSeeMore onClick={goToPostsPage}>
                             Ver mais
                         </ButtonSeeMore>
                     </PostsProfileIdent>

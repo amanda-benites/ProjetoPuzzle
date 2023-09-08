@@ -92,6 +92,15 @@ export const ButtonSeeMore = styled(ButtonHeaderContainer)`
     color: #69B0EE;
 `
 
+export const ButtonSeeMoreDisable = styled(ButtonHeaderContainer)`
+    width: 25vw;
+    color: #CDD1D0;
+`
+
+export const MessageUnfollow = styled.p`
+    color: #CDD1D0;
+`
+
 export const ButtonUnfollow = styled.button`
     background: none;
     border: 1px #69B0EE solid;

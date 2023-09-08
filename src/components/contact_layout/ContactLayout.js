@@ -10,11 +10,6 @@ function ContactLayout(props) {
         navigate("/contact-profile");
     }
 
-    function goToPeopleProfilePage() {
-        navigate("/people-profile");
-    }
-
-
     return(
         <ContactLayoutContainer>
             <ContactImg>

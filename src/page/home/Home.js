@@ -7,26 +7,40 @@ import userImg from "../../assets/user_img.svg"
 
 import exemploImagem from "../../assets/exemploImagem.svg"
 import MauricioExemplo from "../../assets/MauricioExemplo.svg"
+import imgProfile from "../../assets/user_img.svg"
 import { useNavigate } from "react-router-dom"
+import PostCardContact from "../../components/post_card_contact/PostCardContact"
 
 function Home() {
     const postValues = {
         user1: [MauricioExemplo, 'Maurício Costa', exemploImagem],
         user2: [MauricioExemplo, 'Clara Machado', exemploImagem],
         user3: [MauricioExemplo, 'Augusto Silva', exemploImagem],
+        user4: [imgProfile, 'Amanda Moraes Benites', exemploImagem]
     }
 
     let arrayValues = []
 
     for(let i = 0; i < Object.keys(postValues).length; i++) {
+        if(postValues[`user${i + 1}`][1] === 'Amanda Moraes Benites') {
+            arrayValues.push(
+                <PostCard
+                  key={`user${i + 1}`}
+                  userImg={postValues[`user${i + 1}`][0]}
+                  userName={postValues[`user${i + 1}`][1]}
+                  ImgContent={postValues[`user${i + 1}`][2]}
+                />
+            );
+        } else (
         arrayValues.push(
-            <PostCard
+            <PostCardContact
               key={`user${i + 1}`}
               userImg={postValues[`user${i + 1}`][0]}
               userName={postValues[`user${i + 1}`][1]}
               ImgContent={postValues[`user${i + 1}`][2]}
             />
-          );
+          )
+        )
     }
 
     const navigate = useNavigate()

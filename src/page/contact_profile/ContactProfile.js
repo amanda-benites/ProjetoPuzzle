@@ -1,14 +1,21 @@
 import GerenalFooter from "../../components/general_footer/GeneralFoter"
 import HeaderProfile from "../../components/header_profile/HeaderProfile"
 
-import { ButtonSeeMore, ImgContactProfile, PostsProfile, PostsProfileDiv, PostsProfileIdent, ProfileInfos, ProfilePosts, ButtonUnfollow, ButtonTalkWith, ImgProfileDiv, DivButtonsActions, DivButtonFollow, ButtonFollow } from "./style"
+import { ButtonSeeMore, ImgContactProfile, PostsProfile, PostsProfileDiv, PostsProfileIdent, ProfileInfos, ProfilePosts, ButtonUnfollow, ButtonTalkWith, ImgProfileDiv, DivButtonsActions, DivButtonFollow, ButtonFollow, ButtonSeeMoreDisable, MessageUnfollow } from "./style"
 
 import imgExemp from "../../assets/MauricioExemplo.svg"
 import InfoProfile from "../../components/info_profile/InfoProfile"
 import exemplePost from "../../assets/exemploImagem.svg"
 import { useState } from "react"
+import { useNavigate } from "react-router"
 
-function ContactProfile(props) {
+function ContactProfile() {
+
+    const navigate = useNavigate()
+
+    function goToPostsContactPage() {
+        navigate("/contact-posts");
+    }
 
     const topicIdent = {
         identEmail: 'Email',
@@ -21,9 +28,8 @@ function ContactProfile(props) {
         userPhone: '(51) 99999-0000'
     }
 
-    const [isFollowing, setIsFollowing] = useState(true); // Estado para controlar se o usuário está seguindo ou não
+    const [isFollowing, setIsFollowing] = useState(true);
       
-    // Função para alternar entre seguir e deixar de seguir
     const toggleFollow = () => {
         setIsFollowing((prevState) => !prevState);
     };
@@ -57,24 +63,40 @@ function ContactProfile(props) {
                         itemProfile={topicValues.userPhone}
                     />
                 </ProfileInfos>
+                {isFollowing === true ? (
                 <ProfilePosts>
                     <PostsProfileIdent>
                         <InfoProfile 
                             topicProfile={topicIdent.identPosts}
                         />
-                        <ButtonSeeMore>
+                        <ButtonSeeMore onClick={goToPostsContactPage}>
                             Ver mais
                         </ButtonSeeMore>
                     </PostsProfileIdent>
+                        <PostsProfileDiv>
+                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 1" />
+                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 2" />
+                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 3" />
+                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 4" />
+                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 5" />
+                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 6" />
+                        </PostsProfileDiv>
+                </ProfilePosts>
+                ) : (
+                    <ProfilePosts>
+                    <PostsProfileIdent>
+                        <InfoProfile 
+                            topicProfile={topicIdent.identPosts}
+                        />
+                        <ButtonSeeMoreDisable disabled>
+                            Ver mais
+                        </ButtonSeeMoreDisable>
+                    </PostsProfileIdent>
                     <PostsProfileDiv>
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 1" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 2" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 3" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 4" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 5" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 6" />
+                            <MessageUnfollow>Siga {topicValues.userName} para visualizar suas postagens</MessageUnfollow>
                     </PostsProfileDiv>
                 </ProfilePosts>
+                )}
             </div>
             <GerenalFooter/>
         </>

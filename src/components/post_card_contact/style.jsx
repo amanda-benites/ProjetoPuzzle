@@ -19,9 +19,9 @@ export const HeaderPost = styled.div`
     border-radius: 10px 10px 0px 0px;
 
     display: grid;
-    grid-template-columns: 12vw 71vw 10vw;
+    grid-template-columns: 12vw 81vw;
     grid-template-rows: 6vh;
-    grid-template-areas: 'ImgHeader ProfileButton ThreePoints';
+    grid-template-areas: 'ImgHeader ProfileButton';
 `
 
 export const ImgHeader = styled.div`
@@ -39,14 +39,6 @@ export const ProfileButton = styled.div`
     justify-content: left;
     align-items: center;
     padding-left: 2vw;
-`
-
-export const ThreePoints = styled.div`
-    grid-area: ThreePoints;
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
 `
 
 export const BodyPost = styled.div`
@@ -72,12 +64,4 @@ export const ButtonIconsPost = styled(ButtonHeaderContainer)`
 
 export const ImgPostContainer = styled.img`
     width: 85vw;
-`
-
-export const ImgThreePoints = styled.img`
-    transform: rotate(90deg);
-`
-
-export const ImgUser = styled.img`
-    width: 8vw;
 `

@@ -1,26 +1,20 @@
-import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, ImgPostContainer, ImgHeader, ProfileButton, ThreePoints, ImgThreePoints, ImgUser } from "./style"
+import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, ImgPostContainer, ImgHeader, ProfileButton } from "./style"
 
 import likeImg from "../../assets/like_img.svg"
 import commentsImg from "../../assets/comments_post.svg"
-import threePoints from "../../assets/three-points.svg"
 
-function PostCard(props) {
+function PostCardContact(props) {
     return(
         <DivPostContainer>
             <HeaderPost>
                 <ImgHeader>
-                    <ImgUser src={props.userImg} alt="Imagem de exemplo Usuário"/>
+                    <img src={props.userImg} alt="Imagem de exemplo Maurício"/>
                 </ImgHeader>
                 <ProfileButton>
                     <ButtonIconsPost>
                         <p>{props.userName}</p>
                     </ButtonIconsPost>
                 </ProfileButton>
-                <ThreePoints>
-                    <ButtonIconsPost>
-                        <ImgThreePoints src={threePoints} alt="Imagem de três pontos"/>
-                    </ButtonIconsPost>
-                </ThreePoints>
             </HeaderPost>
             <BodyPost>
                 <ImgPostContainer src={props.ImgContent} alt="Imagem de teste"/>
@@ -37,4 +31,4 @@ function PostCard(props) {
     )
 }
 
-export default PostCard
+export default PostCardContact

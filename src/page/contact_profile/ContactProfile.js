@@ -8,7 +8,7 @@ import InfoProfile from "../../components/info_profile/InfoProfile"
 import exemplePost from "../../assets/exemploImagem.svg"
 import { useState } from "react"
 
-function ContactProfile() {
+function ContactProfile(props) {
 
     const topicIdent = {
         identEmail: 'Email',

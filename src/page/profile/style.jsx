@@ -15,16 +15,16 @@ export const ImgInputDiv = styled.div`
 
 export const InputImgProfile = styled.div`
     border: none;
-    border-radius: 50px;
-    height: 15vh;
-    width: 20vw;
+    border-radius: 100px;
+    height: 10vh;
+    width: 22vw;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     
     background: ${props => `url(${props.background}) no-repeat center center`};
-    background-size: 20vw;
+    background-size: 22vw;
     filter: brightness(50%);
 
     &:focus {
@@ -71,4 +71,12 @@ export const PostsProfileIdent = styled.div`
 export const ButtonSeeMore = styled(ButtonHeaderContainer)`
     width: 25vw;
     color: #69B0EE;
+`
+
+export const InputFileContainer = styled.button`
+    background: none;
+    border: none;
+    color: #CDD1D0;
+    text-transform: uppercase;
+    text-decoration: underline;
 `

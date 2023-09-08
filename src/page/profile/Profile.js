@@ -1,9 +1,8 @@
 import GerenalFooter from "../../components/general_footer/GeneralFoter"
 import HeaderProfile from "../../components/header_profile/HeaderProfile"
 
-import { ButtonSeeMore, ImgInputDiv, InputImgProfile, PostsProfile, PostsProfileDiv, PostsProfileIdent, ProfileInfos, ProfilePosts } from "./style"
+import { ButtonSeeMore, ImgInputDiv, InputImgProfile, PostsProfile, PostsProfileDiv, PostsProfileIdent, ProfileInfos, ProfilePosts, InputFileContainer } from "./style"
 
-import galleryImport from "../../assets/gallery-import.svg"
 import imgExemp from "../../assets/user_img.svg"
 import InfoProfile from "../../components/info_profile/InfoProfile"
 import exemplePost from "../../assets/exemploImagem.svg"
@@ -34,16 +33,47 @@ function Profile() {
         userPhone: '(51) 99999-0000'
     }
 
+    const handleFileChange = (e) => {
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+    
+          const reader = new FileReader();
+    
+          reader.onload = function (e) {
+            const fileUrl = e.target.result;
+            const divInputFile = document.getElementById("divInputFile");
+            if (divInputFile) {
+              divInputFile.style.backgroundImage = `url(${fileUrl})`;
+              divInputFile.style.backgroundSize = "cover";
+              divInputFile.style.backgroundPosition = "center";
+            }
+          };
+    
+          reader.readAsDataURL(selectedFile);
+        }
+      };
+
     return(
         <>
             <HeaderProfile/>
             <div>
                 <ImgInputDiv>
-                    <InputImgProfile background={imgExemp}>
+                    <InputImgProfile background={imgExemp} id="divInputFile">
                         <input 
-                            type="image" 
-                            src={galleryImport} 
-                            alt="Input para adicionar imagem de perfil"/>
+                            type="file"
+                            id="fileInput"
+                            style={{ display: "none" }}
+                            onChange={handleFileChange}
+                        />
+                        <InputFileContainer
+                            onClick={() => {
+                                const fileInput = document.getElementById('fileInput');
+                                if (fileInput) {
+                                fileInput.click();
+                                }
+                            }}>
+                        Editar
+                        </InputFileContainer>
                     </InputImgProfile>
                     <h3>Meu perfil</h3>
                 </ImgInputDiv>

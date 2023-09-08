@@ -20,7 +20,6 @@ function CreatePost() {
 
       reader.onload = function (e) {
         const fileUrl = e.target.result;
-        // Definir o fundo da div com a imagem selecionada
         const divInputFile = document.getElementById("divInputFile");
         if (divInputFile) {
           divInputFile.style.backgroundImage = `url(${fileUrl})`;
@@ -53,7 +52,8 @@ function CreatePost() {
                           fileInput.click();
                         }
                       }}>
-                        Coloque a imagem aqui</InputFileContainer>
+                        Coloque a imagem aqui
+                      </InputFileContainer>
                 </DivInputFile>
                 <SpanInsertPost>Inserir legenda</SpanInsertPost>
                 <InputLegendContainer type="text"/>

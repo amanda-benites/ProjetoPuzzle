@@ -12,6 +12,10 @@ function GerenalFooter() {
         navigate("/contacts");
     }
 
+    function goToCreatePostPage() {
+        navigate("/create-post")
+    }
+
     return(
         <FooterContainer>
             <ImgContactsContainer>
@@ -20,7 +24,7 @@ function GerenalFooter() {
                 </ButtonFooterContainer>
             </ImgContactsContainer>
             <ImgAddContainer>
-                <ButtonFooterContainer>
+                <ButtonFooterContainer onClick={goToCreatePostPage}>
                     <img src={imgAdd} alt="Imagem representativa da adição de postagem"/>
                 </ButtonFooterContainer>
             </ImgAddContainer>

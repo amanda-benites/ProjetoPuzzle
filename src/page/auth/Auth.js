@@ -8,7 +8,7 @@ function Auth() {
     
     const navigate = useNavigate()
 
-    function goToCoverPage() {
+    function goToHomePage() {
         navigate("/home");
     }
 
@@ -26,7 +26,7 @@ function Auth() {
                     <Input/>
                 </FormAuthContainer>
                 <DivButtonAuthContainer>
-                    <AuthButtonColor onClick={goToCoverPage} >Entrar</AuthButtonColor>
+                    <AuthButtonColor onClick={goToHomePage} >Entrar</AuthButtonColor>
                     <ForgetPasswordContainer>Esqueceu a senha?</ForgetPasswordContainer>
                 </DivButtonAuthContainer>
             </AuthBodyContainer>

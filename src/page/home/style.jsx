@@ -50,3 +50,15 @@ export const MyNameText = styled.p`
     font-size: small;
     padding-top: 0.5vh;
 `
+
+export const FinalDiv = styled.div`
+    width: 100vw;
+    height: 12vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`
+
+export const FinalText = styled.p`
+    color: lightgray;
+`

@@ -1,12 +1,13 @@
 import GerenalFooter from "../../components/general_footer/GeneralFoter"
 import HomeHeader from "../../components/home_header/HomeHeader"
 import PostCard from "../../components/post_card/PostCard"
-import { BodyHomeContainer, ButtonUserContainer, DivProfileAccess, MainHomeContainer, MyNameText, MyPicture, MyProfile } from "./style"
+import { BodyHomeContainer, ButtonUserContainer, DivProfileAccess, FinalDiv, FinalText, MainHomeContainer, MyNameText, MyPicture, MyProfile } from "./style"
 
 import userImg from "../../assets/user_img.svg"
 
 import exemploImagem from "../../assets/exemploImagem.svg"
 import MauricioExemplo from "../../assets/MauricioExemplo.svg"
+import { useNavigate } from "react-router-dom"
 
 function Home() {
     const postValues = {
@@ -28,6 +29,12 @@ function Home() {
           );
     }
 
+    const navigate = useNavigate()
+
+    function goToProfilePage() {
+        navigate("/profile");
+    }
+
     return(
         <BodyHomeContainer>    
             <HomeHeader/>
@@ -37,11 +44,14 @@ function Home() {
                         <img src={userImg} alt="Imagem representativa do usuário"/>
                     </MyPicture>
                     <MyProfile>
-                        <ButtonUserContainer>Meu Perfil</ButtonUserContainer>
+                        <ButtonUserContainer onClick={goToProfilePage}>Meu Perfil</ButtonUserContainer>
                         <MyNameText>Amanda Benites</MyNameText>
                     </MyProfile>
                 </DivProfileAccess>
                 {arrayValues}
+                <FinalDiv>
+                    <FinalText>Fim das publicações</FinalText>
+                </FinalDiv>
             </MainHomeContainer>
             <GerenalFooter/>
         </BodyHomeContainer>

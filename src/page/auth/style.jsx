@@ -7,6 +7,7 @@ import square from "../../assets/square.svg"
 export const AuthBodyContainer = styled.div`
     width: 100vw;
     height: 75vh;
+    font-family: Amiko, Arial, Helvetica, sans-serif;
 `
 
 export const DivTitleContainer = styled.div`

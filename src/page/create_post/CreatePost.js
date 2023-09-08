@@ -11,20 +11,49 @@ function CreatePost() {
       navigate("/home");
   }
 
-  
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
+    if (selectedFile) {
+
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const fileUrl = e.target.result;
+        // Definir o fundo da div com a imagem selecionada
+        const divInputFile = document.getElementById("divInputFile");
+        if (divInputFile) {
+          divInputFile.style.backgroundImage = `url(${fileUrl})`;
+          divInputFile.style.backgroundSize = "cover";
+          divInputFile.style.backgroundPosition = "center";
+        }
+      };
+
+      reader.readAsDataURL(selectedFile);
+    }
   };
 
-  
+
     return(
         <>
           <ScreenHeader titlePage={"Criar Publicação"}/>  
           <DivInputsContainer>
                 <SpanInsertPost>Inserir imagem</SpanInsertPost>
-                <DivInputFile>
-                    <input type="file" id="fileInput" style={{ display: 'none' }} onChange={handleFileChange} />
-                    <InputFileContainer onClick={() => document.getElementById('fileInput').click()}>Coloque a imagem aqui</InputFileContainer>
+                <DivInputFile id="divInputFile"> 
+                  <input 
+                    type="file"
+                    id="fileInput"
+                    style={{ display: "none" }}
+                    onChange={handleFileChange}
+                  />
+                  <InputFileContainer
+                      onClick={() => {
+                        const fileInput = document.getElementById('fileInput');
+                        if (fileInput) {
+                          fileInput.click();
+                        }
+                      }}>
+                        Coloque a imagem aqui</InputFileContainer>
                 </DivInputFile>
                 <SpanInsertPost>Inserir legenda</SpanInsertPost>
                 <InputLegendContainer type="text"/>

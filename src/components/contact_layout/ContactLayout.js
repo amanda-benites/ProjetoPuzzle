@@ -10,15 +10,27 @@ function ContactLayout(props) {
         navigate("/contact-profile");
     }
 
+    function goToPeopleProfilePage() {
+        navigate("/people-profile");
+    }
+
+
     return(
         <ContactLayoutContainer>
             <ContactImg>
                 <ImgContactContainer src={props.imgContact} alt="Imagem do contato"/>
             </ContactImg>
             <ContactName>
-                <ContactButton onClick={goToContactProfilePage}>
-                    <NameContactText>{props.nameContact}</NameContactText>
-                </ContactButton>
+                {props.nameContact === 'Maurício Costa' ? (
+                    <ContactButton onClick={goToContactProfilePage}>
+                        <NameContactText>{props.nameContact}</NameContactText>
+                    </ContactButton>
+                ) : (
+                    <ContactButton>
+                        <NameContactText>{props.nameContact}</NameContactText>
+                    </ContactButton>
+                )
+                }
             </ContactName>
         </ContactLayoutContainer>
     )

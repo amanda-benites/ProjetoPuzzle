@@ -21,10 +21,6 @@ function PostCard(props) {
                         <ImgThreePoints src={threePoints} alt="Imagem de três pontos"/>
                     </ButtonIconsPost>
                 </ThreePoints>
-                <div>
-                    <button></button>
-                    <button></button>
-                </div>
             </HeaderPost>
             <BodyPost>
                 <ImgPostContainer src={props.ImgContent} alt="Imagem de teste"/>

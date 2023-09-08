@@ -4,17 +4,30 @@ import logoHome from "../../assets/logo_home.svg"
 import search from "../../assets/search.svg"
 import icRepository from "../../assets/icRepository.svg"
 import config from "../../assets/config.svg"
+import { useNavigate } from "react-router"
 
 function HomeHeader() {
+
+        
+    const navigate = useNavigate()
+
+    function goToFindPage() {
+        navigate("/find");
+    }
+
+    function goToProfilePage() {
+        navigate("/profile");
+    }
+    
     return(
         <HomeHeaderContainer>
             <LogoHeaderContainer>
                 <img src={logoHome} alt="Logo na tela principal"/>
             </LogoHeaderContainer>
             <ButtonDivHeaderContainer>
-                <ButtonHeaderContainer><img src={search} alt="Ícone de pesquisa"/></ButtonHeaderContainer>
+                <ButtonHeaderContainer onClick={goToFindPage}><img src={search} alt="Ícone de pesquisa"/></ButtonHeaderContainer>
                 <ButtonHeaderContainer><img src={icRepository} alt="Ícone do repositório"/></ButtonHeaderContainer>
-                <ButtonHeaderContainer><img src={config} alt="Ícone de configuração"/></ButtonHeaderContainer>
+                <ButtonHeaderContainer onClick={goToProfilePage}><img src={config} alt="Ícone de configuração"/></ButtonHeaderContainer>
             </ButtonDivHeaderContainer>
         </HomeHeaderContainer>
     )

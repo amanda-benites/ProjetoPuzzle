@@ -15,6 +15,9 @@ import ContactTestimony from "./page/contact_testimony/ContactTestimony";
 import TestimonyToMe from "./page/testimony_to_me/TestimonyToMe";
 import CreateTestimony from "./page/create_testimony/CreateTestimony";
 import EditTestimony from "./page/edit_testimony/EditTestimony";
+import Repository from "./page/repository/Repository";
+import AddArticle from "./page/add_article/AddArticle";
+import OpenArticle from "./page/open_article/OpenArticle";
 
 function RoutesPage() {
   return(
@@ -35,6 +38,9 @@ function RoutesPage() {
         <Route path="testimony-to-me" Component={TestimonyToMe}/>
         <Route path="create-testimony" Component={CreateTestimony}/>
         <Route path="edit-testimony" Component={EditTestimony}/>
+        <Route path="repository" Component={Repository}/>
+        <Route path="add-article" Component={AddArticle}/>
+        <Route path="open-article" Component={OpenArticle}/>
       </Routes>
     </BrowserRouter>
   )

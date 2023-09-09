@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const DivPostContainer = styled.div`
     width: 93vw;
-    height: 40vh;
+    height: 45vh;
 
     display: flex;
     flex-direction: column;
@@ -16,6 +16,9 @@ export const DivPostContainer = styled.div`
 export const DivContentPostDelete = styled.div`
     width: 100vw;
     height: 50vh;
+
+    padding-top: 5vh;
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,8 +31,11 @@ export const DivButtonsDelete = styled.div`
 
     display: flex;
     flex-direction: row;
+    align-items: end;
+    justify-content: center;
+    gap: 10vw;
+    padding-bottom: 7.5vh;
 
-    background-color: red;
     display: flex;
 `
 

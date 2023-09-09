@@ -18,6 +18,9 @@ import EditTestimony from "./page/edit_testimony/EditTestimony";
 import Repository from "./page/repository/Repository";
 import AddArticle from "./page/add_article/AddArticle";
 import OpenArticle from "./page/open_article/OpenArticle";
+import EditPost from "./page/edit_post/EditPost";
+import DeletePost from "./page/delete_post/DeletePost";
+import ProfileTestimony from "./page/profile_testimony/ProfileTestimony";
 
 function RoutesPage() {
   return(
@@ -41,6 +44,9 @@ function RoutesPage() {
         <Route path="repository" Component={Repository}/>
         <Route path="add-article" Component={AddArticle}/>
         <Route path="open-article" Component={OpenArticle}/>
+        <Route path="edit-post" Component={EditPost}/>
+        <Route path="delete-post" Component={DeletePost}/>
+        <Route path="profile-testimony" Component={ProfileTestimony}/>
       </Routes>
     </BrowserRouter>
   )

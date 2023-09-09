@@ -2,8 +2,16 @@ import ScreenHeader from "../../components/sreen_header/ScreenHeader"
 import { ButtonCancel, ButtonDelete, DivButtonsDelete, DivContentPostDelete, DivPostContainer } from "./style"
 
 import imgExemple from "../../assets/exemploImagem.svg"
+import { useNavigate } from "react-router-dom";
 
 function DeletePost() {
+
+    const navigate = useNavigate()
+
+    function goToHomePage() {
+        navigate("/home");
+    }
+  
     return(
         <>
             <ScreenHeader/>
@@ -13,7 +21,7 @@ function DeletePost() {
                 </DivPostContainer>             
             </DivContentPostDelete>
             <DivButtonsDelete>
-                <ButtonCancel>Cancelar</ButtonCancel>
+                <ButtonCancel onClick={goToHomePage}>Cancelar</ButtonCancel>
                 <ButtonDelete>Concluir</ButtonDelete>
             </DivButtonsDelete>
         </>

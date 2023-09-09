@@ -5,11 +5,11 @@ import { ButtonCancel, ButtonOk, DivButtonsContainer, DivInputFile, DivInputsCon
 
 function EditPost() {
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
-  // function goToHomePage() {
-  //     navigate("/home");
-  // }
+  function goToHomePage() {
+      navigate("/home");
+  }
 
 
   const handleFileChange = (e) => {
@@ -59,7 +59,7 @@ function EditPost() {
                 <InputLegendContainer type="text"/>
           </DivInputsContainer>
           <DivButtonsContainer>
-            <ButtonCancel>Cancelar</ButtonCancel>
+            <ButtonCancel onClick={goToHomePage}>Cancelar</ButtonCancel>
             <ButtonOk>Concluir</ButtonOk>
           </DivButtonsContainer>
         </>

@@ -1,20 +1,28 @@
-import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, ImgPostContainer, ImgHeader, ProfileButton, ThreePoints, ImgThreePoints, ImgUser } from "./style"
+import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, ImgPostContainer, ImgHeader, ProfileButton, ThreePoints, ImgUser, DropDownMenu, ItemsMenu, ImgThreePoints } from "./style"
 
 import likeImg from "../../assets/like_img.svg"
 import commentsImg from "../../assets/comments_post.svg"
 import threePoints from "../../assets/three-points.svg"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function PostCard(props) {
 
+    const navigate = useNavigate()
+
+    function goToEditPostPage() {
+        navigate("/edit-post");
+    }
+
+    function goToDeletePostPage() {
+        navigate("/delete-post");
+    }
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
+    const openMenu = () => {
+      setIsOpen(!isOpen);
     };
-
-
 
     return (
         <DivPostContainer>
@@ -28,22 +36,15 @@ function PostCard(props) {
                     </ButtonIconsPost>
                 </ProfileButton>
                 <ThreePoints>
-                    {/* <ButtonIconsPost onClick={toggleMenu}> */}
-                        <ImgThreePoints src={threePoints} alt="Imagem de três pontos" />
-                        <select onClick={toggleMenu}>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="mercedes">Mercedes</option>
-                            <option value="audi">Audi</option>
-                        </select>
-
-
-
-
-
-
-
-                    {/* </ButtonIconsPost> */}
+                    <ButtonIconsPost onClick={openMenu}>
+                        <ImgThreePoints src={threePoints} alt="Imagem três pontos"/>
+                    </ButtonIconsPost>
+                        {isOpen && (
+                            <DropDownMenu className="dropdown-menu">
+                                <ItemsMenu onClick={goToEditPostPage}>Editar</ItemsMenu>
+                                <ItemsMenu onClick={goToDeletePostPage}>Excluir</ItemsMenu>
+                            </DropDownMenu>
+                        )}
                 </ThreePoints>
             </HeaderPost>
             <BodyPost>

@@ -6,7 +6,7 @@ export const ScreenHeaderContainer = styled.header`
     height: 8vh;
 
     display: grid;
-    grid-template-columns: 6vw 88vw 6vw;
+    grid-template-columns: 10vw 80vw 10vw;
     grid-template-rows: 8vh;
     grid-template-areas: 'DivImgButtonBack DivTitle DivAlign';
 

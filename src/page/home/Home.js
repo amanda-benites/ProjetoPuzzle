@@ -13,12 +13,12 @@ import PostCardContact from "../../components/post_card_contact/PostCardContact"
 
 function Home() {
     const postValues = {
-        user1: [MauricioExemplo, 'Maurício Costa', exemploImagem],
+        user1: [imgProfile, 'Amanda Moraes Benites', exemploImagem],
         user2: [MauricioExemplo, 'Clara Machado', exemploImagem],
         user3: [MauricioExemplo, 'Augusto Silva', exemploImagem],
-        user4: [imgProfile, 'Amanda Moraes Benites', exemploImagem]
+        user4: [MauricioExemplo, 'Maurício Costa', exemploImagem]
     }
-
+    
     let arrayValues = []
 
     for(let i = 0; i < Object.keys(postValues).length; i++) {

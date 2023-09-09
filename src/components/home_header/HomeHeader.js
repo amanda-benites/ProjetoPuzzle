@@ -18,6 +18,10 @@ function HomeHeader() {
     function goToProfilePage() {
         navigate("/profile");
     }
+
+    function goToRepositoryPage() {
+        navigate("/repository");
+    }
     
     return(
         <HomeHeaderContainer>
@@ -26,7 +30,7 @@ function HomeHeader() {
             </LogoHeaderContainer>
             <ButtonDivHeaderContainer>
                 <ButtonHeaderContainer onClick={goToFindPage}><img src={search} alt="Ícone de pesquisa"/></ButtonHeaderContainer>
-                <ButtonHeaderContainer><img src={icRepository} alt="Ícone do repositório"/></ButtonHeaderContainer>
+                <ButtonHeaderContainer onClick={goToRepositoryPage}><img src={icRepository} alt="Ícone do repositório"/></ButtonHeaderContainer>
                 <ButtonHeaderContainer onClick={goToProfilePage}><img src={config} alt="Ícone de configuração"/></ButtonHeaderContainer>
             </ButtonDivHeaderContainer>
         </HomeHeaderContainer>

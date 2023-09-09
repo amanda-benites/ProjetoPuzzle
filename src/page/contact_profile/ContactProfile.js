@@ -1,5 +1,4 @@
 import GerenalFooter from "../../components/general_footer/GeneralFoter"
-import HeaderProfile from "../../components/header_profile/HeaderProfile"
 
 import { ButtonSeeMore, ImgContactProfile, PostsProfile, PostsProfileDiv, PostsProfileIdent, ProfileInfos, ProfilePosts, ButtonUnfollow, ButtonTalkWith, ImgProfileDiv, DivButtonsActions, DivButtonFollow, ButtonFollow, ButtonSeeMoreDisable, MessageUnfollow } from "./style"
 
@@ -8,6 +7,7 @@ import InfoProfile from "../../components/info_profile/InfoProfile"
 import exemplePost from "../../assets/exemploImagem.svg"
 import { useState } from "react"
 import { useNavigate } from "react-router"
+import HeaderContact from "../../components/header_contact/HeaderContact"
 
 function ContactProfile() {
 
@@ -36,7 +36,7 @@ function ContactProfile() {
 
     return(
         <>
-            <HeaderProfile/>
+            <HeaderContact/>
             <div>
                 <ImgProfileDiv>
                     <ImgContactProfile background={imgExemp}>

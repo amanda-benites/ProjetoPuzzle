@@ -55,6 +55,12 @@ export const InputLegendContainer = styled.input`
     border-radius: 10px;
     height: 5vh;
     width: 90vw;
+
+    
+    &:focus {
+        outline: 0;
+        padding-left: 0.5vw;
+    }
 `
 
 export const ButtonCancel = styled.button`

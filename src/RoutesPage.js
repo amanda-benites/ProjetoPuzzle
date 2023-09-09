@@ -11,6 +11,10 @@ import ContactProfile from "./page/contact_profile/ContactProfile";
 import FindPeople from "./page/find_people/FindPeople";
 import ProfilePosts from "./page/profile_posts/ProfilePosts";
 import ContactPosts from "./page/contact_post/ContactPost";
+import ContactTestimony from "./page/contact_testimony/ContactTestimony";
+import TestimonyToMe from "./page/testimony_to_me/TestimonyToMe";
+import CreateTestimony from "./page/create_testimony/CreateTestimony";
+import EditTestimony from "./page/edit_testimony/EditTestimony";
 
 function RoutesPage() {
   return(
@@ -27,6 +31,10 @@ function RoutesPage() {
         <Route path="find" Component={FindPeople}/>
         <Route path="profile-posts" Component={ProfilePosts}/>
         <Route path="contact-posts" Component={ContactPosts}/>
+        <Route path="testimony-contact" Component={ContactTestimony}/>
+        <Route path="testimony-to-me" Component={TestimonyToMe}/>
+        <Route path="create-testimony" Component={CreateTestimony}/>
+        <Route path="edit-testimony" Component={EditTestimony}/>
       </Routes>
     </BrowserRouter>
   )

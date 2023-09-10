@@ -12,6 +12,10 @@ function Auth() {
         navigate("/home");
     }
 
+    function goToPasswordPage() {
+        navigate("/forgot-password");
+    }
+
     return(
         <>
             <AuthHeader/>
@@ -27,7 +31,7 @@ function Auth() {
                 </FormAuthContainer>
                 <DivButtonAuthContainer>
                     <AuthButtonColor onClick={goToHomePage} >Entrar</AuthButtonColor>
-                    <ForgetPasswordContainer>Esqueceu a senha?</ForgetPasswordContainer>
+                    <ForgetPasswordContainer onClick={goToPasswordPage}>Esqueceu a senha?</ForgetPasswordContainer>
                 </DivButtonAuthContainer>
             </AuthBodyContainer>
         </>

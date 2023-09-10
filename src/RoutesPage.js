@@ -21,6 +21,8 @@ import OpenArticle from "./page/open_article/OpenArticle";
 import EditPost from "./page/edit_post/EditPost";
 import DeletePost from "./page/delete_post/DeletePost";
 import ProfileTestimony from "./page/profile_testimony/ProfileTestimony";
+import Exit from "./page/exit/Exit";
+import ForgotPassword from "./page/forgot_password/ForgotPassword";
 
 function RoutesPage() {
   return(
@@ -47,6 +49,8 @@ function RoutesPage() {
         <Route path="edit-post" Component={EditPost}/>
         <Route path="delete-post" Component={DeletePost}/>
         <Route path="profile-testimony" Component={ProfileTestimony}/>
+        <Route path="exit" Component={Exit}/>
+        <Route path="forgot-password" Component={ForgotPassword}/>
       </Routes>
     </BrowserRouter>
   )

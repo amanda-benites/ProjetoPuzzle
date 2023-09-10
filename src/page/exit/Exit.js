@@ -21,7 +21,7 @@ function Exit() {
             </DivTitleContainer>
             <DivButtonsExit>
                 <ButtonCancel onClick={goBack}>Cancelar</ButtonCancel>
-                <ButtonDelete onClick={goToCoverPage}>Concluir</ButtonDelete>
+                <ButtonDelete onClick={goToCoverPage}>Sair</ButtonDelete>
             </DivButtonsExit>
         </>
     )

@@ -11,9 +11,8 @@ export const TestimonyTitle = styled.div`
 `
 
 export const TestimonyButton = styled(ButtonHeaderContainer)`
-    left: auto;
+    text-align: left;
 `
 export const TestemonyText = styled.p`
     font-size: larger;
-
 `

@@ -44,12 +44,12 @@ function ProfileTestimony() {
                     </DivSearchContainer>
                 </DivSearchContainerMain>
                 <div>
-                {filteredTestimony.map((testimony) => (
-                    <TestimonyLayout
-                        key={testimony}
-                        nameContact={testimonyValues[testimony][0]}
-                        testimony={testimonyValues[testimony][1]}/>
-                ))}              
+                    {filteredTestimony.map((testimony) => (
+                        <TestimonyLayout
+                            key={testimony}
+                            nameContact={testimonyValues[testimony][0]}
+                            testimony={testimonyValues[testimony][1]}/>
+                    ))}              
                 </div>
             </div>
             <GerenalFooter/>

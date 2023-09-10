@@ -16,6 +16,10 @@ function GerenalFooter() {
         navigate("/create-post")
     }
 
+    function goToChatsPage() {
+        navigate("/chats")
+    }
+
     return(
         <FooterContainer>
             <ImgContactsContainer>
@@ -29,7 +33,7 @@ function GerenalFooter() {
                 </ButtonFooterContainer>
             </ImgAddContainer>
             <ImgChatContainer>
-                <ButtonFooterContainer>
+                <ButtonFooterContainer onClick={goToChatsPage}>
                     <img src={imgChat} alt="Imagem representativa do chat"/>
                 </ButtonFooterContainer>
             </ImgChatContainer>

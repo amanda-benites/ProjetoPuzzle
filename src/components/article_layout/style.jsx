@@ -5,7 +5,7 @@ import { ButtonHeaderContainer } from "../home_header/style";
 export const ContactLayoutContainer = styled.div`
     width: 100vw;
     display: grid;
-    grid-template-columns: 20vw 80vw;
+    grid-template-columns: 15vw 85vw;
     grid-template-rows: 8vh;
     grid-template-areas: "contactImg contactName";
 `
@@ -28,10 +28,11 @@ export const ContactName = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    padding-right: 2vw;
 `
 
 export const ContactButton = styled(ButtonHeaderContainer)`
-    
+    text-align: left;
 `
 export const NameContactText = styled.p`
     font-size: larger;

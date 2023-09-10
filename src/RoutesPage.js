@@ -25,6 +25,8 @@ import Exit from "./page/exit/Exit";
 import ForgotPassword from "./page/forgot_password/ForgotPassword";
 import PostOpened from "./page/post_opened/PostOpened";
 import PostOpenedContact from "./page/post_opened_contact/PostOpenedContact";
+import Chats from "./page/chats/Chats";
+import ContactChat from "./page/contact_chat/ContactChat";
 
 function RoutesPage() {
   return(
@@ -55,6 +57,8 @@ function RoutesPage() {
         <Route path="forgot-password" Component={ForgotPassword}/>
         <Route path="post-opened" Component={PostOpened}/>
         <Route path="post-opened-contact" Component={PostOpenedContact}/>
+        <Route path="chats" Component={Chats}/>
+        <Route path="contact-chat" Component={ContactChat}/>
       </Routes>
     </BrowserRouter>
   )

@@ -21,7 +21,7 @@ export const DivTitleContainer = styled.div`
     padding-left: 5vw;
     
     background: url(${square}) no-repeat;
-    background-position: 1.9vh 16.2vh;
+    background-position: 1.9vh 18.2vh;
 `
 
 export const FormAuthContainer = styled.form`

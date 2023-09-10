@@ -2,8 +2,16 @@ import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, Im
 
 import likeImg from "../../assets/like_img.svg"
 import commentsImg from "../../assets/comments_post.svg"
+import { useNavigate } from "react-router-dom"
 
 function PostCardContact(props) {
+
+    const navigate = useNavigate()
+
+    function goToPostOpenedContact() {
+        navigate("/post-opened-contact")
+    }
+
     return(
         <DivPostContainer>
             <HeaderPost>
@@ -23,9 +31,15 @@ function PostCardContact(props) {
                 <ButtonIconsPost>
                     <img src={likeImg} alt="Curtida"/>
                 </ButtonIconsPost>
-                <ButtonIconsPost>
-                    <img src={commentsImg} alt="Comentários"/>
-                </ButtonIconsPost>
+                {props.userName === "Maurício Costa" ? (
+                    <ButtonIconsPost onClick={goToPostOpenedContact}>
+                        <img src={commentsImg} alt="Comentários"/>
+                    </ButtonIconsPost>
+                ) : (
+                    <ButtonIconsPost>
+                        <img src={commentsImg} alt="Comentários"/>
+                    </ButtonIconsPost>
+                )}
             </FooterPost>
         </DivPostContainer>
     )

@@ -8,7 +8,7 @@ export const CreateBodyContainer = styled(AuthBodyContainer)`
 export const CreateDivTitle = styled(DivTitleContainer)`
     height: 15vh;
 
-    background-position: 1.9vh 11.2vh;
+    background-position: 1.9vh 13.4vh;
 `
 
 export const CreateFormContainer = styled(FormAuthContainer)`

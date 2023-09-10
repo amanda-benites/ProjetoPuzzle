@@ -14,9 +14,9 @@ import PostCardContact from "../../components/post_card_contact/PostCardContact"
 function Home() {
     const postValues = {
         user1: [imgProfile, 'Amanda Moraes Benites', exemploImagem],
-        user2: [MauricioExemplo, 'Clara Machado', exemploImagem],
+        user2: [MauricioExemplo, 'Maurício Costa', exemploImagem],
         user3: [MauricioExemplo, 'Augusto Silva', exemploImagem],
-        user4: [MauricioExemplo, 'Maurício Costa', exemploImagem]
+        user4: [MauricioExemplo, 'Clara Machado', exemploImagem]
     }
     
     let arrayValues = []

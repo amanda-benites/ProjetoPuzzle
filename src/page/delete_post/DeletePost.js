@@ -14,7 +14,7 @@ function DeletePost() {
   
     return(
         <>
-            <ScreenHeader/>
+            <ScreenHeader titlePage={"Excluir Publicação"}/>
             <DivContentPostDelete>
                 <DivPostContainer>
                     <img src={imgExemple} alt="Imagem de exemplo"/>
@@ -22,7 +22,7 @@ function DeletePost() {
             </DivContentPostDelete>
             <DivButtonsDelete>
                 <ButtonCancel onClick={goToHomePage}>Cancelar</ButtonCancel>
-                <ButtonDelete>Concluir</ButtonDelete>
+                <ButtonDelete>Excluir</ButtonDelete>
             </DivButtonsDelete>
         </>
     )

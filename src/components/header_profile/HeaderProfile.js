@@ -14,6 +14,10 @@ function HeaderProfile() {
         navigate(-1)
     }
 
+    function goToExitPage() {
+        navigate("/exit");
+    }
+
     const goToTestimonyPage = () => {
         navigate('/profile-testimony')
     }
@@ -34,7 +38,7 @@ function HeaderProfile() {
             </ButtonHeaderProfile>
                 {isOpen && (
                     <DropDownMenu className="dropdown-menu">
-                        <ItemsMenu>Sair</ItemsMenu>
+                        <ItemsMenu onClick={goToExitPage}>Sair</ItemsMenu>
                         <ItemsMenu onClick={goToTestimonyPage}>Depoimentos</ItemsMenu>
                     </DropDownMenu>
                     )}

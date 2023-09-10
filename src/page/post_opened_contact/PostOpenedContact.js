@@ -1,20 +1,20 @@
 import GerenalFooter from "../../components/general_footer/GeneralFoter"
 import HomeHeader from "../../components/home_header/HomeHeader"
-import PostOpenedCard from "../../components/post_opened_card/PostOpenedCard"
+import PostOpenedCardContact from "../../components/post_opened_card_contact/PostOpenedCardContact"
 import { BodyHomeContainer, DivAddComment, DivFooterPostOpened, InputAddComment, MainHomeContainer, SendMensage } from "./style"
 
 import exemploImagem from "../../assets/exemploImagem.svg"
-import imgProfile from "../../assets/user_img.svg"
+import imgProfile from "../../assets/MauricioExemplo.svg"
 import send from "../../assets/send_mensage.svg"
 
-function PostOpened() {
+function PostOpenedContact() {
     return(
-        <BodyHomeContainer>    
+        <BodyHomeContainer>
             <HomeHeader/>
             <MainHomeContainer>
-                <PostOpenedCard 
+                <PostOpenedCardContact 
                     userImg={imgProfile}
-                    userName={'Amanda Moraes Benites'}
+                    userName={'Marício Costa'}
                     ImgContent={exemploImagem}/>
             </MainHomeContainer>
             <DivFooterPostOpened>
@@ -30,4 +30,4 @@ function PostOpened() {
     )
 }
 
-export default PostOpened
+export default PostOpenedContact

@@ -1,17 +1,27 @@
 import { useNavigate } from "react-router-dom";
 import { FontH1Container } from "../../styleGlobal"
-import { DivTitleContainer, DivButtonsExit, ButtonCancel, ButtonDelete } from "./style"
+import { DivTitleContainer, DivButtonsExit, ButtonCancel, ButtonLogout } from "./style"
+import { useEffect } from "react";
 
 function Exit() {
 
     const navigate = useNavigate()
 
-    function goBack() {
-        navigate(-1);
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        if(!token) {
+            navigate('/')
+        }
+    }, [navigate])
+
+    const handleLogout = () => {
+        localStorage.removeItem('email')
+        localStorage.removeItem('token')
+        navigate('/')
     }
 
-    function goToCoverPage() {
-        navigate('/');
+    function goBack() {
+        navigate(-1);
     }
 
     return(
@@ -20,8 +30,8 @@ function Exit() {
                 <FontH1Container>Sair da conta</FontH1Container>
             </DivTitleContainer>
             <DivButtonsExit>
-                <ButtonCancel onClick={goBack}>Cancelar</ButtonCancel>
-                <ButtonDelete onClick={goToCoverPage}>Sair</ButtonDelete>
+                <ButtonCancel onClick={goBack}>Voltar</ButtonCancel>
+                <ButtonLogout onClick={handleLogout}>Sair</ButtonLogout>
             </DivButtonsExit>
         </>
     )

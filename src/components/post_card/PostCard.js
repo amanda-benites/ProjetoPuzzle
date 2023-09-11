@@ -1,6 +1,7 @@
 import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, ImgPostContainer, ImgHeader, ProfileButton, ThreePoints, ImgUser, DropDownMenu, ItemsMenu, ImgThreePoints } from "./style"
 
 import likeImg from "../../assets/like_img.svg"
+import imgLiked from "../../assets/imgLiked.svg"
 import commentsImg from "../../assets/comments_post.svg"
 import threePoints from "../../assets/three-points.svg"
 import { useState } from "react";
@@ -21,6 +22,13 @@ function PostCard(props) {
     function goToPostOpened() {
         navigate("/post-opened")
     }
+
+    const [isLiked, setIsLiked] = useState(false);
+
+    const changeLikeState = () => {
+        setIsLiked(!isLiked)
+    }
+
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -56,7 +64,10 @@ function PostCard(props) {
             </BodyPost>
             <FooterPost>
                 <ButtonIconsPost>
-                    <img src={likeImg} alt="Curtida" />
+                    <img 
+                        src={isLiked ? imgLiked : likeImg} 
+                        alt="Curtida"
+                        onClick={changeLikeState} />
                 </ButtonIconsPost>
                 <ButtonIconsPost onClick={goToPostOpened}>
                     <img src={commentsImg} alt="Comentários" />

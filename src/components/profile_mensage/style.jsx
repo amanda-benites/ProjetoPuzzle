@@ -15,8 +15,13 @@ export const DivMensage = styled.div`
     width: 51vw;
     padding: 4vw;
 
-    border-radius: 10px 10px 0px 10px;
+    border-radius: 10px 0px 10px 10px;
 
     background-color: #2CBFAE;
     color: white;
+`
+
+export const TimeTextMsg = styled.p`
+    color: #797C7B;
+    font-size: smaller;
 `

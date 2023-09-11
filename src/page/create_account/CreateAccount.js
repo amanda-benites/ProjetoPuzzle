@@ -9,8 +9,8 @@ function CreateAccount() {
 
     const navigate = useNavigate()
 
-    function goToCoverPage() {
-        navigate("/home");
+    function goBack() {
+        navigate(-1);
     }
 
     return(
@@ -34,7 +34,7 @@ function CreateAccount() {
                     <Input/>
                 </CreateFormContainer>
                 <DivCreateButtonContainer>
-                    <CreateButtonColor onClick={goToCoverPage} >Criar conta</CreateButtonColor>
+                    <CreateButtonColor onClick={goBack} >Criar conta</CreateButtonColor>
                 </DivCreateButtonContainer>
             </CreateBodyContainer>
         </>

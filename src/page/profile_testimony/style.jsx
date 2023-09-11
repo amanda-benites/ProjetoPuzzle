@@ -43,3 +43,10 @@ export const InputSearchContainer = styled.input`
 export const SpanSearchContainer = styled.span`
     color: #d3d3d3;
 `
+
+export const BodyTestimonyProfile = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+`

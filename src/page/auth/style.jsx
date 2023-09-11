@@ -26,7 +26,7 @@ export const DivTitleContainer = styled.div`
 
 export const FormAuthContainer = styled.form`
     width: 95vw;
-    height: 55vh;
+    height: 75vh;
     
     display: flex;
     flex-direction: column;
@@ -39,19 +39,45 @@ export const LabelColor = styled(FontAlatsiContainer)`
     margin-top: 8vh;
 `
 
+export const InputContainer = styled.input`
+    background: none;
+    border: none;
+    height: 5vh;
+    width: 87vw;
+
+    border-bottom: 1px #CDD1D0 solid;
+
+    &:focus {
+        outline: 0;
+        padding-left: 0.5vw;
+    }
+`
+
 export const DivButtonAuthContainer = styled.div`
-    width: 100vw;
-    height: 15vh;
+    width: 90vw;
+    height: 35vh;
     
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: end;
 
     padding-top: 2vh;
 `
 
 export const AuthButtonColor = styled(ButtonContainer)`
     background-color: #F6C863;
+
+    width: 75vw;
+    height: 6vh;
+
+    border: none;
+    border-radius: 20px;
+
+    color: white;
+
+    font-family: Alatsi, Arial, Helvetica, sans-serif;
+    font-size: medium;
 `
 
 export const ForgetPasswordContainer = styled(ButtonContainer)`

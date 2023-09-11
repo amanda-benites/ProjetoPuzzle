@@ -1,4 +1,4 @@
-import { ContainerMensage, DivImgContactMsg, DivMensage } from "./style"
+import { ContainerMensage, DivImgContactMsg, DivMensage, TimeTextContact } from "./style"
 
 import imgExemple from "../../assets/MauricioExemplo.svg"
 
@@ -13,7 +13,7 @@ function ContactMensage(props) {
                 <DivMensage>
                     <p>{props.profileMsg}</p>
                 </DivMensage>
-                <p>{props.timeMsg}</p>
+                <TimeTextContact>{props.timeMsg}</TimeTextContact>
             </div>
         </ContainerMensage>
     )

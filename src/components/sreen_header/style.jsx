@@ -40,3 +40,8 @@ export const DivTitle = styled.div`
 export const DivAlign = styled.div`
     grid-area: DivAlign;
 `
+
+export const H2ContainerHeader = styled.div`
+    font-size: 22px;
+    font-weight: bold;
+`

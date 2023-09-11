@@ -104,7 +104,7 @@ export const MessageUnfollow = styled.p`
 export const ButtonUnfollow = styled.button`
     background: none;
     border: 1px #69B0EE solid;
-    border-radius: 10px;
+    border-radius: 20px;
     color: #69B0EE;
     width: 40vw;
     height: 6vh;
@@ -114,7 +114,7 @@ export const ButtonUnfollow = styled.button`
 export const ButtonFollow = styled.button`
     background: none;
     border: 1px #69B0EE solid;
-    border-radius: 10px;
+    border-radius: 20px;
     color: #69B0EE;
     width: 90vw;
     height: 6vh;

@@ -52,7 +52,7 @@ function Contacts() {
                 ))}              
                 </div>
             </div>
-            <GerenalFooter/>
+            <GerenalFooter idColor='Contacts'/>
         </>
     )
 }

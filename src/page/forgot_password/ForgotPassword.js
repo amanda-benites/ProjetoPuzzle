@@ -16,7 +16,7 @@ function ForgotPassword() {
                 <FontH1Container>Esqueceu a senha?</FontH1Container>
             </DivTitleContainer>
             <DivButtonsExit>
-                <ButtonCancel onClick={goBack}>Cancelar</ButtonCancel>
+                <ButtonCancel onClick={goBack}>Voltar</ButtonCancel>
                 <ButtonDelete>Enviar email</ButtonDelete>
             </DivButtonsExit>
         </>

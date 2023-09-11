@@ -7,7 +7,7 @@ function FooterChat() {
     return(
         <FooterChatContainer>
             <DivInputContainer>
-                <InputChatContainer type='text'/>
+                <InputChatContainer type='text' placeholder="Escreva sua mensagem"/>
                 <ButtonSend>
                     <ImgSendMensage src={imgSend} alt="Ícone de enviar mensagem"/>
                 </ButtonSend>

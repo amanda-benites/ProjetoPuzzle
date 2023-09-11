@@ -1,4 +1,4 @@
-import { ContainerMensage, DivMensage } from "./style"
+import { ContainerMensage, DivMensage, TimeTextMsg } from "./style"
 
 
 function ProfileMensage(props) {
@@ -8,7 +8,7 @@ function ProfileMensage(props) {
             <DivMensage>
                 <p>{props.profileMsg}</p>
             </DivMensage>
-            <p>{props.timeMsg}</p>
+            <TimeTextMsg>{props.timeMsg}</TimeTextMsg>
         </ContainerMensage>
     )
 }

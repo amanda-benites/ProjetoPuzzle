@@ -34,14 +34,14 @@ export const DivButtonsExit = styled.div`
 export const ButtonCancel = styled.button`
     background: none;
     border: 1px #2CBFAE solid;
-    border-radius: 10px;
+    border-radius: 20px;
     color: #2CBFAE;
     width: 40vw;
     height: 6vh;
     font-size: medium;
 `
 
-export const ButtonDelete = styled(ButtonCancel)`
+export const ButtonLogout = styled(ButtonCancel)`
     background-color: #2CBFAE;
     color: #FFFF;
 `

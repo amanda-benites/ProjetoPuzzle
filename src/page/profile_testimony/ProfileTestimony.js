@@ -2,7 +2,7 @@ import GerenalFooter from "../../components/general_footer/GeneralFoter";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 import TestimonyLayout from "../../components/testimony_layout/TestimonyLayout";
 
-import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer } from "./style";
+import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, BodyTestimonyProfile } from "./style";
 
 import { useState } from "react";
 
@@ -43,14 +43,14 @@ function ProfileTestimony() {
                         {inputValue && (<SpanSearchContainer onClick={clearInput}><img src={removeImg} alt="Ícone X"/></SpanSearchContainer>)}
                     </DivSearchContainer>
                 </DivSearchContainerMain>
-                <div>
+                <BodyTestimonyProfile>
                     {filteredTestimony.map((testimony) => (
                         <TestimonyLayout
                             key={testimony}
                             nameContact={testimonyValues[testimony][0]}
                             testimony={testimonyValues[testimony][1]}/>
                     ))}              
-                </div>
+                </BodyTestimonyProfile>
             </div>
             <GerenalFooter/>
         </>

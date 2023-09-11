@@ -33,6 +33,7 @@ export const InputChatContainer = styled.input`
     border: none;
     width: 80vw;
     height: 5vh;
+    padding-left: 3vw;
 
     &:focus {
         outline: 0;

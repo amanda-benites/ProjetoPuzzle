@@ -74,7 +74,7 @@ export const InputLegendContainer = styled.input`
 export const ButtonCancel = styled.button`
     background: none;
     border: 1px #EF5261 solid;
-    border-radius: 10px;
+    border-radius: 20px;
     color: #EF5261;
     width: 40vw;
     height: 6vh;

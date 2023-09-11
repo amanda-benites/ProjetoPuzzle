@@ -25,3 +25,8 @@ export const DivMensage = styled.div`
 
     background-color: #DDF1EF;
 `
+
+export const TimeTextContact = styled.p`
+    color: #797C7B;
+    font-size: smaller;
+`

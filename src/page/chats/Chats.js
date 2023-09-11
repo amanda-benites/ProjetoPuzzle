@@ -27,7 +27,7 @@ function Chats() {
             <div>
                 {arrayValues}
             </div>
-            <GerenalFooter/>
+            <GerenalFooter idColor='Chat'/>
         </>
     )
 }

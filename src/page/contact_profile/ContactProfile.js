@@ -17,6 +17,10 @@ function ContactProfile() {
         navigate("/contact-posts");
     }
 
+    function goToContactChat() {
+        navigate("/contact-chat")
+    }
+
     const topicIdent = {
         identEmail: 'Email',
         identPhone: 'Número de telefone',
@@ -45,7 +49,7 @@ function ContactProfile() {
                     {isFollowing ? (
                         <DivButtonsActions>
                                 <ButtonUnfollow onClick={toggleFollow}>Deixar de seguir</ButtonUnfollow>
-                                <ButtonTalkWith>Conversar</ButtonTalkWith>
+                                <ButtonTalkWith onClick={goToContactChat}>Conversar</ButtonTalkWith>
                         </DivButtonsActions>
                     ) : (
                         <DivButtonFollow>

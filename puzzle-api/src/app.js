@@ -21,6 +21,6 @@ app.use(cors())
 app.use('/api', userRouter);
 app.use('/api/auth', loginRouter);
 // Setar a porta do servidor, a parir do arquivo .env
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 8001);
 
 module.exports = app;

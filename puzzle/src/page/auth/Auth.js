@@ -2,32 +2,39 @@ import AuthHeader from "../../components/auth_header/AuthHeader"
 import { FontH1Container } from "../../styleGlobal"
 import { AuthBodyContainer, AuthButtonColor, DivButtonAuthContainer, DivTitleContainer, ForgetPasswordContainer, FormAuthContainer, LabelColor, InputContainer } from "./style"
 import { useNavigate } from "react-router-dom"
-import { useContext, useState } from "react"
-import { AuthContext } from "../../context/AuthContext"
+import { useState } from "react"
+import useAuth from "../../hooks/useAuth"
+
+
 
 function Auth() {
+    const { signIn } = useAuth();
 
-    const navigate = useNavigate()
+    const [user_email, setUserEmail] = useState("");
+    const [user_password, setUserPassword] = useState("");
+    const [error, setError] = useState("");
+
+    const navigate = useNavigate();
 
     function goToForgotPasswordPage() {
         navigate('/forgot-password')
     }
 
-    const [user_email, setUserEmail] = useState("");
-    const [user_password, setUserPassword] = useState("");
-    const { signIn, signed } = useContext(AuthContext);
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      const data = {
-        user_email,
-        user_password,
-      };
-      await signIn(data);
-    };
+    const handleLogin = () => {
+        if(!user_email | !user_password) {
+            setError("Preencha todos os campos");
+            return;
+        }
 
-    console.log(signed);
-    if (!signed) {
+        const res = signIn(user_email, user_password);
+
+        if(res) {
+            setError(res);
+            return;
+        }
+    
+        navigate("/home");
+    };
 
         return(
             <>
@@ -36,26 +43,26 @@ function Auth() {
                     <DivTitleContainer>
                         <FontH1Container>Entre no Puzzle</FontH1Container>
                     </DivTitleContainer>
-                    <FormAuthContainer onSubmit={handleSubmit}>
+                    <FormAuthContainer>
                         <LabelColor>Email</LabelColor>
                         <InputContainer 
                             type="text"
                             value={user_email}
-                            onChange={(e) => setUserEmail(e.target.value)}/>
+                            onChange={(e) => [setUserEmail(e.target.value), setError("")]}/>
                         <LabelColor>Senha</LabelColor>
                         <InputContainer 
                             type="text"
                             value={user_password}
-                            onChange={(e) => setUserPassword(e.target.value)}/>
+                            onChange={(e) => [setUserPassword(e.target.value), setError("")]}/>
                         <DivButtonAuthContainer> 
-                            <AuthButtonColor type="submit">Entrar</AuthButtonColor>
+                            <label>{error}</label>
+                            <AuthButtonColor onClick={handleLogin}>Entrar</AuthButtonColor>
                             <ForgetPasswordContainer onClick={goToForgotPasswordPage}>Esqueceu a senha?</ForgetPasswordContainer>
-                        </DivButtonAuthContainer>
+                            </DivButtonAuthContainer>
                     </FormAuthContainer>
                 </AuthBodyContainer>
             </>
         )
     }
-}
 
 export default Auth

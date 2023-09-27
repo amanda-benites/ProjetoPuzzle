@@ -1,24 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { FontH1Container } from "../../styleGlobal"
 import { DivTitleContainer, DivButtonsExit, ButtonCancel, ButtonLogout } from "./style"
-import { useEffect } from "react";
+import useAuth from "../../hooks/useAuth";
 
 function Exit() {
+    const {signOut} = useAuth();
+    const navigate = useNavigate();
 
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        const token = localStorage.getItem('token')
-        if(!token) {
-            navigate('/')
-        }
-    }, [navigate])
-
-    const handleLogout = () => {
-        localStorage.removeItem('email')
-        localStorage.removeItem('token')
-        navigate('/')
-    }
 
     function goBack() {
         navigate(-1);
@@ -31,7 +19,7 @@ function Exit() {
             </DivTitleContainer>
             <DivButtonsExit>
                 <ButtonCancel onClick={goBack}>Voltar</ButtonCancel>
-                <ButtonLogout onClick={handleLogout}>Sair</ButtonLogout>
+                <ButtonLogout onClick={() => [signOut, navigate("/")]}>Sair</ButtonLogout>
             </DivButtonsExit>
         </>
     )

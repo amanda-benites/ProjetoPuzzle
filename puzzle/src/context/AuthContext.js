@@ -1,13 +1,11 @@
-import { createContext } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { api } from "../services/api";
+import { createContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext();
+import { api } from "../services/api"
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+export const AuthContext = createContext({});
+
+export const AuthProvider = ({children}) => {
+  const [user, setUser] = useState();
 
   useEffect(() => {
     const loadingStoreData = () => {
@@ -21,18 +19,18 @@ export const AuthProvider = ({ children }) => {
     loadingStoreData();
   }, []);
 
-  const signIn = async ({ user_email, user_password }) => {
+  const signIn = async ({user_email, user_password}) => {
     try {
-      const response = await api.post("/auth/login", { user_email, user_password });
+      const response = await api.post("/login", { user_email, user_password });
       if (response.data.error) {
-        console.log(response.data.error);
+        alert(response.data.error);
       } else {
         setUser(response.data);
         api.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${response.data.tokenApi}`;
         console.log(response)
-        localStorage.setItem("@Auth:user", JSON.stringify(response.data[0].user_name));
+        localStorage.setItem("@Auth:user", JSON.stringify(response.data.data[0].name));
         localStorage.setItem("@Auth:token", response.data.accessToken);
       }
     } catch (error) {
@@ -40,17 +38,10 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const navigate = useNavigate()
-
   const singOut = () => {
-    localStorage.clear();
     setUser(null);
-    return navigate('/auth');
+    localStorage.removeItem("user_token");
   };
 
-  return (
-    <AuthContext.Provider value={{user, signIn, singOut, signed: !!user,}}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+  return <AuthContext.Provider value={{user, signed: !!user, signIn, singOut}}>{children}</AuthContext.Provider>;
+}

@@ -4,15 +4,18 @@ import { AuthBodyContainer, AuthButtonColor, DivButtonAuthContainer, DivTitleCon
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import useAuth from "../../hooks/useAuth"
+import { api } from "../../services/api"
 
 
 
 function Auth() {
-    const { signIn } = useAuth();
+    //const { signIn } = useAuth();
 
     const [user_email, setUserEmail] = useState("");
     const [user_password, setUserPassword] = useState("");
     const [error, setError] = useState("");
+    const [user, setUser] = useState();
+    const signIn = false;
 
     const navigate = useNavigate();
 
@@ -20,20 +23,24 @@ function Auth() {
         navigate('/forgot-password')
     }
 
-    const handleLogin = () => {
-        if(!user_email | !user_password) {
-            setError("Preencha todos os campos");
-            return;
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        const data = {
+          user_email,
+          user_password
+        };
+
+        const response = await api.post("/auth/login", data);
+        console.log(response.data);
+        if(response.data.success === true) {
+            navigate('/home')
+        } else {
+            navigate('/auth')
         }
 
-        const res = signIn(user_email, user_password);
 
-        if(res) {
-            setError(res);
-            return;
-        }
-    
-        navigate("/home");
+    // const handleLogin = () => {
+    //     console.log(user_email, user_password);
     };
 
         return(

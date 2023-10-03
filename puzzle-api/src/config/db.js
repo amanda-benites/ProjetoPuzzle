@@ -17,6 +17,7 @@ const connection = mysql.createConnection({
 // Testa se o banco esta conectado
 connection.connect(function(err) {
     if (err) {
+        console.log(err)
         throw err;
     } else {        
         console.log("Mysql Connected!");

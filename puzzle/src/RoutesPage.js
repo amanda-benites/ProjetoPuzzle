@@ -28,14 +28,6 @@ import PostOpenedContact from "./page/post_opened_contact/PostOpenedContact";
 import Chats from "./page/chats/Chats";
 import ContactChat from "./page/contact_chat/ContactChat";
 
-import useAuth from "./hooks/useAuth"
-
-const Private = ({ Item }) => {
-  const { signed } = useAuth();
-  return signed > 0 ? <Item/> : <Auth/>;
-};
-
-
 function RoutesPage() {
   return(
     <BrowserRouter>
@@ -57,7 +49,7 @@ function RoutesPage() {
         <Route path="exit" element={<Exit/>}/>
         <Route path="find" element={<FindPeople/>}/>
         <Route path="forgot-password" element={<ForgotPassword/>}/>
-        <Route path="home" element={<Private Item={Home}/>}/>
+        <Route path="home" element={<Home/>}/>
         <Route path="open-article" element={<OpenArticle/>}/>
         <Route path="post-opened" element={<PostOpened/>}/>
         <Route path="post-opened-contact" element={<PostOpenedContact/>}/>

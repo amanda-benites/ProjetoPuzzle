@@ -21,7 +21,7 @@ export const AuthProvider = ({children}) => {
 
   const signIn = async ({user_email, user_password}) => {
     try {
-      const response = await api.post("/login", { user_email, user_password });
+      const response = await api.post("/auth/login", { user_email, user_password });
       if (response.data.error) {
         alert(response.data.error);
       } else {
@@ -31,7 +31,7 @@ export const AuthProvider = ({children}) => {
         ] = `Bearer ${response.data.tokenApi}`;
         console.log(response)
         localStorage.setItem("@Auth:user", JSON.stringify(response.data.data[0].name));
-        localStorage.setItem("@Auth:token", response.data.accessToken);
+        localStorage.setItem("@Auth:token", response.data.data[0].token);
       }
     } catch (error) {
       console.log(error);

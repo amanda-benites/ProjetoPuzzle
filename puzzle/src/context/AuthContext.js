@@ -40,7 +40,7 @@ export const AuthProvider = ({children}) => {
 
   const singOut = () => {
     setUser(null);
-    localStorage.removeItem("user_token");
+    localStorage.removeItem("token");
   };
 
   return <AuthContext.Provider value={{user, signed: !!user, signIn, singOut}}>{children}</AuthContext.Provider>;

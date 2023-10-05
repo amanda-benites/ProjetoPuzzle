@@ -4,12 +4,16 @@ import { DivTitleContainer, DivButtonsExit, ButtonCancel, ButtonLogout } from ".
 import useAuth from "../../hooks/useAuth";
 
 function Exit() {
-    const {signOut} = useAuth();
     const navigate = useNavigate();
 
 
     function goBack() {
         navigate(-1);
+    }
+
+    function exitBut() {
+        localStorage.clear();
+        navigate("/")
     }
 
     return(
@@ -19,7 +23,7 @@ function Exit() {
             </DivTitleContainer>
             <DivButtonsExit>
                 <ButtonCancel onClick={goBack}>Voltar</ButtonCancel>
-                <ButtonLogout onClick={() => [signOut, navigate("/")]}>Sair</ButtonLogout>
+                <ButtonLogout onClick={exitBut}>Sair</ButtonLogout>
             </DivButtonsExit>
         </>
     )

@@ -1,21 +1,18 @@
 import AuthHeader from "../../components/auth_header/AuthHeader"
 import { FontH1Container } from "../../styleGlobal"
 import { AuthBodyContainer, AuthButtonColor, DivButtonAuthContainer, DivTitleContainer, ForgetPasswordContainer, FormAuthContainer, LabelColor, InputContainer } from "./style"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { useState } from "react"
-import useAuth from "../../hooks/useAuth"
 import { api } from "../../services/api"
 
 
-
 function Auth() {
-    //const { signIn } = useAuth();
 
     const [user_email, setUserEmail] = useState("");
     const [user_password, setUserPassword] = useState("");
+    const [user, setUser] = useState(null);
     const [error, setError] = useState("");
-    const [user, setUser] = useState();
-    const signIn = false;
+    const signed = localStorage.getItem("@Auth:user") && localStorage.getItem("@Auth:token");
 
     const navigate = useNavigate();
 
@@ -32,17 +29,30 @@ function Auth() {
 
         const response = await api.post("/auth/login", data);
         console.log(response.data);
+
+
         if(response.data.success === true) {
+            console.log("User connected!");
+
+            api.defaults.headers.common[
+                "Authorization"
+            ] = `Bearer ${response.data.data[0].token}`
+
+            localStorage.setItem("@Auth:user", JSON.stringify(response.data.data[0].user_email));
+            localStorage.setItem("@Auth:token", response.data.data[0].token);
+            setUser(response.data.data[0])
+
             navigate('/home')
+
         } else {
             navigate('/auth')
         }
-
-
-    // const handleLogin = () => {
-    //     console.log(user_email, user_password);
     };
 
+    if (signed) {
+        console.log("Success login")
+        return <Navigate to="/home"/>
+    } else{
         return(
             <>
                 <AuthHeader/>
@@ -58,7 +68,7 @@ function Auth() {
                             onChange={(e) => [setUserEmail(e.target.value), setError("")]}/>
                         <LabelColor>Senha</LabelColor>
                         <InputContainer 
-                            type="text"
+                            type="password"
                             value={user_password}
                             onChange={(e) => [setUserPassword(e.target.value), setError("")]}/>
                         <DivButtonAuthContainer> 
@@ -71,5 +81,5 @@ function Auth() {
             </>
         )
     }
-
+}
 export default Auth

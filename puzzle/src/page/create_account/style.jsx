@@ -3,6 +3,7 @@ import { AuthBodyContainer, AuthButtonColor, DivButtonAuthContainer, DivTitleCon
 
 
 export const CreateBodyContainer = styled(AuthBodyContainer)`
+    height: 85vh;
 `
 
 export const CreateDivTitle = styled(DivTitleContainer)`
@@ -12,7 +13,7 @@ export const CreateDivTitle = styled(DivTitleContainer)`
 `
 
 export const CreateFormContainer = styled(FormAuthContainer)`
-    height: 60vh;
+    height: 70vh;
 `
 
 export const CreateLabelColor = styled(LabelColor)`

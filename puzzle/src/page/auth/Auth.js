@@ -1,6 +1,6 @@
 import AuthHeader from "../../components/auth_header/AuthHeader"
 import { FontH1Container } from "../../styleGlobal"
-import { AuthBodyContainer, AuthButtonColor, DivButtonAuthContainer, DivTitleContainer, ForgetPasswordContainer, FormAuthContainer, LabelColor, InputContainer } from "./style"
+import { AuthBodyContainer, AuthButtonColor, DivButtonAuthContainer, DivTitleContainer, ForgetPasswordContainer, FormAuthContainer, LabelColor, InputContainer, LabelError, DivError, ButtonDisabled } from "./style"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { api } from "../../services/api"
@@ -27,31 +27,33 @@ function Auth() {
           user_password
         };
 
-        const response = await api.post("/auth/login", data);
-        console.log(response.data);
-
-
-        if(response.data.success === true) {
-            console.log("User connected!");
-
-            api.defaults.headers.common[
-                "Authorization"
-            ] = `Bearer ${response.data.data[0].token}`
-
-            localStorage.setItem("@Auth:user", JSON.stringify(response.data.data[0].user_email));
-            localStorage.setItem("@Auth:token", response.data.data[0].token);
-            setUser(response.data.data[0])
-
-            navigate('/home')
-
-        } else {
-            navigate('/auth')
+        try {
+            const response = await api.post("/auth/login", data);
+    
+            if (response.data.success === true) {
+                console.log("User connected!");
+    
+                api.defaults.headers.common[
+                    "Authorization"
+                ] = `Bearer ${response.data.data[0].token}`;
+    
+                localStorage.setItem("@Auth:user", JSON.stringify(response.data.data[0].user_email));
+                localStorage.setItem("@Auth:token", response.data.data[0].token);
+                setUser(response.data.data[0]);
+    
+                navigate('/home');
+            } else {
+                setError("Credenciais inválidas. Verifique seu email e senha.");
+            }
+        } catch (error) {
+            console.error("Erro ao fazer login:", error);
+            setError("Credenciais inválidas. Verifique seu email e senha.");
         }
     };
 
     if (signed) {
         console.log("Success login")
-        return <Navigate to="/home"/>
+        return navigate('/home')
     } else{
         return(
             <>
@@ -71,11 +73,19 @@ function Auth() {
                             type="password"
                             value={user_password}
                             onChange={(e) => [setUserPassword(e.target.value), setError("")]}/>
-                        <DivButtonAuthContainer> 
-                            <label>{error}</label>
-                            <AuthButtonColor onClick={handleLogin}>Entrar</AuthButtonColor>
-                            <ForgetPasswordContainer onClick={goToForgotPasswordPage}>Esqueceu a senha?</ForgetPasswordContainer>
-                            </DivButtonAuthContainer>
+                        {error ? 
+                            <DivButtonAuthContainer> 
+                                <DivError>
+                                    <LabelError>{error}</LabelError>
+                                </DivError>
+                                <ButtonDisabled onClick={handleLogin} disabled>Entrar</ButtonDisabled>
+                                <ForgetPasswordContainer onClick={goToForgotPasswordPage}>Esqueceu a senha?</ForgetPasswordContainer>
+                            </DivButtonAuthContainer> 
+                            : 
+                            <DivButtonAuthContainer> 
+                                <AuthButtonColor onClick={handleLogin}>Entrar</AuthButtonColor>
+                                <ForgetPasswordContainer onClick={goToForgotPasswordPage}>Esqueceu a senha?</ForgetPasswordContainer>
+                            </DivButtonAuthContainer> }
                     </FormAuthContainer>
                 </AuthBodyContainer>
             </>

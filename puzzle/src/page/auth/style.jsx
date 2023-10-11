@@ -26,7 +26,7 @@ export const DivTitleContainer = styled.div`
 
 export const FormAuthContainer = styled.form`
     width: 95vw;
-    height: 75vh;
+    height: 70vh;
     
     display: flex;
     flex-direction: column;
@@ -56,6 +56,7 @@ export const InputContainer = styled.input`
 export const DivButtonAuthContainer = styled.div`
     width: 90vw;
     height: 35vh;
+
     
     display: flex;
     flex-direction: column;
@@ -87,4 +88,27 @@ export const ForgetPasswordContainer = styled(ButtonContainer)`
 
     background: none;
     color: #F6C863;
+`
+
+export const DivError = styled.div`
+    width: 100vw;
+    height: 5vh;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+`
+
+export const LabelError = styled.label`
+    color: #CDD1D0;
+
+    width: 80vw;
+    text-align: center;
+
+    font-size: small;
+`
+
+export const ButtonDisabled = styled(AuthButtonColor)`
+    opacity: 0.7;
 `

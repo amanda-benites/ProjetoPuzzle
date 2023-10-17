@@ -22,6 +22,7 @@ function Auth() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        
         const data = {
           user_email,
           user_password

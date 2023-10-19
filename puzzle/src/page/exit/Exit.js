@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FontH1Container } from "../../styleGlobal"
 import { DivTitleContainer, DivButtonsExit, ButtonCancel, ButtonLogout } from "./style"
-import useAuth from "../../hooks/useAuth";
 
 function Exit() {
     const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import AuthHeader from "../../components/auth_header/AuthHeader"
 import { FontH1Container } from "../../styleGlobal"
 import { AuthBodyContainer, AuthButtonColor, DivButtonAuthContainer, DivTitleContainer, ForgetPasswordContainer, FormAuthContainer, LabelColor, InputContainer, LabelError, DivError, ButtonDisabled } from "./style"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { api } from "../../services/api"
 

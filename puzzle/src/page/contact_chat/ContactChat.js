@@ -1,8 +1,11 @@
+import { useContext } from "react";
 import ContactMensage from "../../components/contact_mensage/ContactMensage";
 import DateLine from "../../components/date_line/DateLine";
 import FooterChat from "../../components/footer_chat/FooterChat";
 import HeaderChat from "../../components/header_chat/HeaderChat";
 import ProfileMensage from "../../components/profile_mensage/ProfileMensage";
+import { useAuthRedirect } from "../../hooks/useAuthRedirect";
+import { AuthContext } from "../../context/AuthContext";
 
 function ContactChat() {
     const msgValues = {
@@ -34,6 +37,11 @@ function ContactChat() {
                 />
         )};
     }
+
+    const { authenticated } = useContext(AuthContext);
+    useAuthRedirect(authenticated);
+
+    if (authenticated) {
     return(
         <>
             <HeaderChat titleChat={'Maurício Costa'}/>
@@ -43,7 +51,7 @@ function ContactChat() {
             </div>
             <FooterChat/>
         </>
-    )
+    )}
 }
 
 export default ContactChat

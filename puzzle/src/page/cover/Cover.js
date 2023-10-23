@@ -6,7 +6,6 @@ import CoverImg from "../../components/cover_img/CoverImg";
 import LoginButton from "../../components/login_button/LoginButton";
 
 function Cover() {
-
     const navigate = useNavigate()
 
     function goToCoverPage() {

@@ -27,10 +27,14 @@ import PostOpened from "./page/post_opened/PostOpened";
 import PostOpenedContact from "./page/post_opened_contact/PostOpenedContact";
 import Chats from "./page/chats/Chats";
 import ContactChat from "./page/contact_chat/ContactChat";
+import DeleteAccount from "./page/delete_account/DeleteAccount";
+import EditAccount from "./page/edit_account/EditAccount";
+import { AuthProvider } from "./context/AuthContext";
 
 function RoutesPage() {
   return(
     <BrowserRouter>
+    <AuthProvider>
       <Routes>
         <Route index element={<Cover/>}/>
         <Route path="add-article" element={<AddArticle/>}/>
@@ -43,7 +47,9 @@ function RoutesPage() {
         <Route path="create" element={<CreateAccount/>}/>
         <Route path="create-post" element={<CreatePost/>}/>
         <Route path="create-testimony" element={<CreateTestimony/>}/>
+        <Route path="delete-account" element={<DeleteAccount/>}/>
         <Route path="delete-post" element={<DeletePost/>}/>
+        <Route path="edit-account" element={<EditAccount/>}/>
         <Route path="edit-post" element={<EditPost/>}/>
         <Route path="edit-testimony" element={<EditTestimony/>}/>
         <Route path="exit" element={<Exit/>}/>
@@ -60,6 +66,7 @@ function RoutesPage() {
         <Route path="testimony-contact" element={<ContactTestimony/>}/>
         <Route path="testimony-to-me" element={<TestimonyToMe/>}/>
       </Routes>
+    </AuthProvider>
     </BrowserRouter>
   )
 }

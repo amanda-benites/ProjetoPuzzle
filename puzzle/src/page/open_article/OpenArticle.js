@@ -3,6 +3,9 @@ import ScreenHeader from "../../components/sreen_header/ScreenHeader"
 import imgArticle from "../../assets/article_gray.svg"
 import { ButtonArticleAdd, ButtonArticleBack, DivButtonsArticle, DivContentArticle, DivImgArticle, H4ArticleIdent1, H4ArticleIdent2 } from "./style"
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useAuthRedirect } from "../../hooks/useAuthRedirect";
 
 
 function OpenArticle() {
@@ -13,6 +16,10 @@ function OpenArticle() {
         navigate("/home");
     }
 
+    const { authenticated } = useContext(AuthContext);
+    useAuthRedirect(authenticated);
+
+    if (authenticated) {
     return(
         <>
             <ScreenHeader titlePage={`Abrir artigo`}/>
@@ -30,7 +37,7 @@ function OpenArticle() {
                 <ButtonArticleAdd>Abrir</ButtonArticleAdd>
             </DivButtonsArticle>
         </>
-    )
+    )}
 }
 
 export default OpenArticle

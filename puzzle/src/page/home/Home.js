@@ -10,6 +10,9 @@ import MauricioExemplo from "../../assets/MauricioExemplo.svg"
 import imgProfile from "../../assets/user_img.svg"
 import { useNavigate } from "react-router-dom"
 import PostCardContact from "../../components/post_card_contact/PostCardContact"
+import { useContext } from "react"
+import { AuthContext } from "../../context/AuthContext"
+import { useAuthRedirect } from "../../hooks/useAuthRedirect"
 
 function Home() {
     const postValues = {
@@ -49,6 +52,10 @@ function Home() {
         navigate("/profile");
     }
 
+    const { authenticated } = useContext(AuthContext);
+    useAuthRedirect(authenticated);
+
+    if (authenticated === true) {
     return(
         <BodyHomeContainer>    
             <HomeHeader/>
@@ -69,7 +76,7 @@ function Home() {
             </MainHomeContainer>
             <GerenalFooter/>
         </BodyHomeContainer>
-    )
+    )}
 }
 
 export default Home

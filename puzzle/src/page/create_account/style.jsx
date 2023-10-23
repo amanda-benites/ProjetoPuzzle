@@ -41,3 +41,16 @@ export const InputContainer = styled.input`
         padding-left: 0.5vw;
     }
 `
+
+export const CreateLabelError = styled.label`
+    color: #CDD1D0;
+
+    width: 80vw;
+    text-align: center;
+
+    font-size: small;
+`
+
+export const CreateButtonDisabled = styled(CreateButtonColor)`
+    opacity: 0.7;
+`

@@ -25,6 +25,7 @@ export const InputImgProfile = styled.div`
     
     background: ${props => `url(${props.background}) no-repeat center center`};
     background-size: 22vw;
+    filter: brightness(50%);
 
     &:focus {
         outline: 0;
@@ -34,17 +35,51 @@ export const InputImgProfile = styled.div`
 
 export const ProfileInfos = styled.div`
     width: 100vw;
-    height: 31vh;
+    height: 46vh;
     display: flex;
     flex-direction: column;
-    padding-top: 5vh;
+    justify-content: center;
     font-family: Amiko, Arial, Helvetica, sans-serif;
 `
 
-export const ProfilePosts = styled.div`
+export const EditButtonSaveDiv = styled.div`
     width: 100vw;
-    height: 40vh;
+    height: 25vh;
+    padding-bottom: 5vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: end;
 ` 
+
+export const ButtonSaveEdit = styled.button`
+    width: 75vw;
+    height: 6vh;
+
+    border: none;
+    border-radius: 20px;
+
+    background-color: #2CBFAE;
+    color: white;
+
+    font-family: Alatsi, Arial, Helvetica, sans-serif;
+    font-size: medium;
+`
+
+export const ButtonContainer = styled.button`
+    width: 75vw;
+    height: 6vh;
+
+    border: none;
+    border-radius: 20px;
+
+    background-color: #2CBFAE;
+    color: white;
+
+    font-family: Alatsi, Arial, Helvetica, sans-serif;
+    font-size: medium;
+`
 
 export const PostsProfileDiv = styled.div`
     width: 100vw;
@@ -54,7 +89,6 @@ export const PostsProfileDiv = styled.div`
     align-items: center;
     justify-content: center;
     gap: 2vw;
-    flex-wrap: wrap;
 `
 
 export const PostsProfile = styled.img`
@@ -71,4 +105,12 @@ export const PostsProfileIdent = styled.div`
 export const ButtonSeeMore = styled(ButtonHeaderContainer)`
     width: 25vw;
     color: #69B0EE;
+`
+
+export const InputFileContainer = styled.button`
+    background: none;
+    border: none;
+    color: #CDD1D0;
+    text-transform: uppercase;
+    text-decoration: underline;
 `

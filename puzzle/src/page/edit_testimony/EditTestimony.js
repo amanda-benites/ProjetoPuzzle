@@ -3,6 +3,9 @@ import ScreenHeader from "../../components/sreen_header/ScreenHeader"
 import imgTestimony from "../../assets/testimony_img.svg"
 import { ButtonTestimonyAdd, ButtonTestimonyBack, DivButtonsTestimony, DivContentTestimony, DivImgTestimony, H4TestimonyIdent, InputContentTestimony } from "./style"
 import { useNavigate } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useAuthRedirect } from "../../hooks/useAuthRedirect";
 
 
 function EditTestimony() {
@@ -13,6 +16,10 @@ function EditTestimony() {
         navigate("/home");
     }
 
+    const { authenticated } = useContext(AuthContext);
+    useAuthRedirect(authenticated);
+
+    if (authenticated) {
     return(
         <>
             <ScreenHeader titlePage={`Editar depoimento`}/>
@@ -21,14 +28,14 @@ function EditTestimony() {
             </DivImgTestimony>
             <DivContentTestimony>
                 <H4TestimonyIdent>Depoimento</H4TestimonyIdent>
-                <InputContentTestimony type="text" placeholder="Escreva aqui"/>
+                <InputContentTestimony type="text" placeholder="3 - Transtono do espectro autista: qualidade de vida e estresse em cuidadores e/ou familiares - revisão de literatura"/>
             </DivContentTestimony>
             <DivButtonsTestimony>
                 <ButtonTestimonyBack onClick={goToHomePage}>Voltar</ButtonTestimonyBack>
                 <ButtonTestimonyAdd>Adicionar</ButtonTestimonyAdd>
             </DivButtonsTestimony>
         </>
-    )
+    )}
 }
 
 export default EditTestimony

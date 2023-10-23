@@ -1,8 +1,12 @@
+import { useContext } from "react"
 import ChatLayout from "../../components/chat_layout/ChatLayout"
 import GerenalFooter from "../../components/general_footer/GeneralFoter"
 import ScreenHeader from "../../components/sreen_header/ScreenHeader"
+import { AuthContext } from "../../context/AuthContext"
+import { useAuthRedirect } from "../../hooks/useAuthRedirect"
 
 function Chats() {
+
     const chatValues = {
         chat1: ['Maurício Costa', 3, 1],
         chat2: ['Augusto Silva', 10, 0],
@@ -21,6 +25,11 @@ function Chats() {
             />
         );
     }
+
+    const { authenticated } = useContext(AuthContext);
+    useAuthRedirect(authenticated);
+
+    if (authenticated) {
     return(
         <>
             <ScreenHeader titlePage={'Conversas'}/>
@@ -29,7 +38,7 @@ function Chats() {
             </div>
             <GerenalFooter idColor='Chat'/>
         </>
-    )
+    )}
 }
 
 export default Chats

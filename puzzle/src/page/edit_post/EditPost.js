@@ -1,6 +1,9 @@
 import { useNavigate } from "react-router";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 import { ButtonCancel, ButtonOk, DivButtonsContainer, DivInputFile, DivInputsContainer, InputFileContainer, InputLegendContainer, SpanInsertPost } from "./style";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useAuthRedirect } from "../../hooks/useAuthRedirect";
 
 
 function EditPost() {
@@ -32,7 +35,10 @@ function EditPost() {
     }
   };
 
+  const { authenticated } = useContext(AuthContext);
+  useAuthRedirect(authenticated);
 
+  if (authenticated) {
     return(
         <>
           <ScreenHeader titlePage={"Editar Publicação"}/>  
@@ -63,7 +69,7 @@ function EditPost() {
             <ButtonOk>Concluir</ButtonOk>
           </DivButtonsContainer>
         </>
-    )
+    )}
 }
 
 export default EditPost

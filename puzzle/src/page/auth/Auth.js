@@ -52,10 +52,7 @@ function Auth() {
         }
     };
 
-    if (signed) {
-        console.log("Success login")
-        return navigate('/home')
-    } else{
+
         return(
             <>
                 <AuthHeader/>
@@ -91,6 +88,5 @@ function Auth() {
                 </AuthBodyContainer>
             </>
         )
-    }
 }
 export default Auth

@@ -25,14 +25,14 @@ export const ImgBackProfile = styled.img`
 export const DropDownMenu = styled.div`
     position: absolute;
     width: 28vw;
-    height: 14vh;
+    height: 10vh;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 
-    margin-top: 16.5vh;
+    margin-top: 12.5vh;
     margin-left: 64vw;
     background-color: #FFF7E6;
 `

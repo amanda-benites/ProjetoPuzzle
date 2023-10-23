@@ -6,7 +6,7 @@ import threePoints from "../../assets/three-points.svg"
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-function HeaderProfile() {
+function HeaderProfileEdit() {
 
     const navigate = useNavigate()
 
@@ -18,16 +18,8 @@ function HeaderProfile() {
         navigate("/exit");
     }
 
-    function goToTestimonyPage() {
-        navigate('/profile-testimony')
-    }
-
     function goToDeletePage() {
         navigate('/delete-account')
-    }
-
-    function goToEditProfilePage() {
-        navigate('/edit-account')
     }
 
     const [isOpen, setIsOpen] = useState(false);
@@ -46,9 +38,7 @@ function HeaderProfile() {
             </ButtonHeaderProfile>
                 {isOpen && (
                     <DropDownMenu className="dropdown-menu">
-                        <ItemsMenu onClick={goToTestimonyPage}>Depoimentos</ItemsMenu>
                         <ItemsMenu onClick={goToExitPage}>Sair</ItemsMenu>
-                        <ItemsMenu onClick={goToEditProfilePage}>Editar conta</ItemsMenu>
                         <ItemsMenu onClick={goToDeletePage}>Deletar conta</ItemsMenu>
                     </DropDownMenu>
                     )}
@@ -56,4 +46,4 @@ function HeaderProfile() {
     )
 }
 
-export default HeaderProfile
+export default HeaderProfileEdit

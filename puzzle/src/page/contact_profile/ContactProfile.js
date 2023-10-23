@@ -5,9 +5,11 @@ import { ButtonSeeMore, ImgContactProfile, PostsProfile, PostsProfileDiv, PostsP
 import imgExemp from "../../assets/MauricioExemplo.svg"
 import InfoProfile from "../../components/info_profile/InfoProfile"
 import exemplePost from "../../assets/exemploImagem.svg"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router"
 import HeaderContact from "../../components/header_contact/HeaderContact"
+import { useAuthRedirect } from "../../hooks/useAuthRedirect"
+import { AuthContext } from "../../context/AuthContext"
 
 function ContactProfile() {
 
@@ -19,13 +21,11 @@ function ContactProfile() {
 
     const topicIdent = {
         identEmail: 'Email',
-        identPhone: 'Número de telefone',
         identPosts: 'Postagens'
     }
     const topicValues = {
         userName: 'Maurício Costa',
         userEmail: 'mauricio@teste.com',
-        userPhone: '(51) 99999-0000'
     }
 
     const [isFollowing, setIsFollowing] = useState(true);
@@ -34,6 +34,10 @@ function ContactProfile() {
         setIsFollowing((prevState) => !prevState);
     };
 
+    const { authenticated } = useContext(AuthContext);
+    useAuthRedirect(authenticated);
+
+    if (authenticated) {
     return(
         <>
             <HeaderContact/>
@@ -57,10 +61,6 @@ function ContactProfile() {
                     <InfoProfile 
                         topicProfile={topicIdent.identEmail} 
                         itemProfile={topicValues.userEmail}
-                    />
-                    <InfoProfile 
-                        topicProfile={topicIdent.identPhone} 
-                        itemProfile={topicValues.userPhone}
                     />
                 </ProfileInfos>
                 {isFollowing === true ? (
@@ -100,7 +100,7 @@ function ContactProfile() {
             </div>
             <GerenalFooter/>
         </>
-    )
+    )}
 }
 
 export default ContactProfile

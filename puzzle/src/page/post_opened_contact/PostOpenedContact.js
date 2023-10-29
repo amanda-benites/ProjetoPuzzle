@@ -6,15 +6,8 @@ import { BodyHomeContainer, DivAddComment, DivFooterPostOpened, InputAddComment,
 import exemploImagem from "../../assets/exemploImagem.svg"
 import imgProfile from "../../assets/MauricioExemplo.svg"
 import send from "../../assets/send_mensage.svg"
-import { useContext } from "react"
-import { AuthContext } from "../../context/AuthContext"
-import { useAuthRedirect } from "../../hooks/useAuthRedirect"
 
 function PostOpenedContact() {
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
-
-    if (authenticated) {
     return(
         <BodyHomeContainer>
             <HomeHeader/>
@@ -34,7 +27,7 @@ function PostOpenedContact() {
             </DivFooterPostOpened>
             <GerenalFooter/>
         </BodyHomeContainer>
-    )}
+    )
 }
 
 export default PostOpenedContact

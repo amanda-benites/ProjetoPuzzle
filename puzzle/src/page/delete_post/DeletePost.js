@@ -3,9 +3,6 @@ import { ButtonCancel, ButtonDelete, DivButtonsDelete, DivContentPostDelete, Div
 
 import imgExemple from "../../assets/exemploImagem.svg"
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { useAuthRedirect } from "../../hooks/useAuthRedirect";
 
 function DeletePost() {
 
@@ -15,10 +12,6 @@ function DeletePost() {
         navigate("/home");
     }
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
-
-    if (authenticated) {
     return(
         <>
             <ScreenHeader titlePage={"Excluir Publicação"}/>
@@ -32,7 +25,7 @@ function DeletePost() {
                 <ButtonDelete>Excluir</ButtonDelete>
             </DivButtonsDelete>
         </>
-    )}
+    )
 }
 
 export default DeletePost

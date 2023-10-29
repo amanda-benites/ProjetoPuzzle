@@ -10,9 +10,7 @@ import MauricioExemplo from "../../assets/MauricioExemplo.svg"
 import imgProfile from "../../assets/user_img.svg"
 import { useNavigate } from "react-router-dom"
 import PostCardContact from "../../components/post_card_contact/PostCardContact"
-import { useContext } from "react"
-import { AuthContext } from "../../context/AuthContext"
-import { useAuthRedirect } from "../../hooks/useAuthRedirect"
+import { useEffect, useState } from "react"
 
 function Home() {
     const postValues = {
@@ -52,10 +50,16 @@ function Home() {
         navigate("/profile");
     }
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
+    const [userName, setUserName] = useState("");
 
-    if (authenticated === true) {
+    useEffect(() => {
+      // Acesse o user_name diretamente do localStorage
+      const storedUserName = localStorage.getItem("@Auth:user_name");
+      if (storedUserName) {
+        setUserName(storedUserName);
+      }
+    }, []);
+
     return(
         <BodyHomeContainer>    
             <HomeHeader/>
@@ -66,7 +70,7 @@ function Home() {
                     </MyPicture>
                     <MyProfile>
                         <ButtonUserContainer onClick={goToProfilePage}>Meu Perfil</ButtonUserContainer>
-                        <MyNameText>Amanda Benites</MyNameText>
+                        <MyNameText>{userName}</MyNameText>
                     </MyProfile>
                 </DivProfileAccess>
                 {arrayValues}
@@ -76,7 +80,7 @@ function Home() {
             </MainHomeContainer>
             <GerenalFooter/>
         </BodyHomeContainer>
-    )}
+    )
 }
 
 export default Home

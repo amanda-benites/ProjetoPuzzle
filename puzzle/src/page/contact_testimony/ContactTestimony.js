@@ -4,14 +4,12 @@ import TestimonyLayout from "../../components/testimony_layout/TestimonyLayout";
 
 import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, BodyTestimony, DivButtonTestimony, ButtonAddTestimony } from "./style";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 
 import iconSearch from "../../assets/search.svg"
 import removeImg from "../../assets/remove.svg"
 import { useNavigate } from "react-router";
-import { AuthContext } from "../../context/AuthContext";
-import { useAuthRedirect } from "../../hooks/useAuthRedirect";
 
 function ContactTestimony() {
 
@@ -37,10 +35,6 @@ function ContactTestimony() {
     testimonyValues[testimony][1].toLowerCase().includes(inputValue.toLowerCase())
     );
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
-
-    if (authenticated) {
     return(
         <>
             <ScreenHeader titlePage={"Depoimentos"}/>
@@ -71,7 +65,7 @@ function ContactTestimony() {
             </div>
             <GerenalFooter/>
         </>
-    )}
+    )
 }
 
 export default ContactTestimony

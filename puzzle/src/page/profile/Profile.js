@@ -7,9 +7,6 @@ import imgExemp from "../../assets/user_img.svg"
 import InfoProfile from "../../components/info_profile/InfoProfile"
 import exemplePost from "../../assets/exemploImagem.svg"
 import { useNavigate } from "react-router"
-import { useContext } from "react"
-import { AuthContext } from "../../context/AuthContext"
-import { useAuthRedirect } from "../../hooks/useAuthRedirect"
 
 function Profile() {
 
@@ -29,10 +26,6 @@ function Profile() {
         userEmail: 'amanda@teste.com',
     }
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
-  
-    if (authenticated) {
     return(
         <>
             <HeaderProfile/>
@@ -73,7 +66,7 @@ function Profile() {
             </div>
             <GerenalFooter/>
         </>
-    )}
+    )
 }
 
 export default Profile

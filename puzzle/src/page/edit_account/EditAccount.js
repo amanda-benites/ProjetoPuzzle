@@ -3,9 +3,6 @@ import GerenalFooter from "../../components/general_footer/GeneralFoter"
 import { ImgInputDiv, InputImgProfile, ProfileInfos, InputFileContainer, EditButtonSaveDiv, ButtonSaveEdit } from "./style"
 
 import imgExemp from "../../assets/user_img.svg"
-import { useContext } from "react"
-import { AuthContext } from "../../context/AuthContext"
-import { useAuthRedirect } from "../../hooks/useAuthRedirect"
 import InfoProfileEdit from "../../components/info_profile_edit/InfoProfileEdit"
 import HeaderProfileEdit from "../../components/header_profile_edit/HeaderProfileEdit"
 
@@ -53,10 +50,6 @@ function EditAccount() {
         }
       };
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
-  
-    if (authenticated) {
     return(
         <>
             <HeaderProfileEdit/>
@@ -101,7 +94,7 @@ function EditAccount() {
             </div>
             <GerenalFooter/>
         </>
-    )}
+    )
 }
 
 export default EditAccount

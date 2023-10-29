@@ -3,15 +3,13 @@ import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 
 import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, DivButtonReporsitory, BodyRepository, ButtonAddArticle } from "./style";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 
 import iconSearch from "../../assets/search.svg"
 import removeImg from "../../assets/remove.svg"
 import { useNavigate } from "react-router";
 import ArticleLayout from "../../components/article_layout/ArticleLayout";
-import { AuthContext } from "../../context/AuthContext";
-import { useAuthRedirect } from "../../hooks/useAuthRedirect";
 
 function Repository() {
 
@@ -37,10 +35,6 @@ function Repository() {
     articleValues[article][0].toLowerCase().includes(inputValue.toLowerCase())
     );
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
-
-    if (authenticated) {
     return(
         <>
             <ScreenHeader titlePage={"Repositório"}/>
@@ -70,7 +64,7 @@ function Repository() {
             </div>
             <GerenalFooter/>
         </>
-    )}
+    )
 }
 
 export default Repository

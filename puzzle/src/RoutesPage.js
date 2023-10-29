@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import Cover from "./page/cover/Cover"
 import Auth from "./page/auth/Auth"
@@ -29,44 +29,103 @@ import Chats from "./page/chats/Chats";
 import ContactChat from "./page/contact_chat/ContactChat";
 import DeleteAccount from "./page/delete_account/DeleteAccount";
 import EditAccount from "./page/edit_account/EditAccount";
-import { AuthProvider } from "./context/AuthContext";
+
+// Lógica para privar as rotas
+const PrivateRoutes = ({children, redirectTo}) => {
+  const isAuthenticated = localStorage.getItem("@Auth:token") !== null;
+  console.log('isAuth', isAuthenticated)
+  return isAuthenticated ? children : <Navigate to={redirectTo}/>
+}
 
 function RoutesPage() {
   return(
     <BrowserRouter>
-    <AuthProvider>
       <Routes>
+        {/* Rotas sem validação */}
         <Route index element={<Cover/>}/>
-        <Route path="add-article" element={<AddArticle/>}/>
         <Route path="auth" element={<Auth/>}/>
-        <Route path="chats" element={<Chats/>}/>
-        <Route path="contacts" element={<Contacts/>}/>
-        <Route path="contact-chat" element={<ContactChat/>}/>
-        <Route path="contact-posts" element={<ContactPosts/>}/>
-        <Route path="contact-profile" element={<ContactProfile/>}/>
         <Route path="create" element={<CreateAccount/>}/>
-        <Route path="create-post" element={<CreatePost/>}/>
-        <Route path="create-testimony" element={<CreateTestimony/>}/>
-        <Route path="delete-account" element={<DeleteAccount/>}/>
-        <Route path="delete-post" element={<DeletePost/>}/>
-        <Route path="edit-account" element={<EditAccount/>}/>
-        <Route path="edit-post" element={<EditPost/>}/>
-        <Route path="edit-testimony" element={<EditTestimony/>}/>
-        <Route path="exit" element={<Exit/>}/>
-        <Route path="find" element={<FindPeople/>}/>
-        <Route path="forgot-password" element={<ForgotPassword/>}/>
-        <Route path="home" element={<Home/>}/>
-        <Route path="open-article" element={<OpenArticle/>}/>
-        <Route path="post-opened" element={<PostOpened/>}/>
-        <Route path="post-opened-contact" element={<PostOpenedContact/>}/>
-        <Route path="profile" element={<Profile/>}/>
-        <Route path="profile-posts" element={<ProfilePosts/>}/>
-        <Route path="profile-testimony" element={<ProfileTestimony/>}/>
-        <Route path="repository" element={<Repository/>}/>
-        <Route path="testimony-contact" element={<ContactTestimony/>}/>
-        <Route path="testimony-to-me" element={<TestimonyToMe/>}/>
+
+        {/* Rotas privadas */}
+        <Route path="add-article" element={<PrivateRoutes redirectTo='/'>
+          <AddArticle/>
+        </PrivateRoutes>}/>
+        <Route path="chats" element={<PrivateRoutes redirectTo='/'>
+          <Chats/>
+        </PrivateRoutes>}/>
+        <Route path="contacts" element={<PrivateRoutes redirectTo='/'>
+          <Contacts/>
+        </PrivateRoutes>}/>
+        <Route path="contact-chat" element={<PrivateRoutes redirectTo='/'>
+          <ContactChat/>
+        </PrivateRoutes>}/>
+        <Route path="contact-posts" element={<PrivateRoutes redirectTo='/'>
+          <ContactPosts/>
+        </PrivateRoutes>}/>
+        <Route path="contact-profile" element={<PrivateRoutes redirectTo='/'>
+          <ContactProfile/>
+        </PrivateRoutes>}/>
+        <Route path="create-post" element={<PrivateRoutes redirectTo='/'>
+          <CreatePost/>
+        </PrivateRoutes>}/>
+        <Route path="create-testimony" element={<PrivateRoutes redirectTo='/'>
+          <CreateTestimony/>
+        </PrivateRoutes>}/>
+        <Route path="delete-account" element={<PrivateRoutes redirectTo='/'>
+          <DeleteAccount/>
+        </PrivateRoutes>}/>
+        <Route path="delete-post" element={<PrivateRoutes redirectTo='/'>
+          <DeletePost/>
+        </PrivateRoutes>}/>
+        <Route path="edit-account" element={<PrivateRoutes redirectTo='/'>
+          <EditAccount/>
+        </PrivateRoutes>}/>
+        <Route path="edit-post" element={<PrivateRoutes redirectTo='/'>
+          <EditPost/>
+        </PrivateRoutes>}/>
+        <Route path="edit-testimony" element={<PrivateRoutes redirectTo='/'>
+          <EditTestimony/>
+        </PrivateRoutes>}/>
+        <Route path="exit" element={<PrivateRoutes redirectTo='/'>
+          <Exit/>
+        </PrivateRoutes>}/>
+        <Route path="find" element={<PrivateRoutes redirectTo='/'>
+          <FindPeople/>
+        </PrivateRoutes>}/>
+        <Route path="forgot-password" element={<PrivateRoutes redirectTo='/'>
+          <ForgotPassword/>
+        </PrivateRoutes>}/>
+        <Route path="home" element={<PrivateRoutes redirectTo='/'>
+          <Home/>
+        </PrivateRoutes>}/>
+        <Route path="open-article" element={<PrivateRoutes redirectTo='/'>
+          <OpenArticle/>
+        </PrivateRoutes>}/>
+        <Route path="post-opened" element={<PrivateRoutes redirectTo='/'>
+          <PostOpened/>
+        </PrivateRoutes>}/>
+        <Route path="post-opened-contact" element={<PrivateRoutes redirectTo='/'>
+          <PostOpenedContact/>
+        </PrivateRoutes>}/>
+        <Route path="profile" element={<PrivateRoutes redirectTo='/'>
+          <Profile/>
+        </PrivateRoutes>}/>
+        <Route path="profile-posts" element={<PrivateRoutes redirectTo='/'>
+          <ProfilePosts/>
+        </PrivateRoutes>}/>
+        <Route path="profile-testimony" element={<PrivateRoutes redirectTo='/'>
+          <ProfileTestimony/>
+        </PrivateRoutes>}/>
+        <Route path="repository" element={<PrivateRoutes redirectTo='/'>
+          <Repository/>
+        </PrivateRoutes>}/>
+        <Route path="testimony-contact" element={<PrivateRoutes redirectTo='/'>
+          <ContactTestimony/>
+        </PrivateRoutes>}/>
+        <Route path="testimony-to-me" element={<PrivateRoutes redirectTo='/'>
+          <TestimonyToMe/>
+        </PrivateRoutes>}/>
       </Routes>
-    </AuthProvider>
     </BrowserRouter>
   )
 }

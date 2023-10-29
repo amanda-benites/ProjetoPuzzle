@@ -4,11 +4,6 @@ import ScreenHeader from "../../components/sreen_header/ScreenHeader"
 import imgExemp from "../../assets/exemploImagem.svg"
 import { BodyImgsContacts, DivPostsContactImgs } from "./style"
 
-import { useAuthRedirect } from "../../hooks/useAuthRedirect"
-import { AuthContext } from "../../context/AuthContext"
-import { useContext } from "react"
-
-
 function ContactPosts() {
     const postValues = {
         post1: imgExemp,
@@ -34,10 +29,7 @@ function ContactPosts() {
         );
     }
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
 
-    if (authenticated) {
     return(
         <BodyImgsContacts>
             <ScreenHeader titlePage={`Publicações`}/>
@@ -45,7 +37,7 @@ function ContactPosts() {
                 {arrayValues}
             </DivPostsContactImgs>
         </BodyImgsContacts>
-    )}
+    )
 }
 
 export default ContactPosts

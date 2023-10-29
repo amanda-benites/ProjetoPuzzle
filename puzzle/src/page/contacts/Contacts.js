@@ -4,13 +4,11 @@ import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanS
 
 import MauricioExemplo from "../../assets/MauricioExemplo.svg"
 import ContactLayout from "../../components/contact_layout/ContactLayout";
-import { useContext, useState } from "react";
+import { useState } from "react";
 
 
 import iconSearch from "../../assets/search.svg"
 import removeImg from "../../assets/remove.svg"
-import { useAuthRedirect } from "../../hooks/useAuthRedirect";
-import { AuthContext } from "../../context/AuthContext";
 
 function Contacts() {
     const contactsValues = {
@@ -29,10 +27,6 @@ function Contacts() {
     contactsValues[contact][1].toLowerCase().includes(inputValue.toLowerCase())
     );
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
-
-    if (authenticated) {
     return(
         <>
             <ScreenHeader titlePage={"Meus Contatos"}/>
@@ -60,7 +54,7 @@ function Contacts() {
             </div>
             <GerenalFooter idColor='Contacts'/>
         </>
-    )}
+    )
 }
 
 export default Contacts

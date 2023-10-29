@@ -2,10 +2,8 @@ import AuthHeader from "../../components/auth_header/AuthHeader"
 import { FontH1Container } from "../../styleGlobal"
 import { AuthBodyContainer, AuthButtonColor, DivButtonAuthContainer, DivTitleContainer, ForgetPasswordContainer, FormAuthContainer, LabelColor, InputContainer, LabelError, DivError, ButtonDisabled } from "./style"
 import { useNavigate } from "react-router-dom"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { api } from "../../services/api"
-import { useHomeRedirect } from "../../hooks/useHomeRedirect"
-import { AuthContext } from "../../context/AuthContext"
 
 
 function Auth() {
@@ -41,6 +39,10 @@ function Auth() {
     
                 localStorage.setItem("@Auth:user", JSON.stringify(response.data.data[0].user_email));
                 localStorage.setItem("@Auth:token", response.data.data[0].token);
+                const userName = response.data.data[0].user_name;
+
+                // Tente armazenar o user_name diretamente no localStorage
+                localStorage.setItem("@Auth:user_name", userName);
                 setUser(response.data.data[0]);
     
                 navigate('/home');
@@ -52,10 +54,6 @@ function Auth() {
             setError("Credenciais inválidas. Verifique seu email e senha.");
         }
     };
-
-    const { authenticated } = useContext(AuthContext);
-    useHomeRedirect(authenticated)
-
 
         return(
             <>

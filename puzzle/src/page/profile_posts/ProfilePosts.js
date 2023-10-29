@@ -3,9 +3,6 @@ import ScreenHeader from "../../components/sreen_header/ScreenHeader"
 
 import imgExemp from "../../assets/exemploImagem.svg"
 import { BodyImgsContacts, DivPostsContactImgs } from "./style"
-import { useContext } from "react"
-import { AuthContext } from "../../context/AuthContext"
-import { useAuthRedirect } from "../../hooks/useAuthRedirect"
 
 function ProfilePosts() {
     const postValues = {
@@ -32,10 +29,6 @@ function ProfilePosts() {
         );
     }
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
-
-    if (authenticated) {
     return(
         <BodyImgsContacts>
             <ScreenHeader titlePage={`Minhas publicações`}/>
@@ -43,7 +36,7 @@ function ProfilePosts() {
                 {arrayValues}
             </DivPostsContactImgs>
         </BodyImgsContacts>
-    )}
+    )
 }
 
 export default ProfilePosts

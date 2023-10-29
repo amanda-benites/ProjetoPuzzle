@@ -1,9 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FontH1Container } from "../../styleGlobal"
 import { DivTitleContainer, DivButtonsExit, ButtonCancel, ButtonLogout } from "./style"
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { useAuthRedirect } from "../../hooks/useAuthRedirect";
 
 function Exit() {
     const navigate = useNavigate();
@@ -18,10 +15,6 @@ function Exit() {
         navigate('/auth')
     }
 
-    const { authenticated } = useContext(AuthContext);
-    useAuthRedirect(authenticated);
-
-    if (authenticated) {
     return(
         <>
             <DivTitleContainer>
@@ -32,7 +25,7 @@ function Exit() {
                 <ButtonLogout onClick={signOut}>Sair</ButtonLogout>
             </DivButtonsExit>
         </>
-    )}
+    )
 }
 
 export default Exit

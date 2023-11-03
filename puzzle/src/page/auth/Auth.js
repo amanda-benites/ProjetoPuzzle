@@ -40,9 +40,11 @@ function Auth() {
                 localStorage.setItem("@Auth:user", JSON.stringify(response.data.data[0].user_email));
                 localStorage.setItem("@Auth:token", response.data.data[0].token);
                 const userName = response.data.data[0].user_name;
+                const userId = response.data.data[0].user_id;
 
-                // Tente armazenar o user_name diretamente no localStorage
                 localStorage.setItem("@Auth:user_name", userName);
+                localStorage.setItem("@Auth: user_id", userId);
+
                 setUser(response.data.data[0]);
     
                 navigate('/home');

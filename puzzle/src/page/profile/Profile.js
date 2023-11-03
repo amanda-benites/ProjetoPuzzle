@@ -28,26 +28,21 @@ function Profile() {
 
     const [userData, setUserData] = useState('');
     
+      // pega as informações do usuário baseadas no email
       useEffect(() => {
+        // pega o email do localstorage e tira as aspas
         const userEmail = localStorage.getItem("@Auth:user").replace(/"/g, '');
         
+        // função get para pegar as informações
         axios.get(`${api.defaults.baseURL}/user/information/${userEmail}`)
         .then(response => {
             const userDataFromServer = response.data; 
-            console.log('--------> userDataFromServer :', userDataFromServer);
             setUserData(userDataFromServer.data);
-            console.log('--------> userDataFromServer :', userData);
         })
         .catch(error => {
             console.error('Erro ao buscar dados do usuário:', error);
         });
       }, []);
-
-    //   const arrayValues = [userData.data.user_name, userData.data.user_email, userData.data.img_profile]
-
-    //   console.log('------------>>> USERDATA: ', userData.data.user_name)
-    //   console.log('------------>>> USERDATA: ', userData.data.user_email)
-    //   console.log('------------>>> USERDATA: ', userData.data.img_profile)
     
     return(
         <>

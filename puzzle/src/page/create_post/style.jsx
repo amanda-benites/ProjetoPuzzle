@@ -77,3 +77,8 @@ export const ButtonOk = styled(ButtonCancel)`
     background-color: #EF5261;
     color: #FFFF;
 `
+
+export const PostImg = styled.img`
+    width: 90vw;
+    height: 40vh;
+`

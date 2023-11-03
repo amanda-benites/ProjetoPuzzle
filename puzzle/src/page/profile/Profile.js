@@ -34,9 +34,7 @@ function Profile() {
         axios.get(`${api.defaults.baseURL}/user/information/${userEmail}`)
         .then(response => {
             const userDataFromServer = response.data; 
-            console.log('--------> userDataFromServer :', userDataFromServer);
             setUserData(userDataFromServer.data);
-            console.log('--------> userDataFromServer :', userData);
         })
         .catch(error => {
             console.error('Erro ao buscar dados do usuário:', error);

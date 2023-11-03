@@ -16,16 +16,9 @@ function ArticleLayout(props) {
                 <ImgContactContainer src={iconArticle} alt="Ícone do artigo"/>
             </ContactImg>
             <ContactName>
-                {props.nameArticle === 'Transtono do espectro autista: qualidade de vida e estresse em cuidadores e/ou familiares - revisão de literatura' ? (
                     <ContactButton onClick={goToOpenArticlePage}>
                         <NameContactText>{props.nameArticle}</NameContactText>
                     </ContactButton>
-                ) : (
-                    <ContactButton>
-                        <NameContactText>{props.nameArticle}</NameContactText>
-                    </ContactButton>
-                )
-                }
             </ContactName>
         </ContactLayoutContainer>
     )

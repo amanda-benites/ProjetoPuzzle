@@ -41,12 +41,6 @@ function Profile() {
         });
       }, []);
 
-    //   const arrayValues = [userData.data.user_name, userData.data.user_email, userData.data.img_profile]
-
-    //   console.log('------------>>> USERDATA: ', userData.data.user_name)
-    //   console.log('------------>>> USERDATA: ', userData.data.user_email)
-    //   console.log('------------>>> USERDATA: ', userData.data.img_profile)
-    
     return(
         <>
             <HeaderProfile/>

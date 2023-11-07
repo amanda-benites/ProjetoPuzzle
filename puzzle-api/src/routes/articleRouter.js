@@ -8,7 +8,7 @@ const {
     findArticle
 } = require('../controllers/articleController')
 
-router.get('/article', listArticles);
+router.get('/articles', listArticles);
 router.post('/create', newArticle);
 router.post('/find_articles', findArticle);
 

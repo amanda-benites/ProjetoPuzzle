@@ -65,3 +65,12 @@ export const ButtonAddArticle = styled(ButtonHeaderContainer)`
     color: #69B0EE;
     font-weight: bold;
 `
+
+export const TextNotArticles = styled.p`
+    color: #CDD1D0;
+
+    width: 80vw;
+    text-align: center;
+
+    font-size: medium;
+`

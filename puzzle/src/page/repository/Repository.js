@@ -1,7 +1,7 @@
 import GerenalFooter from "../../components/general_footer/GeneralFoter";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 
-import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, DivButtonReporsitory, BodyRepository, ButtonAddArticle } from "./style";
+import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, TextNotArticles, DivButtonReporsitory, BodyRepository, ButtonAddArticle } from "./style";
 
 import { useEffect, useState } from "react";
 
@@ -30,37 +30,29 @@ function Repository() {
         setInputValue('');
     };
 
-    // const filteredArticle = Object.keys(articleValues).filter((article) =>
-    // articleValues[article][0].toLowerCase().includes(inputValue.toLowerCase())
-    // );
-
+    
+    
     useEffect(() => {
-        // Função para buscar artigos com base no texto digitado
-        const searchArticles = async () => {
-          try {
-            const response = await axios.get(`${api.defaults.baseURL}/article/findArticle`, {
-              params: {
-                article_id: inputValue, // Ou campo apropriado para a pesquisa
-              },
-            });
+        axios.get(`${api.defaults.baseURL}/article/articles`)
+        .then(function (response) {
+                const sortedArticles = response.data.data.sort((a, b) => {
+                    const dateA = new Date(a.created_at);
+                    const dateB = new Date(b.created_at);
+                    return dateB - dateA;
+                });
+
+                setArticles(sortedArticles);
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert("erro");
+              });
+    }, []);
     
-            const foundArticle = response.data.data;
-    
-            if (foundArticle) {
-              setArticles([foundArticle]);
-              setError(null);
-            } else {
-              setError('Nenhum artigo encontrado');
-            }
-          } catch (error) {
-            setError('Erro na solicitação');
-            console.log(error);
-          }
-        };
-    
-        // Chama a função de busca quando o valor do campo de pesquisa muda
-        searchArticles();
-      }, [inputValue]);
+    const filteredArticles = articles.filter((article) => 
+    article.article_name.toLowerCase().includes(inputValue.toLowerCase())
+  );
+
 
     return(
         <>
@@ -81,9 +73,12 @@ function Repository() {
                 <DivButtonReporsitory>
                     <ButtonAddArticle onClick={goToAddArticlePage}>+ Adicionar artigo</ButtonAddArticle>
                 </DivButtonReporsitory>
+                
+                {(filteredArticles.length !== 0) ?
+                  
                 <BodyRepository>
 
-                {articles.map(article => (
+                {filteredArticles.map((article) => (
                     <ArticleLayout
                         key={article.article_id}
                         nameArticle={article.article_name} 
@@ -91,6 +86,13 @@ function Repository() {
                 ))}
           
                 </BodyRepository>
+                : 
+                <BodyRepository>
+
+                    <TextNotArticles>Nenhum artigo encontrado.</TextNotArticles>
+          
+                </BodyRepository>
+                }
             </div>
             <GerenalFooter/>
         </>

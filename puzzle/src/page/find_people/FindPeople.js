@@ -54,6 +54,7 @@ function FindPeople() {
                             key={contact.user_id}
                             imgContact={contact.img_profile !== null ? contact.img_profile : genericImg_user}
                             nameContact={contact.user_name}
+                            userId = {contact.user_id}
                         />
                     ))}
                 </div>

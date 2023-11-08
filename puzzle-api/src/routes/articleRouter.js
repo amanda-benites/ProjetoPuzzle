@@ -10,6 +10,6 @@ const {
 
 router.get('/articles', listArticles);
 router.post('/create', newArticle);
-router.post('/find_articles', findArticle);
+router.post('/find_article/:article_id', findArticle);
 
 module.exports = router;

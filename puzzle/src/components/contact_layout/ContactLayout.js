@@ -7,7 +7,7 @@ function ContactLayout(props) {
     const navigate = useNavigate()
 
     function goToContactProfilePage() {
-        navigate("/contact-profile");
+        navigate(`/contact-profile/${props.userId}`);
     }
 
     return(
@@ -16,16 +16,9 @@ function ContactLayout(props) {
                 <ImgContactContainer src={props.imgContact} alt="Imagem do contato"/>
             </ContactImg>
             <ContactName>
-                {props.nameContact === 'Maurício Costa' ? (
                     <ContactButton onClick={goToContactProfilePage}>
                         <NameContactText>{props.nameContact}</NameContactText>
                     </ContactButton>
-                ) : (
-                    <ContactButton>
-                        <NameContactText>{props.nameContact}</NameContactText>
-                    </ContactButton>
-                )
-                }
             </ContactName>
         </ContactLayoutContainer>
     )

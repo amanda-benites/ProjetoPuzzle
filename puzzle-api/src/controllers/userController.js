@@ -63,6 +63,34 @@ async function listUserInfos(request, response) {
       }
     });
   }
+
+
+  async function listPeopleInfos(request, response) {
+    const userId = request.params.user_id;// Recupere o email do parâmetro da rota
+  
+    // Preparar o comando de execução no banco
+    connection.query('SELECT * FROM users WHERE user_id = ?', [userId], (err, results) => {
+      if (err) {
+        response.status(400).json({
+          success: false,
+          message: "An error has occurred. Unable to return user informations.",
+          query: err.sql,
+          sqlMessage: err.sqlMessage
+        });
+      } else if (results.length > 0) {
+        response.status(200).json({
+          success: true,
+          message: 'Success in returning user informations.',
+          data: results[0] // Suponhamos que você deseja retornar apenas o primeiro resultado
+        });
+      } else {
+        response.status(400).json({
+          success: false,
+          message: `Unable to return user informations. User not found.`,
+        });
+      }
+    });
+  }
   
 
 // Função que cria um novo usuário 
@@ -199,6 +227,7 @@ async function deleteUser(request, response) {
 module.exports = {
     listUsers,
     listUserInfos,
+    listPeopleInfos,
     storeUser,
     updateUser,
     deleteUser

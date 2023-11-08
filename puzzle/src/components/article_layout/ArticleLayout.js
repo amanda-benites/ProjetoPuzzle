@@ -7,7 +7,7 @@ function ArticleLayout(props) {
     const navigate = useNavigate()
 
     function goToOpenArticlePage() {
-        navigate(`/open-article/${props.articleId}`);
+        navigate(`/open-article/${props.article_id}`);
     }
 
     return(

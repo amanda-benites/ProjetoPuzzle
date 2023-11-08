@@ -19,7 +19,7 @@ app.use(express.json());
 // Habilitar o recebimento de requests em formato JSON
 app.use(cors())
 // Habilitar as rotas na aplicação
-app.use('/api', userRouter);
+app.use('/api/user', userRouter);
 app.use('/api/auth', loginRouter);
 app.use('/api/article', articleRouter)
 // Setar a porta do servidor, a parir do arquivo .env

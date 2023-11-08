@@ -98,7 +98,7 @@ function RoutesPage() {
         <Route path="home" element={<PrivateRoutes redirectTo='/'>
           <Home/>
         </PrivateRoutes>}/>
-        <Route path="open-article" element={<PrivateRoutes redirectTo='/'>
+        <Route path="open-article/:articleId" element={<PrivateRoutes redirectTo='/'>
           <OpenArticle/>
         </PrivateRoutes>}/>
         <Route path="post-opened" element={<PrivateRoutes redirectTo='/'>

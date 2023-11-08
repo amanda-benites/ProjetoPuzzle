@@ -6,8 +6,9 @@ const bcrypt = require('bcrypt');
 
 // Função que retorna todos usuários no banco de dados
 async function listUsers(request, response) {
+    const userId = request.params.user_id;// Recupere o email do parâmetro da rota
     // Preparar o comando de execução no banco
-    connection.query('SELECT * FROM users', (resultserr, ) => { 
+    connection.query('SELECT * FROM users WHERE user_id != ?', [userId], (err, results) => { 
         try {  // Tenta retornar as solicitações requisitadas
             if (results) {  // Se tiver conteúdo 
                 response.status(200).json({

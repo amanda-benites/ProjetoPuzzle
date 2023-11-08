@@ -81,6 +81,7 @@ function Repository() {
                 {filteredArticles.map((article) => (
                     <ArticleLayout
                         key={article.article_id}
+                        articleId={article.article_id}
                         nameArticle={article.article_name} 
                         />
                 ))}

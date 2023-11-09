@@ -1,17 +1,21 @@
 import GerenalFooter from "../../components/general_footer/GeneralFoter";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 
-import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, DivButtonReporsitory, BodyRepository, ButtonAddArticle } from "./style";
+import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, TextNotArticles, DivButtonReporsitory, BodyRepository, ButtonAddArticle } from "./style";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 import iconSearch from "../../assets/search.svg"
 import removeImg from "../../assets/remove.svg"
 import { useNavigate } from "react-router";
 import ArticleLayout from "../../components/article_layout/ArticleLayout";
+import { api } from "../../services/api";
+import axios from "axios";
 
 function Repository() {
+    const [articles, setArticles] = useState([]);
+    const [error, setError] = useState(null);
 
     const navigate = useNavigate()
 
@@ -19,11 +23,6 @@ function Repository() {
         navigate("/add-article");
     }
 
-    const articleValues = {
-        article1: ['Transtono do espectro autista: qualidade de vida e estresse em cuidadores e/ou familiares - revisão de literatura'],
-        article2: ['Crianças e jovens autistas: impacto na dinâmica familiar e pessoal de seus pais'],
-        article3: ['As vivências de mães de jovens autistas']
-    }
 
     const [inputValue, setInputValue] = useState('');
 
@@ -31,9 +30,29 @@ function Repository() {
         setInputValue('');
     };
 
-    const filteredArticle = Object.keys(articleValues).filter((article) =>
-    articleValues[article][0].toLowerCase().includes(inputValue.toLowerCase())
-    );
+    
+    
+    useEffect(() => {
+        axios.get(`${api.defaults.baseURL}/article/articles`)
+        .then(function (response) {
+                const sortedArticles = response.data.data.sort((a, b) => {
+                    const dateA = new Date(a.created_at);
+                    const dateB = new Date(b.created_at);
+                    return dateB - dateA;
+                });
+
+                setArticles(sortedArticles);
+            })
+            .catch(function (error) {
+                console.log(error);
+                alert("erro");
+              });
+    }, []);
+    
+    const filteredArticles = articles.filter((article) => 
+    article.article_name.toLowerCase().includes(inputValue.toLowerCase())
+  );
+
 
     return(
         <>
@@ -54,13 +73,27 @@ function Repository() {
                 <DivButtonReporsitory>
                     <ButtonAddArticle onClick={goToAddArticlePage}>+ Adicionar artigo</ButtonAddArticle>
                 </DivButtonReporsitory>
+                
+                {(filteredArticles.length !== 0) ?
+                  
                 <BodyRepository>
-                    {filteredArticle.map((article) => (
-                        <ArticleLayout
-                            key={article}
-                            nameArticle={articleValues[article][0]}/>
-                    ))}              
+
+                {filteredArticles.map((article) => (
+                    <ArticleLayout
+                        key={article.article_id}
+                        article_id={article.article_id}
+                        nameArticle={article.article_name} 
+                        />
+                ))}
+          
                 </BodyRepository>
+                : 
+                <BodyRepository>
+
+                    <TextNotArticles>Nenhum artigo encontrado.</TextNotArticles>
+          
+                </BodyRepository>
+                }
             </div>
             <GerenalFooter/>
         </>

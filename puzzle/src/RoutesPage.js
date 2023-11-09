@@ -62,7 +62,7 @@ function RoutesPage() {
         <Route path="contact-posts" element={<PrivateRoutes redirectTo='/'>
           <ContactPosts/>
         </PrivateRoutes>}/>
-        <Route path="contact-profile" element={<PrivateRoutes redirectTo='/'>
+        <Route path="contact-profile/:userId" element={<PrivateRoutes redirectTo='/'>
           <ContactProfile/>
         </PrivateRoutes>}/>
         <Route path="create-post" element={<PrivateRoutes redirectTo='/'>
@@ -98,7 +98,7 @@ function RoutesPage() {
         <Route path="home" element={<PrivateRoutes redirectTo='/'>
           <Home/>
         </PrivateRoutes>}/>
-        <Route path="open-article" element={<PrivateRoutes redirectTo='/'>
+        <Route path="open-article/:article_id" element={<PrivateRoutes redirectTo='/'>
           <OpenArticle/>
         </PrivateRoutes>}/>
         <Route path="post-opened" element={<PrivateRoutes redirectTo='/'>

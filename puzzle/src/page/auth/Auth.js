@@ -43,7 +43,7 @@ function Auth() {
                 const userId = response.data.data[0].user_id;
 
                 localStorage.setItem("@Auth:user_name", userName);
-                localStorage.setItem("@Auth: user_id", userId);
+                localStorage.setItem("@Auth:user_id", userId);
 
                 setUser(response.data.data[0]);
     

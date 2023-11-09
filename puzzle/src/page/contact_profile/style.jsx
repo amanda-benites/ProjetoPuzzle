@@ -15,8 +15,8 @@ export const ImgProfileDiv = styled.div`
 
 export const ImgContactProfile = styled.div`
     border: none;
-    border-radius: 50px;
-    height: 15vh;
+    border-radius: 100px;
+    height: 9vh;
     width: 20vw;
     display: flex;
     flex-direction: row;

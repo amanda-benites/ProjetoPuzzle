@@ -2,12 +2,14 @@ import GerenalFooter from "../../components/general_footer/GeneralFoter"
 
 import { ButtonSeeMore, ImgContactProfile, PostsProfile, PostsProfileDiv, PostsProfileIdent, ProfileInfos, ProfilePosts, ButtonUnfollow, ButtonTalkWith, ImgProfileDiv, DivButtonsActions, DivButtonFollow, ButtonFollow, ButtonSeeMoreDisable, MessageUnfollow } from "./style"
 
-import imgExemp from "../../assets/MauricioExemplo.svg"
+import genericImg_user from "../../assets/genericImg_user.jpg"
 import InfoProfile from "../../components/info_profile/InfoProfile"
 import exemplePost from "../../assets/exemploImagem.svg"
-import { useState } from "react"
-import { useNavigate } from "react-router"
+import { useEffect, useState } from "react"
+import { useNavigate, useParams } from 'react-router-dom';
 import HeaderContact from "../../components/header_contact/HeaderContact"
+import axios from "axios"
+import { api } from "../../services/api"
 
 function ContactProfile() {
 
@@ -21,25 +23,40 @@ function ContactProfile() {
         identEmail: 'Email',
         identPosts: 'Postagens'
     }
-    const topicValues = {
-        userName: 'Maurício Costa',
-        userEmail: 'mauricio@teste.com',
-    }
-
     const [isFollowing, setIsFollowing] = useState(true);
       
     const toggleFollow = () => {
         setIsFollowing((prevState) => !prevState);
     };
 
+
+    const param = useParams()
+    const contactId = param.userId
+
+
+    const [contactData, setContactData] = useState('');
+    
+    useEffect(() => {
+        axios.get(`${api.defaults.baseURL}/user/contact/${contactId}`)
+        .then(response => {
+            const contactataFromServer = response.data; 
+            setContactData(contactataFromServer.data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados do artigo:', error);
+        });
+    }, []);
+    
+    
+    console.log('-------------->>>contactData :', contactData);
     return(
         <>
             <HeaderContact/>
             <div>
                 <ImgProfileDiv>
-                    <ImgContactProfile background={imgExemp}>
+                    <ImgContactProfile background={contactData.img_profile === null ? genericImg_user : contactData.img_profile}>
                     </ImgContactProfile>
-                        <h3>{topicValues.userName}</h3>
+                        <h3>{contactData.user_name}</h3>
                     {isFollowing ? (
                         <DivButtonsActions>
                                 <ButtonUnfollow onClick={toggleFollow}>Deixar de seguir</ButtonUnfollow>
@@ -54,7 +71,7 @@ function ContactProfile() {
                 <ProfileInfos>
                     <InfoProfile 
                         topicProfile={topicIdent.identEmail} 
-                        itemProfile={topicValues.userEmail}
+                        itemProfile={contactData.user_email}
                     />
                 </ProfileInfos>
                 {isFollowing === true ? (
@@ -87,7 +104,7 @@ function ContactProfile() {
                         </ButtonSeeMoreDisable>
                     </PostsProfileIdent>
                     <PostsProfileDiv>
-                            <MessageUnfollow>Siga {topicValues.userName} para visualizar suas postagens</MessageUnfollow>
+                            <MessageUnfollow>Siga userName para visualizar suas postagens</MessageUnfollow>
                     </PostsProfileDiv>
                 </ProfilePosts>
                 )}

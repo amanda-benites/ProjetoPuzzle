@@ -8,7 +8,7 @@ function ScreenHeader(props) {
     const navigate = useNavigate()
 
     const goBack = () => {
-        navigate(-1)
+        navigate('/home')
     }
 
     return(

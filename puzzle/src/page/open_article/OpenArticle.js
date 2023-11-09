@@ -2,15 +2,38 @@ import ScreenHeader from "../../components/sreen_header/ScreenHeader"
 
 import imgArticle from "../../assets/article_gray.svg"
 import { ButtonArticleAdd, ButtonArticleBack, DivButtonsArticle, DivContentArticle, DivImgArticle, H4ArticleIdent1, H4ArticleIdent2 } from "./style"
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
+import axios from "axios";
 
 function OpenArticle() {
+    const param = useParams()
+    const articleId = param.article_id
 
     const navigate = useNavigate()
 
     function goToHomePage() {
         navigate("/home");
     }
+
+    const [articleData, setArticleData] = useState(null);
+    
+    useEffect(() => {
+        axios.get(`${api.defaults.baseURL}/article/find_article/${articleId}`)
+        .then(response => {
+            const articleataFromServer = response.data; 
+            setArticleData(articleataFromServer.data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados do artigo:', error);
+        });
+        console.log("1111111111111111111")
+    }, []);
+
+
+    console.log('aaaaaaaaaaa', articleData)
+
 
     return(
         <>

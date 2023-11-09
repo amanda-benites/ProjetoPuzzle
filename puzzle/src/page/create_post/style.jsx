@@ -37,6 +37,11 @@ export const DivInputFile = styled.div`
     margin-bottom: 3vh;
 `
 
+export const ImgPost = styled.img`
+    width: 90vw;
+    height: 40vh;
+`
+
 export const LabelInputContainer = styled.label`
     color: #CDD1D0;
 `

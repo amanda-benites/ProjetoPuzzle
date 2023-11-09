@@ -16,8 +16,7 @@ async function createPost(request, response) {
 
     const params = [
       request.body.user_id,
-      // Pega o fileName do arquivo para inserir no BD.
-      request.file.img_post, 
+      request.file.filename, 
       request.body.legend_post
   ];
     connection.query(query, params, (error, result) => {
@@ -34,13 +33,13 @@ async function createPost(request, response) {
 var fs = require('fs');
 
 // Função que rcebe dois argumentos: base64str, que é uma string em formato base64 a ser decodificada, e fileName, que é o nome do arquivo onde a decodificação será salva.
-function base64_decode(base64str,fileName){
+function base64_decode(base64str, fileName){
   var bitmap = Buffer.from(base64str, 'base64');
 
   // O conteúdo decodificado é escrito no arquivo especificado por fileName.
-  fs.writeFileSync(img_post+'',bitmap, 'binary', function (err){
+  fs.writeFileSync(fileName+'',bitmap, 'binary', function (err){
     if(err){
-      console.log('Conversao com erro');
+      console.log('Conversion error');
     }
   } );
 }
@@ -50,8 +49,8 @@ async function getAllPosts(req, res) {
     const query = `
       SELECT
         posts.post_id AS post_id
-        posts.user_id AS post_id,
-        posts.img_post AS post_image,
+        posts.user_id AS user_id,
+        posts.img_post AS img_post,
         posts.legend_post AS legend_post,
         users.user_name AS user_name,
         users.user_email AS user_email

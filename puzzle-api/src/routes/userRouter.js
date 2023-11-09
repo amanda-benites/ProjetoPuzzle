@@ -23,7 +23,7 @@ const {
 router.get('/all/:user_id', listUsers);
 router.get('/information/:user_email', listUserInfos);
 router.get('/contact/:user_id', listPeopleInfos)
-router.post('/user/create', storeUser);
+router.post('/create', storeUser);
 router.put('/update/:id', updateUser);
 router.delete('/delete/:id', deleteUser);
 

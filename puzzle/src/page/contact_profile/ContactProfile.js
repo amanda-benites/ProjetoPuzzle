@@ -51,7 +51,9 @@ function ContactProfile() {
     console.log('-------------->>>contactData :', contactData);
     return(
         <>
-            <HeaderContact/>
+            <HeaderContact
+                followerId={contactData.user_id}
+            />
             <div>
                 <ImgProfileDiv>
                     <ImgContactProfile background={contactData.img_profile === null ? genericImg_user : contactData.img_profile}>

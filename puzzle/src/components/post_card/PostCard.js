@@ -7,10 +7,13 @@ import threePoints from "../../assets/three-points.svg"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function PostCard(props) {
+import userImg from "../../assets/user_img.svg"
+
+function PostCard({posts}) {
+    const images = 'http://localhost:8000/uploads/'
 
     const navigate = useNavigate()
-
+    console.log(posts)
     function goToEditPostPage() {
         navigate("/edit-post");
     }
@@ -36,45 +39,51 @@ function PostCard(props) {
       setIsOpen(!isOpen);
     };
 
-    return (
-        <DivPostContainer>
-            <HeaderPost>
-                <ImgHeader>
-                    <ImgUser src={props.userImg} alt="Imagem de exemplo Usuário" />
-                </ImgHeader>
-                <ProfileButton>
+    // {posts.map((item, index) => {
+    // console.log('------->> item :', item);
+        return (
+            <DivPostContainer key={posts.post_id}>
+                <HeaderPost>
+                    <ImgHeader>
+                        <ImgUser src={userImg} alt="Imagem de exemplo Usuário" />
+                    </ImgHeader>
+                    <ProfileButton>
+                        <ButtonIconsPost>
+                            <p>{posts.user_name}</p>
+                        </ButtonIconsPost>
+                    </ProfileButton>
+                    <ThreePoints>
+                        <ButtonIconsPost onClick={openMenu}>
+                            <ImgThreePoints src={threePoints} alt="Imagem três pontos"/>
+                        </ButtonIconsPost>
+                            {isOpen && (
+                                <DropDownMenu className="dropdown-menu">
+                                    <ItemsMenu onClick={goToEditPostPage}>Editar</ItemsMenu>
+                                    <ItemsMenu onClick={goToDeletePostPage}>Excluir</ItemsMenu>
+                                </DropDownMenu>
+                            )}
+                    </ThreePoints>
+                </HeaderPost>
+                <BodyPost>
+                    <ImgPostContainer src={images + posts.img_post} alt="Imagem de teste" />
+                </BodyPost>
+                <FooterPost>
                     <ButtonIconsPost>
-                        <p>{props.userName}</p>
+                        <img 
+                            src={isLiked ? imgLiked : likeImg} 
+                            alt="Curtida"
+                            onClick={changeLikeState} />
                     </ButtonIconsPost>
-                </ProfileButton>
-                <ThreePoints>
-                    <ButtonIconsPost onClick={openMenu}>
-                        <ImgThreePoints src={threePoints} alt="Imagem três pontos"/>
+                    <ButtonIconsPost onClick={goToPostOpened}>
+                        <img src={commentsImg} alt="Comentários" />
                     </ButtonIconsPost>
-                        {isOpen && (
-                            <DropDownMenu className="dropdown-menu">
-                                <ItemsMenu onClick={goToEditPostPage}>Editar</ItemsMenu>
-                                <ItemsMenu onClick={goToDeletePostPage}>Excluir</ItemsMenu>
-                            </DropDownMenu>
-                        )}
-                </ThreePoints>
-            </HeaderPost>
-            <BodyPost>
-                <ImgPostContainer src={props.ImgContent} alt="Imagem de teste" />
-            </BodyPost>
-            <FooterPost>
-                <ButtonIconsPost>
-                    <img 
-                        src={isLiked ? imgLiked : likeImg} 
-                        alt="Curtida"
-                        onClick={changeLikeState} />
-                </ButtonIconsPost>
-                <ButtonIconsPost onClick={goToPostOpened}>
-                    <img src={commentsImg} alt="Comentários" />
-                </ButtonIconsPost>
-            </FooterPost>
-        </DivPostContainer>
-    )
+                </FooterPost>
+                <div>
+                    <p>{posts.legend_post}</p>
+                </div>
+            </DivPostContainer>
+        )
+    //})}
 }
 
 export default PostCard

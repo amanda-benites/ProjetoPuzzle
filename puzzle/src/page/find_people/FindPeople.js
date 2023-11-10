@@ -3,7 +3,7 @@ import axios from "axios";
 import { api } from "../../services/api";
 import GerenalFooter from "../../components/general_footer/GeneralFoter";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
-import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer } from "./style";
+import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, MainFindPeople } from "./style";
 import genericImg_user from "../../assets/genericImg_user.jpg";
 import ContactLayout from "../../components/contact_layout/ContactLayout";
 import iconSearch from "../../assets/search.svg";
@@ -48,7 +48,7 @@ function FindPeople() {
                         {inputValue && (<SpanSearchContainer onClick={clearInput}><img src={removeImg} alt="Ícone X" /></SpanSearchContainer>)}
                     </DivSearchContainer>
                 </DivSearchContainerMain>
-                <div>
+                <MainFindPeople>
                     {filteredContacts.map((contact) => (
                         <ContactLayout
                             key={contact.user_id}
@@ -57,7 +57,7 @@ function FindPeople() {
                             userId = {contact.user_id}
                         />
                     ))}
-                </div>
+                </MainFindPeople>
             </div>
             <GerenalFooter />
         </>

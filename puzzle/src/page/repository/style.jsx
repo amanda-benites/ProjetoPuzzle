@@ -59,6 +59,7 @@ export const BodyRepository = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 1.5vh;
+    padding-bottom: 10vh;
 `
 
 export const ButtonAddArticle = styled(ButtonHeaderContainer)`

@@ -5,7 +5,7 @@ import tetemIcon from "../../assets/testemIcon.svg"
 
 import { useNavigate } from "react-router-dom";
 
-function HeaderContact() {
+function HeaderContact(props) {
 
     const navigate = useNavigate()
 
@@ -14,7 +14,7 @@ function HeaderContact() {
     }
 
     function goToTestimonyContactPage() {
-        navigate("/testimony-contact");
+        navigate(`/testimony-contact/${props.followerId}`);
     }
 
     return(

@@ -119,7 +119,7 @@ function RoutesPage() {
         <Route path="repository" element={<PrivateRoutes redirectTo='/'>
           <Repository/>
         </PrivateRoutes>}/>
-        <Route path="testimony-contact" element={<PrivateRoutes redirectTo='/'>
+        <Route path="testimony-contact/:followerId" element={<PrivateRoutes redirectTo='/'>
           <ContactTestimony/>
         </PrivateRoutes>}/>
         <Route path="testimony-to-me" element={<PrivateRoutes redirectTo='/'>

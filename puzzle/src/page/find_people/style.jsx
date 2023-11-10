@@ -43,3 +43,7 @@ export const InputSearchContainer = styled.input`
 export const SpanSearchContainer = styled.span`
     color: #d3d3d3;
 `
+
+export const MainFindPeople = styled.div`
+    padding-bottom: 10vh;
+`

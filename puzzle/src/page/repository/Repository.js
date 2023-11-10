@@ -45,7 +45,6 @@ function Repository() {
             })
             .catch(function (error) {
                 console.log(error);
-                alert("erro");
               });
     }, []);
     

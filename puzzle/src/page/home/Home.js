@@ -69,7 +69,6 @@ function Home() {
                         <MyNameText>{userName}</MyNameText>
                     </MyProfile>
                 </DivProfileAccess>
-                <div>
                     {posts.map((post) => {   
                         return (
                             <>
@@ -80,7 +79,6 @@ function Home() {
                             </>
                         )
                     })}
-                </div>
                 <FinalDiv>
                     <FinalText>Fim das publicações</FinalText>
                 </FinalDiv>

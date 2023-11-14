@@ -1,7 +1,6 @@
 // Importa as configurações do banco de dados na variável connection
 const connection = require('../config/db');
 
-// Função que retorna todos usuários no banco de dados
 async function listArticles(request, response) {
     connection.query('SELECT * FROM articles', (err, results) => { 
         try {  

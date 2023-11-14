@@ -12,6 +12,14 @@ import axios from "axios"
 import { api } from "../../services/api"
 
 function ContactProfile() {
+    const [contactData, setContactData] = useState('');
+    const [followData, setFollowData] = useState('');
+    const [isFollowing, setIsFollowing] = useState(false);
+
+    const userIdLogin = localStorage.getItem('@Auth:user_id')
+    const param = useParams()
+    const contactId = param.userId
+
 
     const navigate = useNavigate()
 
@@ -23,32 +31,47 @@ function ContactProfile() {
         identEmail: 'Email',
         identPosts: 'Postagens'
     }
-    const [isFollowing, setIsFollowing] = useState(true);
       
     const toggleFollow = () => {
         setIsFollowing((prevState) => !prevState);
     };
-
-
-    const param = useParams()
-    const contactId = param.userId
-
-
-    const [contactData, setContactData] = useState('');
     
     useEffect(() => {
         axios.get(`${api.defaults.baseURL}/user/contact/${contactId}`)
         .then(response => {
-            const contactataFromServer = response.data; 
-            setContactData(contactataFromServer.data);
+            const contactDataFromServer = response.data; 
+            setContactData(contactDataFromServer.data);
+            setIsFollowing(true)
         })
         .catch(error => {
             console.error('Erro ao buscar dados do artigo:', error);
         });
     }, []);
     
-    
-    console.log('-------------->>>contactData :', contactData);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const data = {
+            userIdLogin, 
+            contactId
+        };
+
+        try { 
+            axios.post(`${api.defaults.baseURL}/follow/create`, data)
+            .then(response => {
+                const followDataFromServer = response.data.data;
+                setFollowData(followDataFromServer)
+            })
+            .catch(error => {
+                console.log('Erro ao seguir usuário', error)
+            })
+        } catch (error) {
+            console.log('Erro ao seguir usuário', error)
+        }
+    }
+
+
     return(
         <>
             <HeaderContact
@@ -59,14 +82,14 @@ function ContactProfile() {
                     <ImgContactProfile background={contactData.img_profile === null ? genericImg_user : contactData.img_profile}>
                     </ImgContactProfile>
                         <h3>{contactData.user_name}</h3>
-                    {isFollowing ? (
+                    {isFollowing === true ? (
                         <DivButtonsActions>
                                 <ButtonUnfollow onClick={toggleFollow}>Deixar de seguir</ButtonUnfollow>
                                 <ButtonTalkWith>Conversar</ButtonTalkWith>
                         </DivButtonsActions>
                     ) : (
                         <DivButtonFollow>
-                            <ButtonFollow onClick={toggleFollow}>Seguir</ButtonFollow>
+                            <ButtonFollow onClick={handleSubmit}>Seguir</ButtonFollow>
                         </DivButtonFollow>
                     )}
                 </ImgProfileDiv>

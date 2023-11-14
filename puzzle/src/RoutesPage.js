@@ -122,7 +122,7 @@ function RoutesPage() {
         <Route path="testimony-contact/:followerId" element={<PrivateRoutes redirectTo='/'>
           <ContactTestimony/>
         </PrivateRoutes>}/>
-        <Route path="testimony-to-me" element={<PrivateRoutes redirectTo='/'>
+        <Route path="testimony-to-me/:testimonyId" element={<PrivateRoutes redirectTo='/'>
           <TestimonyToMe/>
         </PrivateRoutes>}/>
       </Routes>

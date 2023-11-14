@@ -30,7 +30,7 @@ function CreateTestimony() {
         try {
           await api.post("/depositions/create", data);
           console.log("Depoimento criado com sucesso!");
-
+          navigate(-1)
         } catch (error) {
           console.error("Erro ao criar depoimento:", error);
         }

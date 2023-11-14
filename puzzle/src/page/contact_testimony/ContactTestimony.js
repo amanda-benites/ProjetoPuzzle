@@ -74,6 +74,8 @@ function ContactTestimony() {
             {filteredDepositions.map((testimony) => (
                     <TestimonyLayout
                         key={testimony.testimony_id}
+                        testimonyId={testimony.testimony_id}
+                        userIdValue={testimony.user_id}
                         nameContact={testimony.nome_comentou}
                         testimony={testimony.testimony_content}
                     />

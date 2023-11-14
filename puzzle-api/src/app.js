@@ -10,6 +10,7 @@ const loginRouter = require('./routes/loginRouter');
 const articleRouter = require('./routes/articleRouter');
 const postRouter = require('./routes/postRouter');
 const depositionsRouter = require('./routes/depositionsRouter')
+const followRouter = require('./routes/followRouter')
 // Importar o pacote dotenv, gerenciador de variáveis de ambiente
 const dotenv = require('dotenv').config();
 
@@ -32,6 +33,7 @@ app.use('/api/auth', loginRouter);
 app.use('/api/article', articleRouter)
 app.use('/api/post', postRouter);
 app.use('/api/depositions', depositionsRouter)
+app.use('/api/follow', followRouter)
 // Setar a porta do servidor, a parir do arquivo .env
 app.set('port', process.env.PORT || 8000);
 

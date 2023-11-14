@@ -4,27 +4,45 @@ import TestimonyLayout from "../../components/testimony_layout/TestimonyLayout";
 
 import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, BodyTestimonyProfile } from "./style";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 import iconSearch from "../../assets/search.svg"
 import removeImg from "../../assets/remove.svg"
+import axios from "axios";
+import { api } from "../../services/api";
 
 function ProfileTestimony() {
-    const testimonyValues = {
-        testimony1: ['Maurício Costa', '1 - Transtono do espectro autista: qualidade de vida e estresse em cuidadores e/ou familiares - revisão de literatura'],
-        testimony2: ['Clara Machado', '2- Transtono do espectro autista: qualidade de vida e estresse em cuidadores e/ou familiares - revisão de literatura'],
-        testimony3: ['Tânia Gonçalvez', '3 - Transtono do espectro autista: qualidade de vida e estresse em cuidadores e/ou familiares - revisão de literatura']
-    }
+    const [depositions, setDepositions] = useState([]);
+    const userId = localStorage.getItem('@Auth:user_id')
+
+    useEffect(() => {
+        axios.get(`${api.defaults.baseURL}/depositions/profile/${userId}`)
+            .then(function (response) {
+                console.log('response.data.data', response.data);
+                const sortedDepositions = response.data.data.sort((a, b) => {
+                    const dateA = new Date(a.testimony_date);
+                    const dateB = new Date(b.testimony_date);
+                    return dateB - dateA;
+                });
+
+                setDepositions(sortedDepositions);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }, []);
+    
+
 
     const [inputValue, setInputValue] = useState('');
 
     const clearInput = () => {
         setInputValue('');
     };
-
-    const filteredTestimony = Object.keys(testimonyValues).filter((testimony) =>
-    testimonyValues[testimony][1].toLowerCase().includes(inputValue.toLowerCase())
+    
+    const filteredDepositions = depositions.filter((testimony) => 
+    testimony.testimony_content.toLowerCase().includes(inputValue.toLowerCase())
     );
       
     return(
@@ -44,11 +62,11 @@ function ProfileTestimony() {
                     </DivSearchContainer>
                 </DivSearchContainerMain>
                 <BodyTestimonyProfile>
-                    {filteredTestimony.map((testimony) => (
+                    {filteredDepositions.map((testimony) => (
                         <TestimonyLayout
-                            key={testimony}
-                            nameContact={testimonyValues[testimony][0]}
-                            testimony={testimonyValues[testimony][1]}/>
+                            key={testimony.testimony_id}
+                            nameContact={testimony.nome_comentou}
+                            testimony={testimony.testimony_content}/>
                     ))}              
                 </BodyTestimonyProfile>
             </div>

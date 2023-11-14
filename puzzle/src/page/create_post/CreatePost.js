@@ -30,7 +30,6 @@ function CreatePost() {
   }, [preview]);
 
   const handleSubmit = async (e) => {
-    // Evita que o envio do formulário seja tratado de maneira padrão pelo navegador e faz com que você possa determinar as ações futuras.
     e.preventDefault();
     console.log('Imagem do post', image)
     
@@ -74,15 +73,6 @@ function CreatePost() {
                       <ImgPost src={preview} alt="Imagem selecionada"/>
                     </div>
                   )}
-                  {/* <InputFileContainer
-                      onClick={() => {
-                        const imageInput = document.getElementById('imageInput');
-                        if (imageInput) {
-                          imageInput.click();
-                        }
-                      }}>
-                        Coloque a imagem aqui
-                      </InputFileContainer> */}
                 </DivInputFile>
                 <SpanInsertPost>Inserir legenda</SpanInsertPost>
                 <InputLegendContainer type="text"

@@ -16,23 +16,23 @@ import axios from "axios";
 
 function ContactTestimony() {
     const [depositions, setDepositions] = useState([]);
+    const [inputValue, setInputValue] = useState('');
     const param = useParams()
     const followerId = param.followerId
-    console.log('---------------->> followerId :', followerId);
 
     const navigate = useNavigate()
 
     function goToCreateTestimonyPage() {
-        navigate("/create-testimony");
+        navigate(`/create-testimony/${followerId}`);
     }
 
     useEffect(() => {
         axios.get(`${api.defaults.baseURL}/depositions/find/${followerId}`)
-        .then(function (response) {
-            console.log('response.data.data',  response)
-                const sortedDepositions = response.data.depositions.sort((a, b) => {
-                    const dateA = new Date(a.created_at);
-                    const dateB = new Date(b.created_at);
+            .then(function (response) {
+                console.log('response.data.data', response.data);
+                const sortedDepositions = response.data.data.sort((a, b) => {
+                    const dateA = new Date(a.testimony_date);
+                    const dateB = new Date(b.testimony_date);
                     return dateB - dateA;
                 });
 
@@ -40,19 +40,16 @@ function ContactTestimony() {
             })
             .catch(function (error) {
                 console.log(error);
-              });
+            });
     }, []);
-
-
-    const [inputValue, setInputValue] = useState('');
-
+    
     const clearInput = () => {
         setInputValue('');
     };
     
     const filteredDepositions = depositions.filter((testimony) => 
     testimony.testimony_content.toLowerCase().includes(inputValue.toLowerCase())
-  );
+    );
 
     return(
         <>
@@ -73,13 +70,14 @@ function ContactTestimony() {
                 <DivButtonTestimony>
                     <ButtonAddTestimony onClick={goToCreateTestimonyPage}>+ Adicionar depoimento</ButtonAddTestimony>
                 </DivButtonTestimony>
-                <BodyTestimony>
-                    {filteredDepositions.map((testimony) => (
-                        <TestimonyLayout
-                            key={testimony.d.testimony_id}
-                            nameContact={testimony.u.nome_comentou}
-                            testimony={testimony.d.testimony_content}/>
-                    ))}              
+            <BodyTestimony>
+            {filteredDepositions.map((testimony) => (
+                    <TestimonyLayout
+                        key={testimony.testimony_id}
+                        nameContact={testimony.nome_comentou}
+                        testimony={testimony.testimony_content}
+                    />
+                ))}
                 </BodyTestimony>
             </div>
             <GerenalFooter/>

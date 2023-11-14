@@ -33,7 +33,7 @@ async function listArticles(request, response) {
 }
 
 
-// Função que cria um novo post
+// Função que cria um novo artigo
 async function newArticle(request, response) {
     const values = [
         request.body.article_name,

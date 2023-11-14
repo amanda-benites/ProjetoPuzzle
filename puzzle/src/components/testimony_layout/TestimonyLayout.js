@@ -13,23 +13,12 @@ function TestimonyLayout(props) {
     function goToEditTestimony() {
         navigate("/edit-testimony");
     }
-
+    
     return(
             <TestimonyTitle>
-                {props.nameContact === 'Você' ? (
-                    <TestimonyButton onClick={goToEditTestimony}>
-                        <b>{props.nameContact}:</b> {props.testimony}
-                    </TestimonyButton>
-                ) : props.nameContact === 'Maurício Costa' ? (
                     <TestimonyButton onClick={goToTestimonyToMe}>
                         <b>{props.nameContact}:</b> {props.testimony}
-                    </TestimonyButton>
-                ) : (
-                    <TestimonyButton>
-                        <b>{props.nameContact}:</b> {props.testimony}
-                    </TestimonyButton>
-                )
-                }
+                    </TestimonyButton>                                 
             </TestimonyTitle>
     )
 }

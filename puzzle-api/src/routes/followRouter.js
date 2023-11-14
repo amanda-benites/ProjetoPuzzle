@@ -6,7 +6,7 @@ const {
     followUser
 } = require('../controllers/followController')
 
-router.post('/create', followUser);
+router.post('/create/', followUser);
 
 
 module.exports = router;

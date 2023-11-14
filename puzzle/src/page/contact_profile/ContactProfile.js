@@ -62,6 +62,7 @@ function ContactProfile() {
             .then(response => {
                 const followDataFromServer = response.data.data;
                 setFollowData(followDataFromServer)
+                console.log('aaaaaaaaaaaaaaaaaa')
             })
             .catch(error => {
                 console.log('Erro ao seguir usuário', error)

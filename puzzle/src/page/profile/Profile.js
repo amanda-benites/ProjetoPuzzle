@@ -47,9 +47,8 @@ function Profile() {
         const userIdLogin = parseInt(localStorage.getItem("@Auth:user_id"), 10)
         async function fetchPosts() {
             try {
-                const response = await api.get(`/post/user/${userIdLogin}`); 
+                const response = await api.get(`post/six/user/${userIdLogin}`); 
                 setPostUserInfos(response.data); 
-                console.log('------- response.data :', response.data);
                 
             } catch (error) {
                 console.error('Erro ao recuperar as ifotmações do post:', error);

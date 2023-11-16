@@ -4,17 +4,26 @@ import likeImg from "../../assets/like_img.svg"
 import imgLiked from "../../assets/imgLiked.svg"
 import commentsImg from "../../assets/comments_post.svg"
 import threePoints from "../../assets/three-points.svg"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import userImg from "../../assets/user_img.svg"
+import { api } from "../../services/api"
+import axios from "axios"
 
 function PostCard({posts}) {
     const images = 'http://localhost:8000/uploads/'
-    const userLoginId = localStorage.getItem("@Auth:user_id")
+    const [isOpen, setIsOpen] = useState(false);
+    const [isLikedTeste, setIsLikedTeste] = useState();
+    const userLoginId = parseInt(localStorage.getItem("@Auth:user_id"), 10)
 
     const navigate = useNavigate()
-    console.log(posts)
+
+
+    const openMenu = () => {
+      setIsOpen(!isOpen);
+    };
+
     function goToEditPostPage() {
         navigate("/edit-post");
     }
@@ -29,19 +38,44 @@ function PostCard({posts}) {
 
     const [isLiked, setIsLiked] = useState(false);
 
-    const changeLikeState = () => {
-        setIsLiked(!isLiked)
-    }
+    // const changeLikeState = () => {
+    //     setIsLiked(!isLiked)
+    // }
+  
+    const fetchLikeStatus = async () => {
+      try {
+        const formData = {
+            postId: posts.post_id,
+            userId: userLoginId
+        };
+  
+        const response = await api.post('/like/action', formData);
+  
+        const isLiked = response;
+
+        console.log('#################33', isLiked)
 
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const openMenu = () => {
-      setIsOpen(!isOpen);
+        // setIsLikedTeste(!!isEnabled);
+      } catch (err) {
+        console.error(err);
+      }
     };
 
-    console.log('aaaaaaaaaaaaaaa', posts)
-
+    useEffect(() => {
+        const postId = posts.postId
+        axios.get(`${api.defaults.baseURL}/like/informations/${postId}`)
+        .then(function (response) {
+                const likeInformations = response.data
+                
+                setIsLikedTeste(likeInformations);
+                console.log('%%%%%%%%%%%%%%55 likeInformations :', likeInformations);
+            })
+            .catch(function (error) {
+                console.log(error);
+              });
+    }, [posts.postId]);
+  
         return (
             <DivPostContainer key={posts.post_id}>
                 {posts.user_id == userLoginId ?
@@ -84,9 +118,9 @@ function PostCard({posts}) {
                 <FooterPost>
                     <ButtonIconsPost>
                         <img 
-                            src={isLiked ? imgLiked : likeImg} 
+                            src={likeImg} 
                             alt="Curtida"
-                            onClick={changeLikeState} />
+                            onClick={fetchLikeStatus} />
                     </ButtonIconsPost>
                     <ButtonIconsPost onClick={goToPostOpened}>
                         <img src={commentsImg} alt="Comentários" />

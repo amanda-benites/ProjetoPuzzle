@@ -32,11 +32,10 @@ function Contacts() {
               });
     }, []);
 
-
-    console.log('aaaaaaaaaaa', followData)
     const filteredContacts = followData.filter((follow) =>
         follow.user_name.toLowerCase().includes(inputValue.toLowerCase())
     );
+    
     return(
         <>
             <ScreenHeader titlePage={"Meus Contatos"}/>

@@ -12,6 +12,7 @@ const postRouter = require('./routes/postRouter');
 const depositionsRouter = require('./routes/depositionsRouter')
 const followRouter = require('./routes/followRouter')
 const commentsRouter = require('./routes/commentsRouter')
+const likeRouter = require('./routes/likeRouter')
 // Importar o pacote dotenv, gerenciador de variáveis de ambiente
 const dotenv = require('dotenv').config();
 
@@ -36,6 +37,7 @@ app.use('/api/post', postRouter);
 app.use('/api/depositions', depositionsRouter);
 app.use('/api/follow', followRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/like', likeRouter)
 // Setar a porta do servidor, a parir do arquivo .env
 app.set('port', process.env.PORT || 8000);
 

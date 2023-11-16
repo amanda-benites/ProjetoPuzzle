@@ -34,7 +34,7 @@ export const InputImgProfile = styled.div`
 
 export const ProfileInfos = styled.div`
     width: 100vw;
-    height: 31vh;
+    height: 29vh;
     display: flex;
     flex-direction: column;
     padding-top: 5vh;
@@ -43,7 +43,7 @@ export const ProfileInfos = styled.div`
 
 export const ProfilePosts = styled.div`
     width: 100vw;
-    height: 40vh;
+    height: 42vh;
 ` 
 
 export const PostsProfileDiv = styled.div`
@@ -59,8 +59,10 @@ export const PostsProfileDiv = styled.div`
 
 export const PostsProfile = styled.img`
     width: 30vw;
-    height: 16vh;
+    height: 15vh;
     border-radius: 10px;
+
+    object-fit: cover;
 `
 
 export const PostsProfileIdent = styled.div`

@@ -9,6 +9,7 @@ var fs = require('fs');
 
 // Função que rcebe dois argumentos: base64str, que é uma string em formato base64 a ser decodificada, e fileName, que é o nome do arquivo onde a decodificação será salva.
 function base64_decode(base64str, fileName){
+console.log('base64_decode :', base64_decode);
   var bitmap = Buffer.from(base64str, 'base64');
 
   // O conteúdo decodificado é escrito no arquivo especificado por fileName.
@@ -112,6 +113,45 @@ async function getAllPosts(req, res) {
     });
   }
 
+  async function getSixtUserPosts (request, response) {
+    const postId = request.params.user_id;
+    
+    const query = `
+    SELECT
+      posts.post_id AS post_id,
+      posts.user_id AS user_id,
+      posts.img_post AS img_post,
+      posts.legend_post AS legend_post,
+      users.user_name AS user_name,
+      users.img_profile AS img_profile
+    FROM
+      posts
+    JOIN
+      users ON posts.user_id = users.user_id
+    WHERE
+      posts.user_id = ?
+    LIMIT 6
+    `;
+  
+    connection.query(query, [postId], (error, results) => {
+      if (error) {
+        console.error('Erro ao recuperar as informações do post: ' + error.message);
+        return response.status(500).json({ error: 'Erro ao recuperar as informações do post' });
+      }
+
+      results.forEach((post) => {
+        if (post.post_image) {
+          const base64Data = post.post_image;
+          // Define o nome do arquivo.
+          const postImg = `post_${post.post_id}.jpeg`; 
+          base64_decode(base64Data, postImg);
+        }
+      });
+  
+      response.json(results);
+    });
+  }
+
   async function getUserPosts (request, response) {
     const postId = request.params.user_id;
     
@@ -156,5 +196,6 @@ async function getAllPosts(req, res) {
       createPost,
       getAllPosts,
       getPostInformations,
+      getSixtUserPosts,
       getUserPosts
   }

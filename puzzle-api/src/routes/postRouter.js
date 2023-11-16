@@ -5,6 +5,7 @@ const {
     createPost, 
     getAllPosts,
     getPostInformations,
+    getSixtUserPosts,
     getUserPosts 
 } = require('../controllers/postController');
 const router = Router();
@@ -16,5 +17,6 @@ router.post('/create', upload.single('file'), createPost);
 router.get('/all', getAllPosts);
 router.get('/informations/:post_id', getPostInformations);
 router.get('/user/:user_id', getUserPosts)
+router.get('/six/user/:user_id', getSixtUserPosts)
 
 module.exports = router;

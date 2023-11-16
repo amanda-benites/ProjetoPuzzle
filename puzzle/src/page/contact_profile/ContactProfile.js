@@ -87,12 +87,10 @@ function ContactProfile() {
             axios.put(`${api.defaults.baseURL}/follow/unfollow`, data)
             .then(response => {
                 const unfollowDataFromServer = response.data.data;
-                console.log('pelo amor de deussssssssssssssssssssssssssssssss')
             })
             .catch(error => {
                 console.log('Erro ao seguir usuário', error)
             })
-            console.log('222222222222222222222')
             window.location.reload();
         } catch (error) {
             console.log('Erro ao seguir usuário', error);
@@ -109,15 +107,15 @@ function ContactProfile() {
                     <ImgContactProfile background={contactData.img_profile === null ? genericImg_user : contactData.img_profile}>
                     </ImgContactProfile>
                         <h3>{contactData.user_name}</h3>
-                    {followData && !followData.data.isFollowed ? (
-                        <DivButtonFollow>
-                            <ButtonFollow onClick={handleFollow}>Seguir</ButtonFollow>
-                        </DivButtonFollow>
-                    ) : (
+                    {followData && followData.data.isFollowed ? (
                         <DivButtonsActions>
                                 <ButtonUnfollow onClick={handleUnfollow}>Deixar de seguir</ButtonUnfollow>
                                 <ButtonTalkWith>Conversar</ButtonTalkWith>
                         </DivButtonsActions>
+                    ) : (
+                        <DivButtonFollow>
+                            <ButtonFollow onClick={handleFollow}>Seguir</ButtonFollow>
+                        </DivButtonFollow>
                     )}
                 </ImgProfileDiv>
                 <ProfileInfos>

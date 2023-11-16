@@ -74,6 +74,8 @@ export const DivMargin = styled.div`
 export const ImgPostContainer = styled.img`
     width: 80vw;
     height: 37vh;
+
+    object-fit: cover;
 `
 
 export const ImgThreePoints = styled.img`

@@ -59,6 +59,7 @@ export const PostsProfileDiv = styled.div`
 
 export const PostsProfile = styled.img`
     width: 30vw;
+    height: 16vh;
     border-radius: 10px;
 `
 

@@ -1,5 +1,5 @@
-// Importa as configurações do banco de dados na variável connection
 const connection = require('../config/db');
+require("dotenv").config();
 
 async function listArticles(request, response) {
     connection.query('SELECT * FROM articles', (err, results) => { 

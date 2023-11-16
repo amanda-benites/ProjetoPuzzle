@@ -14,11 +14,10 @@ import { api } from "../../services/api"
 function ContactProfile() {
     const [contactData, setContactData] = useState('');
     const [followData, setFollowData] = useState('');
-    const [isFollowing, setIsFollowing] = useState(false);
 
-    const userIdLogin = localStorage.getItem('@Auth:user_id')
+    const userIdLogin = parseInt(localStorage.getItem('@Auth:user_id'), 10)
     const param = useParams()
-    const contactId = param.userId
+    const contactId = parseInt(param.userId, 10)
 
 
     const navigate = useNavigate()
@@ -32,25 +31,30 @@ function ContactProfile() {
         identPosts: 'Postagens'
     }
       
-    const toggleFollow = () => {
-        setIsFollowing((prevState) => !prevState);
-    };
-    
     useEffect(() => {
         axios.get(`${api.defaults.baseURL}/user/contact/${contactId}`)
         .then(response => {
             const contactDataFromServer = response.data; 
             setContactData(contactDataFromServer.data);
-            setIsFollowing(true)
         })
         .catch(error => {
             console.error('Erro ao buscar dados do artigo:', error);
         });
     }, []);
     
+    useEffect(() => {
+        axios.get(`${api.defaults.baseURL}/follow/informations/contact/${contactId}`)
+        .then(function (response) {
+                const followInformations = response.data
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+                setFollowData(followInformations);
+            })
+            .catch(function (error) {
+                console.log(error);
+              });
+    }, [contactId]);
+
+    const handleFollow = async (e) => {
 
         const data = {
             userIdLogin, 
@@ -61,8 +65,7 @@ function ContactProfile() {
             axios.post(`${api.defaults.baseURL}/follow/create`, data)
             .then(response => {
                 const followDataFromServer = response.data.data;
-                setFollowData(followDataFromServer)
-                console.log('aaaaaaaaaaaaaaaaaa')
+                window.location.reload();
             })
             .catch(error => {
                 console.log('Erro ao seguir usuário', error)
@@ -72,6 +75,29 @@ function ContactProfile() {
         }
     }
 
+    const handleUnfollow = async (e) => {
+        e.preventDefault();
+
+        const data = {
+            userIdLogin, 
+            contactId
+        };
+    
+        try { 
+            axios.put(`${api.defaults.baseURL}/follow/unfollow`, data)
+            .then(response => {
+                const unfollowDataFromServer = response.data.data;
+                console.log('pelo amor de deussssssssssssssssssssssssssssssss')
+            })
+            .catch(error => {
+                console.log('Erro ao seguir usuário', error)
+            })
+            console.log('222222222222222222222')
+            window.location.reload();
+        } catch (error) {
+            console.log('Erro ao seguir usuário', error);
+        }
+    }
 
     return(
         <>
@@ -83,15 +109,15 @@ function ContactProfile() {
                     <ImgContactProfile background={contactData.img_profile === null ? genericImg_user : contactData.img_profile}>
                     </ImgContactProfile>
                         <h3>{contactData.user_name}</h3>
-                    {isFollowing === true ? (
+                    {followData && !followData.data.isFollowed ? (
+                        <DivButtonFollow>
+                            <ButtonFollow onClick={handleFollow}>Seguir</ButtonFollow>
+                        </DivButtonFollow>
+                    ) : (
                         <DivButtonsActions>
-                                <ButtonUnfollow onClick={toggleFollow}>Deixar de seguir</ButtonUnfollow>
+                                <ButtonUnfollow onClick={handleUnfollow}>Deixar de seguir</ButtonUnfollow>
                                 <ButtonTalkWith>Conversar</ButtonTalkWith>
                         </DivButtonsActions>
-                    ) : (
-                        <DivButtonFollow>
-                            <ButtonFollow onClick={handleSubmit}>Seguir</ButtonFollow>
-                        </DivButtonFollow>
                     )}
                 </ImgProfileDiv>
                 <ProfileInfos>
@@ -100,7 +126,7 @@ function ContactProfile() {
                         itemProfile={contactData.user_email}
                     />
                 </ProfileInfos>
-                {isFollowing === true ? (
+                {followData.isFollowed === 1 ? (
                 <ProfilePosts>
                     <PostsProfileIdent>
                         <InfoProfile 

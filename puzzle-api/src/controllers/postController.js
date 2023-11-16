@@ -47,7 +47,7 @@ async function getAllPosts(req, res) {
       posts.img_post AS img_post,
       posts.legend_post AS legend_post,
       users.user_name AS user_name,
-      users.user_email AS user_email
+      users.img_profile AS img_profile
     FROM
       posts
     JOIN
@@ -73,9 +73,88 @@ async function getAllPosts(req, res) {
       res.json(results);
     });
   }
+
+  async function getPostInformations(request, response) {
+    const postId = request.params.post_id;
+    
+    const query = `
+    SELECT
+      posts.post_id AS post_id,
+      posts.user_id AS user_id,
+      posts.img_post AS img_post,
+      posts.legend_post AS legend_post,
+      users.user_name AS user_name,
+      users.img_profile AS img_profile
+    FROM
+      posts
+    JOIN
+      users ON posts.user_id = users.user_id
+    WHERE
+      posts.post_id = ?
+    `;
+  
+    connection.query(query, [postId], (error, results) => {
+      if (error) {
+        console.error('Erro ao recuperar as informações do post: ' + error.message);
+        return response.status(500).json({ error: 'Erro ao recuperar as informações do post' });
+      }
+
+      results.forEach((post) => {
+        if (post.post_image) {
+          const base64Data = post.post_image;
+          // Define o nome do arquivo.
+          const postImg = `post_${post.post_id}.jpeg`; 
+          base64_decode(base64Data, postImg);
+        }
+      });
+  
+      response.json(results);
+    });
+  }
+
+  async function getUserPosts (request, response) {
+    const postId = request.params.user_id;
+    
+    const query = `
+    SELECT
+      posts.post_id AS post_id,
+      posts.user_id AS user_id,
+      posts.img_post AS img_post,
+      posts.legend_post AS legend_post,
+      users.user_name AS user_name,
+      users.img_profile AS img_profile
+    FROM
+      posts
+    JOIN
+      users ON posts.user_id = users.user_id
+    WHERE
+      posts.user_id = ?
+    `;
+  
+    connection.query(query, [postId], (error, results) => {
+      if (error) {
+        console.error('Erro ao recuperar as informações do post: ' + error.message);
+        return response.status(500).json({ error: 'Erro ao recuperar as informações do post' });
+      }
+
+      results.forEach((post) => {
+        if (post.post_image) {
+          const base64Data = post.post_image;
+          // Define o nome do arquivo.
+          const postImg = `post_${post.post_id}.jpeg`; 
+          base64_decode(base64Data, postImg);
+        }
+      });
+  
+      response.json(results);
+    });
+  }
+  
   
   
   module.exports = {
       createPost,
-      getAllPosts
+      getAllPosts,
+      getPostInformations,
+      getUserPosts
   }

@@ -3,11 +3,14 @@ import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, Im
 import likeImg from "../../assets/like_img.svg"
 import commentsImg from "../../assets/comments_post.svg"
 import threePoints from "../../assets/three-points.svg"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CommentLayout from "../comments_layout/CommentsLayout";
+import { api } from "../../services/api";
 
 function PostOpenedCard(props) {
+    const userIdLogin = localStorage.getItem("@Auth:user_id")
+    const [comments, setComments ] = useState([]);
 
     const navigate = useNavigate()
 
@@ -23,29 +26,20 @@ function PostOpenedCard(props) {
         navigate(-1);
     }
 
-    const postValues = {
-        comment1: ['Clara Machado', 'Exemplo de comentário'],
-        comment2: ['Augusto Silva', 'Exemplo de comentário'],
-        comment3: ['Maurício Costa', 'Exemplo de comentário'],
-        comment4: ['Clara Machado', 'Exemplo de comentário'],
-        comment5: ['Augusto Silva', 'Exemplo de comentário um pouco mais longo que os outros.'],
-        comment6: ['Maurício Costa', 'Exemplo de comentário'],
-        comment7: ['Clara Machado', 'Exemplo de comentário'],
-        comment8: ['Augusto Silva', 'Exemplo de comentário'],
-        comment9: ['Maurício Costa', 'Exemplo de comentário']
-    }
     
-    let arrayValues = []
+    useEffect(() => {
+        const fetchData = async () => {
 
-    for(let i = 0; i < Object.keys(postValues).length; i++) {
-            arrayValues.push(
-                <CommentLayout
-                  key={`comment${i + 1}`}
-                  nameContact={postValues[`comment${i + 1}`][0]}
-                  comment={postValues[`comment${i + 1}`][1]}
-                />
-            );
-        }
+        try{
+            const response = await api.get(`/comments/list/${props.postId}`);
+            const commentList = response.data.data;
+            setComments(commentList);
+        } catch (err) {
+            console.error(err);
+        }};
+        fetchData();
+    }, [props.postId]);
+
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -53,29 +47,44 @@ function PostOpenedCard(props) {
       setIsOpen(!isOpen);
     };
 
+    console.log('aaaaaaaaaa', comments)
+
     return (
         <DivPostContainer>
-            <HeaderPost>
-                <ImgHeader>
-                    <ImgUser src={props.userImg} alt="Imagem de exemplo Usuário" />
-                </ImgHeader>
-                <ProfileButton>
-                    <ButtonIconsPost>
-                        <p>{props.userName}</p>
-                    </ButtonIconsPost>
-                </ProfileButton>
-                <ThreePoints>
-                    <ButtonIconsPost onClick={openMenu}>
-                        <ImgThreePoints src={threePoints} alt="Imagem três pontos"/>
-                    </ButtonIconsPost>
-                        {isOpen && (
-                            <DropDownMenu className="dropdown-menu">
-                                <ItemsMenu onClick={goToEditPostPage}>Editar</ItemsMenu>
-                                <ItemsMenu onClick={goToDeletePostPage}>Excluir</ItemsMenu>
-                            </DropDownMenu>
-                        )}
-                </ThreePoints>
-            </HeaderPost>
+            {props.userId == userIdLogin ? 
+                <HeaderPost>
+                    <ImgHeader>
+                        <ImgUser src={props.userImg} alt="Imagem de exemplo Usuário" />
+                    </ImgHeader>
+                    <ProfileButton>
+                        <ButtonIconsPost>
+                            <p>{props.userName}</p>
+                        </ButtonIconsPost>
+                    </ProfileButton>
+                    <ThreePoints>
+                        <ButtonIconsPost onClick={openMenu}>
+                            <ImgThreePoints src={threePoints} alt="Imagem três pontos"/>
+                        </ButtonIconsPost>
+                            {isOpen && (
+                                <DropDownMenu className="dropdown-menu">
+                                    <ItemsMenu onClick={goToEditPostPage}>Editar</ItemsMenu>
+                                    <ItemsMenu onClick={goToDeletePostPage}>Excluir</ItemsMenu>
+                                </DropDownMenu>
+                            )}
+                    </ThreePoints>
+                </HeaderPost>
+            :
+                <HeaderPost>
+                    <ImgHeader>
+                        <ImgUser src={props.userImg} alt="Imagem de exemplo Usuário" />
+                    </ImgHeader>
+                    <ProfileButton>
+                        <ButtonIconsPost>
+                            <p>{props.userName}</p>
+                        </ButtonIconsPost>
+                    </ProfileButton>
+                </HeaderPost>
+            }
             <BodyPost>
                 <ImgPostContainer src={props.ImgContent} alt="Imagem de teste" />
             </BodyPost>
@@ -89,7 +98,13 @@ function PostOpenedCard(props) {
             </FooterPost>
             <DivMainComments>
                 <DivComments>
-                    {arrayValues}
+                    {comments.map((comment) => (
+                        <CommentLayout
+                            key={comment.comment_id}
+                            nameContact={comment.UserName}
+                            comment={comment.comment_content}
+                        />
+                    ))}
                 </DivComments>
                 <DivEndComments>
 

@@ -115,3 +115,9 @@ export const ItemsMenu = styled.button`
     align-items: flex-start;
     justify-content: center;
 `
+
+export const DivLegendContainer = styled.div`
+    width: 93vw;
+    height: 3vh;
+    padding-left: 5vw;
+`

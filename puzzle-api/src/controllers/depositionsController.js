@@ -1,5 +1,5 @@
-// Importa as configurações do banco de dados na variável connection
 const connection = require('../config/db');
+require("dotenv").config();
 
 async function findDepositions(request, response) {
     const followerId = request.params.followerId;

@@ -4,7 +4,6 @@ import PostCard from "../../components/post_card/PostCard"
 import { BodyHomeContainer, ButtonUserContainer, DivProfileAccess, FinalDiv, FinalText, MainHomeContainer, MyNameText, MyPicture, MyProfile } from "./style"
 
 import { useNavigate } from "react-router-dom"
-import PostCardContact from "../../components/post_card_contact/PostCardContact"
 import { useEffect, useState } from "react"
 import userImg from "../../assets/user_img.svg"
 
@@ -47,16 +46,6 @@ function Home() {
     
 
     return(
-        // <>
-        //     {posts.map((post) => {
-        //         return (
-        //             <>
-        //                 <p>{ post.user_id }</p>
-        //             </>
-        //         )
-        //         })
-        //     }
-        // </>
         <BodyHomeContainer>    
             <HomeHeader/>
             <MainHomeContainer>
@@ -72,7 +61,6 @@ function Home() {
                     {posts.map((post) => {   
                         return (
                             <>
-                                {/* <div>{post.legend_post}</div>                      */}
                                 <PostCard
                                     posts={post}
                                 />

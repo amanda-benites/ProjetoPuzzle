@@ -24,7 +24,6 @@ import ProfileTestimony from "./page/profile_testimony/ProfileTestimony";
 import Exit from "./page/exit/Exit";
 import ForgotPassword from "./page/forgot_password/ForgotPassword";
 import PostOpened from "./page/post_opened/PostOpened";
-import PostOpenedContact from "./page/post_opened_contact/PostOpenedContact";
 import Chats from "./page/chats/Chats";
 import ContactChat from "./page/contact_chat/ContactChat";
 import DeleteAccount from "./page/delete_account/DeleteAccount";
@@ -101,11 +100,8 @@ function RoutesPage() {
         <Route path="open-article/:article_id" element={<PrivateRoutes redirectTo='/'>
           <OpenArticle/>
         </PrivateRoutes>}/>
-        <Route path="post-opened" element={<PrivateRoutes redirectTo='/'>
+        <Route path="post-opened/:post_id" element={<PrivateRoutes redirectTo='/'>
           <PostOpened/>
-        </PrivateRoutes>}/>
-        <Route path="post-opened-contact" element={<PrivateRoutes redirectTo='/'>
-          <PostOpenedContact/>
         </PrivateRoutes>}/>
         <Route path="profile" element={<PrivateRoutes redirectTo='/'>
           <Profile/>

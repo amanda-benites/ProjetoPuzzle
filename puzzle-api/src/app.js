@@ -11,6 +11,7 @@ const articleRouter = require('./routes/articleRouter');
 const postRouter = require('./routes/postRouter');
 const depositionsRouter = require('./routes/depositionsRouter')
 const followRouter = require('./routes/followRouter')
+const commentsRouter = require('./routes/commentsRouter')
 // Importar o pacote dotenv, gerenciador de variáveis de ambiente
 const dotenv = require('dotenv').config();
 
@@ -30,10 +31,11 @@ app.use(cors())
 // Habilitar as rotas na aplicação
 app.use('/api/user', userRouter);
 app.use('/api/auth', loginRouter);
-app.use('/api/article', articleRouter)
+app.use('/api/article', articleRouter);
 app.use('/api/post', postRouter);
-app.use('/api/depositions', depositionsRouter)
-app.use('/api/follow', followRouter)
+app.use('/api/depositions', depositionsRouter);
+app.use('/api/follow', followRouter);
+app.use('/api/comments', commentsRouter);
 // Setar a porta do servidor, a parir do arquivo .env
 app.set('port', process.env.PORT || 8000);
 

@@ -13,6 +13,9 @@ import { useEffect, useState } from "react"
 import { api } from "../../services/api"
 
 function Profile() {
+    const images = 'http://localhost:8000/uploads/'
+    const [userData, setUserData] = useState('');
+    const [postUserInfos, setPostUserInfos] = useState([]);
 
     const navigate = useNavigate()
 
@@ -25,15 +28,10 @@ function Profile() {
         identEmail: 'Email',
         identPosts: 'Postagens'
     }
-
-    const [userData, setUserData] = useState('');
     
-      // pega as informações do usuário baseadas no email
       useEffect(() => {
-        // pega o email do localstorage e tira as aspas
         const userEmail = localStorage.getItem("@Auth:user").replace(/"/g, '');
         
-        // função get para pegar as informações
         axios.get(`${api.defaults.baseURL}/user/information/${userEmail}`)
         .then(response => {
             const userDataFromServer = response.data; 
@@ -43,6 +41,25 @@ function Profile() {
             console.error('Erro ao buscar dados do usuário:', error);
         });
       }, []);
+
+      
+      useEffect(() => {
+        const userIdLogin = parseInt(localStorage.getItem("@Auth:user_id"), 10)
+        async function fetchPosts() {
+            try {
+                const response = await api.get(`/post/user/${userIdLogin}`); 
+                setPostUserInfos(response.data); 
+                console.log('------- response.data :', response.data);
+                
+            } catch (error) {
+                console.error('Erro ao recuperar as ifotmações do post:', error);
+            }
+        }
+    
+        fetchPosts();
+    }, []);
+
+    console.log('yyyyyyyyyyyyyyyyy', postUserInfos)
     
     return(
         <>
@@ -74,12 +91,9 @@ function Profile() {
                         </ButtonSeeMore>
                     </PostsProfileIdent>
                     <PostsProfileDiv>
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 1" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 2" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 3" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 1" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 2" />
-                        <PostsProfile src={exemplePost} alt="Exemplo de imagem 3" />
+                    {postUserInfos.map(postUser => (
+                        <PostsProfile key={postUser.post_id} src={images + postUser.img_post} alt="Exemplo de imagem 1" />
+                    ))}
                     </PostsProfileDiv>
                 </ProfilePosts>
             </div>

@@ -4,9 +4,9 @@ const { Router } = require('express');
 const router = Router();
 // Importar as funções (processamento da requisição) do controller
 const { 
-    likePost, 
+    isLiked    
 } = require('../controllers/likeController');
 
-router.post('/action', likePost);
+router.post('/informations', isLiked);
 
 module.exports = router;

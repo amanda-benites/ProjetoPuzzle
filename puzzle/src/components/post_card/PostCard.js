@@ -14,7 +14,7 @@ import axios from "axios"
 function PostCard({posts}) {
     const images = 'http://localhost:8000/uploads/'
     const [isOpen, setIsOpen] = useState(false);
-    const [isLikedTeste, setIsLikedTeste] = useState();
+    const [isLikedInfo, setIsLikedInfo] = useState([]);
     const userLoginId = parseInt(localStorage.getItem("@Auth:user_id"), 10)
 
     const navigate = useNavigate()
@@ -36,8 +36,6 @@ function PostCard({posts}) {
         navigate(`/post-opened/${posts.post_id}`)
     }
 
-    const [isLiked, setIsLiked] = useState(false);
-
     // const changeLikeState = () => {
     //     setIsLiked(!isLiked)
     // }
@@ -53,28 +51,36 @@ function PostCard({posts}) {
   
         const isLiked = response;
 
-        console.log('#################33', isLiked)
-
-
-        // setIsLikedTeste(!!isEnabled);
+        window.location.reload();
       } catch (err) {
         console.error(err);
       }
     };
 
+    const likeStatus = async () => {
+        try {
+            const paramValues = {
+                post_id: posts.post_id,
+                user_id: userLoginId
+            };
+    
+            const response = await api.post('/verifity/informations', paramValues);
+        
+            if (response.data.data) {
+                const isLiked = response.data.data;
+                setIsLikedInfo(isLiked);
+            }
+            // const isLiked = response.data.data[0].isLiked.data[0];
+            // setIsLiked(!!isLiked);
+        } catch (error) {
+            console.error('erro:', error);
+        }
+    };  
+
     useEffect(() => {
-        const postId = posts.postId
-        axios.get(`${api.defaults.baseURL}/like/informations/${postId}`)
-        .then(function (response) {
-                const likeInformations = response.data
-                
-                setIsLikedTeste(likeInformations);
-                console.log('%%%%%%%%%%%%%%55 likeInformations :', likeInformations);
-            })
-            .catch(function (error) {
-                console.log(error);
-              });
-    }, [posts.postId]);
+        // Chama a função de busca ao montar o componente
+        likeStatus();
+      }, [userLoginId, posts.post_id]); 
   
         return (
             <DivPostContainer key={posts.post_id}>
@@ -118,9 +124,9 @@ function PostCard({posts}) {
                 <FooterPost>
                     <ButtonIconsPost>
                         <img 
-                            src={likeImg} 
+                            src={isLikedInfo.length > 0 ? imgLiked : likeImg} 
                             alt="Curtida"
-                            onClick={fetchLikeStatus} />
+                            onClick={() => fetchLikeStatus()}  />
                     </ButtonIconsPost>
                     <ButtonIconsPost onClick={goToPostOpened}>
                         <img src={commentsImg} alt="Comentários" />

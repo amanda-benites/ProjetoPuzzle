@@ -19,7 +19,6 @@ function ContactTestimony() {
     const [inputValue, setInputValue] = useState('');
     const param = useParams()
     const followerId = param.followerId
-
     const navigate = useNavigate()
 
     function goToCreateTestimonyPage() {

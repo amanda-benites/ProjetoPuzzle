@@ -64,27 +64,38 @@ async function likePost(request, response) {
 
 async function isLiked(request, response) {
     const params = [
-        request.params.postId,
-        request.params.userId
+        request.body.post_id,
+        request.body.user_id
     ];
 
-    const query = "SELECT * FROM postlikes WHERE post_id = ? AND user_id = ?;";
+    console.log('rrrrrrrrrrrrrrrr', params)
 
-    try {
-        const [results] = await connection.execute(query, params);
+    const query = "SELECT isLiked FROM postlikes WHERE post_id = ? AND user_id = ?;";
 
-        response.status(200).json({
-            success: true,
-            message: 'Retorno de usuários com sucesso!',
-            data: results
-        });
-    } catch (error) {
-        response.status(500).json({
-            success: false,
-            message: "Ocorreu um erro. Não foi possível realizar sua requisição!",
-            error: error.message
-        });
-    }
+    connection.query(query, params, (error, results) => {
+      try {
+          if (!error) {
+              response.status(200).json({
+                  success: true,
+                  message: 'Retorno de usuários com sucesso!',
+                  data: results
+              });
+          } else {
+              response.status(400).json({
+                  success: false,
+                  message: `Não foi possível retornar os usuários.`,
+                  query: error.sql,
+                  sqlMessage: error.sqlMessage
+              });
+          }
+      } catch (error) { // Caso aconteça qualquer erro no processo na requisição, retorna uma mensagem amigável
+          response.status(500).json({
+              success: false,
+              message: "Ocorreu um erro. Não foi possível realizar sua requisição!",
+              error: error
+          });
+      }
+  });
 }
 
 

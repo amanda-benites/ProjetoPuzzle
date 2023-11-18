@@ -35,7 +35,6 @@ function Home() {
                 try {
                     const response = await api.get('/post/all'); 
                     setPosts(response.data); 
-                    console.log(posts);
                 } catch (error) {
                     console.error('Erro ao recuperar os posts:', error);
                 }

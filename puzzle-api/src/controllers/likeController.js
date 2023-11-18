@@ -10,8 +10,6 @@ async function likePost(request, response) {
     request.body.userId
   ];
 
-  console.log('aaaaaaaaaaa', values)
-
   try {
     // Verificar se a relação de like já existe
     connection.query('SELECT * FROM postlikes where post_id = ? and user_id = ?', values, (err, results) => {
@@ -63,45 +61,79 @@ async function likePost(request, response) {
 }
 
 async function isLiked(request, response) {
-    const params = [
-        request.body.post_id,
-        request.body.user_id
-    ];
+  const params = [
+      request.body.post_id,
+      request.body.user_id
+  ];
 
-    console.log('rrrrrrrrrrrrrrrr', params)
+  const query = "SELECT isLiked FROM postlikes WHERE post_id = ? AND user_id = ?;";
 
-    const query = "SELECT isLiked FROM postlikes WHERE post_id = ? AND user_id = ?;";
-
-    connection.query(query, params, (error, results) => {
-      try {
-          if (!error) {
-              response.status(200).json({
-                  success: true,
-                  message: 'Retorno de usuários com sucesso!',
-                  data: results
-              });
-          } else {
-              response.status(400).json({
-                  success: false,
-                  message: `Não foi possível retornar os usuários.`,
-                  query: error.sql,
-                  sqlMessage: error.sqlMessage
-              });
-          }
-      } catch (error) { // Caso aconteça qualquer erro no processo na requisição, retorna uma mensagem amigável
-          response.status(500).json({
-              success: false,
-              message: "Ocorreu um erro. Não foi possível realizar sua requisição!",
-              error: error
-          });
-      }
-  });
+  connection.query(query, params, (error, results) => {
+    try {
+        if (!error) {
+            response.status(200).json({
+                success: true,
+                message: 'Retorno de usuários com sucesso!',
+                data: results
+            });
+        } else {
+            response.status(400).json({
+                success: false,
+                message: `Não foi possível retornar os usuários.`,
+                query: error.sql,
+                sqlMessage: error.sqlMessage
+            });
+        }
+    } catch (error) { // Caso aconteça qualquer erro no processo na requisição, retorna uma mensagem amigável
+        response.status(500).json({
+            success: false,
+            message: "Ocorreu um erro. Não foi possível realizar sua requisição!",
+            error: error
+        });
+    }
+});
 }
 
+async function unlikePost(request, response) {
+  const values = [
+    request.body.postId,
+    request.body.userId
+  ];
 
+  try {
+    connection.query('UPDATE postlikes SET isLiked = 0 WHERE post_id = ? AND user_id = ?', values, (err, results) => {
+      if (err) {
+        response.status(400).json({
+          success: false,
+          message: "An error has occurred. Unable to update post like status.",
+          query: err.sql,
+          sqlMessage: err.sqlMessage
+        });
+      } else if (results.affectedRows > 0) {
+        response.status(200).json({
+          success: true,
+          message: 'Success to unlike post.',
+          data: results
+        });
+      } else {
+        response.status(400).json({
+          success: false,
+          message: `Unable to unlike post.`,
+        });
+      }
+    });
+  } catch (error) {
+    response.status(500).json({
+      success: false,
+      message: `Internal Server Error.`,
+      error: error.message,
+    });
+  }
+}
 
 module.exports = {
     likePost,
-    isLiked
+    isLiked,
+    unlikePost
 }
 

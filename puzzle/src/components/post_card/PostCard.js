@@ -41,21 +41,40 @@ function PostCard({posts}) {
     // }
   
     const fetchLikeStatus = async () => {
-      try {
-        const formData = {
+        try {
+          const formData = {
             postId: posts.post_id,
             userId: userLoginId
-        };
-  
-        const response = await api.post('/like/action', formData);
-  
-        const isLiked = response;
-
-        window.location.reload();
-      } catch (err) {
-        console.error(err);
-      }
-    };
+          };
+      
+          const response = await api.post('/like/action', formData);
+      
+          const isLiked = response.data.data;
+      
+          if (isLiked.length > 0 && response.data.data[0].isLiked === 1) {
+            // Post is already liked, update the like status to 0
+            const unlikeResponse = await api.put('/like/delete', formData);            
+            if (unlikeResponse.data.success) {
+              setIsLikedInfo([]);
+            } else {
+              console.error("Failed to update like status:", unlikeResponse.data.message);
+            } 
+          } else {
+            // Post is not liked, like the post
+            // You may need to adjust the endpoint and data structure based on your server implementation
+            const likeResponse = await api.post('/like/action', formData);
+      
+            if (likeResponse.data.success) {
+              setIsLikedInfo(likeResponse.data.data);
+            } else {
+              console.error("Failed to like post:", likeResponse.data.message);
+            }
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      
 
     const likeStatus = async () => {
         try {

@@ -23,9 +23,7 @@ function PostOpened() {
         async function fetchPosts() {
             try {
                 const response = await api.get(`/post/informations/${postId}`); 
-                setPostInformations(response.data[0]); 
-                console.log('------- response.data :', response.data[0]);
-                
+                setPostInformations(response.data[0]);                 
             } catch (error) {
                 console.error('Erro ao recuperar as ifotmações do post:', error);
             }
@@ -51,8 +49,6 @@ function PostOpened() {
             console.error('Erro ao criar o comentário:', error);
         }
     };
-
-    console.log()
 
     return(
         <BodyHomeContainer>    

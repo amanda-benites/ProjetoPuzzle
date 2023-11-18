@@ -31,7 +31,6 @@ function CreatePost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Imagem do post', image)
     
     let formData = new FormData();
     formData.append('legend', legend);

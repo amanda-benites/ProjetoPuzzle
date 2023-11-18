@@ -13,6 +13,10 @@ export const DivImgTestimony = styled.div`
 export const DivContentTestimony = styled.div`
     padding-top: 2vh;
     padding-left: 4vw;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 `
 
 export const H4TestimonyIdent = styled.h4`

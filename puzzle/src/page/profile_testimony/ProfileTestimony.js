@@ -19,7 +19,6 @@ function ProfileTestimony() {
     useEffect(() => {
         axios.get(`${api.defaults.baseURL}/depositions/profile/${userId}`)
             .then(function (response) {
-                console.log('response.data.data', response.data);
                 const sortedDepositions = response.data.data.sort((a, b) => {
                     const dateA = new Date(a.testimony_date);
                     const dateB = new Date(b.testimony_date);

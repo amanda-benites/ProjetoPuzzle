@@ -12,7 +12,7 @@ function TestimonyLayout(props) {
     }
 
     function goToEditTestimony() {
-        navigate("/edit-testimony");
+        navigate(`/edit-testimony/${props.testimonyId}`);
     }
     
     return(

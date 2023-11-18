@@ -57,8 +57,6 @@ function Profile() {
     
         fetchPosts();
     }, []);
-
-    console.log('yyyyyyyyyyyyyyyyy', postUserInfos)
     
     return(
         <>

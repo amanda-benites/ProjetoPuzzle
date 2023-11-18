@@ -28,12 +28,7 @@ function OpenArticle() {
         .catch(error => {
             console.error('Erro ao buscar dados do artigo:', error);
         });
-        console.log("1111111111111111111")
     }, []);
-
-
-    console.log('aaaaaaaaaaa', articleData)
-
 
     return(
         <>

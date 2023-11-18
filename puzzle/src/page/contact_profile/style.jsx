@@ -53,7 +53,7 @@ export const DivButtonFollow = styled.div`
 
 export const ProfileInfos = styled.div`
     width: 100vw;
-    height: 24vh;
+    height: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -78,7 +78,10 @@ export const PostsProfileDiv = styled.div`
 
 export const PostsProfile = styled.img`
     width: 30vw;
+    height: 15vh;
     border-radius: 10px;
+
+    object-fit: cover;
 `
 
 export const PostsProfileIdent = styled.div`

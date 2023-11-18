@@ -4,7 +4,6 @@ import { ButtonSeeMore, ImgContactProfile, PostsProfile, PostsProfileDiv, PostsP
 
 import genericImg_user from "../../assets/genericImg_user.jpg"
 import InfoProfile from "../../components/info_profile/InfoProfile"
-import exemplePost from "../../assets/exemploImagem.svg"
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from 'react-router-dom';
 import HeaderContact from "../../components/header_contact/HeaderContact"
@@ -12,8 +11,10 @@ import axios from "axios"
 import { api } from "../../services/api"
 
 function ContactProfile() {
+    const images = 'http://localhost:8000/uploads/'
     const [contactData, setContactData] = useState('');
     const [followData, setFollowData] = useState('');
+    const [postUserInfos, setPostUserInfos] = useState([]);
 
     const userIdLogin = parseInt(localStorage.getItem('@Auth:user_id'), 10)
     const param = useParams()
@@ -23,7 +24,7 @@ function ContactProfile() {
     const navigate = useNavigate()
 
     function goToPostsContactPage() {
-        navigate("/contact-posts");
+        navigate(`/contact-posts/${contactId}`);
     }
 
     const topicIdent = {
@@ -97,6 +98,21 @@ function ContactProfile() {
         }
     }
 
+    useEffect(() => {
+        async function fetchPosts() {
+            try {
+                const response = await api.get(`post/six/user/${contactId}`); 
+                setPostUserInfos(response.data); 
+                
+            } catch (error) {
+                console.error('Erro ao recuperar as ifotmações do post:', error);
+            }
+        }
+    
+        fetchPosts();
+    }, []);
+    
+
     return(
         <>
             <HeaderContact
@@ -124,7 +140,7 @@ function ContactProfile() {
                         itemProfile={contactData.user_email}
                     />
                 </ProfileInfos>
-                {followData.isFollowed === 1 ? (
+                {followData && followData.data.isFollowed ? (
                 <ProfilePosts>
                     <PostsProfileIdent>
                         <InfoProfile 
@@ -135,13 +151,10 @@ function ContactProfile() {
                         </ButtonSeeMore>
                     </PostsProfileIdent>
                         <PostsProfileDiv>
-                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 1" />
-                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 2" />
-                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 3" />
-                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 4" />
-                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 5" />
-                            <PostsProfile src={exemplePost} alt="Exemplo de imagem 6" />
-                        </PostsProfileDiv>
+                            {postUserInfos.map(postUser => (
+                                <PostsProfile key={postUser.post_id} src={images + postUser.img_post} alt="Exemplo de imagem 1" />
+                            ))}
+                    </PostsProfileDiv>
                 </ProfilePosts>
                 ) : (
                     <ProfilePosts>

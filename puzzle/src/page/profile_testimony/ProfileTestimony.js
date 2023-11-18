@@ -14,7 +14,7 @@ import { api } from "../../services/api";
 
 function ProfileTestimony() {
     const [depositions, setDepositions] = useState([]);
-    const userId = localStorage.getItem('@Auth:user_id')
+    const userId = parseInt(localStorage.getItem('@Auth:user_id'), 10)
 
     useEffect(() => {
         axios.get(`${api.defaults.baseURL}/depositions/profile/${userId}`)
@@ -64,8 +64,11 @@ function ProfileTestimony() {
                     {filteredDepositions.map((testimony) => (
                         <TestimonyLayout
                             key={testimony.testimony_id}
+                            testimonyId={testimony.testimony_id}
+                            userIdValue={testimony.user_id}
                             nameContact={testimony.nome_comentou}
-                            testimony={testimony.testimony_content}/>
+                            testimony={testimony.testimony_content}
+                        />
                     ))}              
                 </BodyTestimonyProfile>
             </div>

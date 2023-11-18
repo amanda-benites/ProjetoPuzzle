@@ -6,13 +6,16 @@ const {
     findDepositions,
     findDepositionsToUser,
     selectTestimonyInfos,
-    newTestimony
+    newTestimony,
+    updateTestimony
 } = require('../controllers/depositionsController')
 
 router.get('/find/:followerId', findDepositions);
-router.get('/profile', findDepositionsToUser);
+router.get('/profile/:userId', findDepositionsToUser);
 router.get('/informations/:testimonyId', selectTestimonyInfos);
 router.post('/create', newTestimony);
+router.put('/update', updateTestimony);
+
 
 
 module.exports = router;

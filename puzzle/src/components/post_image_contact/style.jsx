@@ -8,6 +8,7 @@ export const ButtonImgContact = styled(ButtonHeaderContainer)`
 export const ImgPostContactDesign = styled.img`
     border-radius: 10px;
     width: 40vw;
-
+    height: 20vh;
     object-fit: cover;
+
 `

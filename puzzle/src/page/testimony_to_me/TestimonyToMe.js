@@ -11,7 +11,7 @@ function TestimonyToMe() {
     const param = useParams()
     const testimonyId = parseInt(param.testimonyId, 10)
 
-    const [testimonyValues, setTestimonyValues] = useState('');
+    const [testimonyValues, setTestimonyValues] = useState({});
 
     useEffect(() => {
         axios.get(`${api.defaults.baseURL}/depositions/informations/${testimonyId}`)
@@ -26,13 +26,13 @@ function TestimonyToMe() {
 
     return(
         <>
-            <ScreenHeader titlePage={`Depoimento de ${testimonyValues.user_name}`}/>
+            <ScreenHeader titlePage={testimonyValues ? `Depoimento de ${testimonyValues.user_name}` : 'Carregando...'}/>
             <DivImgTestimony>
                 <img src={imgTestimony} alt="Imagem dos depoimentos"/>
             </DivImgTestimony>
             <DivContentTestimony>
                 <H4TestimonyIdent>Depoimento</H4TestimonyIdent>
-                <p>{testimonyValues.testimony_content}</p>
+                <p>{testimonyValues ? testimonyValues.testimony_content : 'Carregando...'}</p>
             </DivContentTestimony>
         </>
     )

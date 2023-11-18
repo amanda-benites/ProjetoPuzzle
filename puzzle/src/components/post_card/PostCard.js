@@ -35,10 +35,6 @@ function PostCard({posts}) {
     function goToPostOpened() {
         navigate(`/post-opened/${posts.post_id}`)
     }
-
-    // const changeLikeState = () => {
-    //     setIsLiked(!isLiked)
-    // }
   
     const fetchLikeStatus = async () => {
         try {

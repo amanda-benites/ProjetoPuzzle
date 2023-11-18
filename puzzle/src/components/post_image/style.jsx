@@ -7,6 +7,4 @@ export const ButtonImgProfile = styled(ButtonHeaderContainer)`
 `
 
 export const PostImgProfileDesign = styled(ImgPostContactDesign)`
-    height: 20vh;
-    object-fit: cover;
 `

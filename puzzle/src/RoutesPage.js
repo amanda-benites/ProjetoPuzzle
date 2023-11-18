@@ -58,7 +58,7 @@ function RoutesPage() {
         <Route path="contact-chat" element={<PrivateRoutes redirectTo='/'>
           <ContactChat/>
         </PrivateRoutes>}/>
-        <Route path="contact-posts" element={<PrivateRoutes redirectTo='/'>
+        <Route path="contact-posts/:contactId" element={<PrivateRoutes redirectTo='/'>
           <ContactPosts/>
         </PrivateRoutes>}/>
         <Route path="contact-profile/:userId" element={<PrivateRoutes redirectTo='/'>

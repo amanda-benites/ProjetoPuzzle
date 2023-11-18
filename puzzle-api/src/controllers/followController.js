@@ -63,8 +63,6 @@ async function unfollowUser(request, response) {
     request.body.contactId
   ];
 
-  console.log(values);
-
   try {
     connection.query(
       'UPDATE follows SET isFollowed = 0 WHERE user_id = ? AND follower_id = ?', values, (err, results) => {

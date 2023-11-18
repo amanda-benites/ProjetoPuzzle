@@ -25,9 +25,6 @@ function ProfilePosts() {
         fetchPosts();
     }, []);
 
-    
-    console.log('qqqqqqqqqqqqqqqqq', postUserInfos);
-
     return(
         <BodyImgsContacts>
             <ScreenHeader titlePage={`Minhas publicações`}/>

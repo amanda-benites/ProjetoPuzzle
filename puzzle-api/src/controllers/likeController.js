@@ -25,8 +25,6 @@ async function likePost(request, response) {
         const query = 'INSERT INTO postlikes (post_id, user_id) VALUES (?, ?);';
 
         connection.query(query, values, (err, results) => {
-          console.log('e ' + err);
-          console.log('r ' + results);
 
           if (err) {
               response.status(400).json({

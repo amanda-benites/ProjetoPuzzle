@@ -45,7 +45,6 @@ async function findDepositionsToUser(request, response) {
 
 async function selectTestimonyInfos (request, response) {
   const testimonyId = request.params.testimonyId;
-  console.log('testimonyId :', testimonyId);
 
   connection.query('SELECT d.testimony_content, d.user_id, d.follower_id, d.testimony_date, d.testimony_id, u.user_name FROM depositions d JOIN users u ON u.user_id = d.user_id WHERE d.testimony_id = ?;', [testimonyId], (err, results) => {
     if (err) {
@@ -105,38 +104,38 @@ async function newTestimony(request, response) {
 async function updateTestimony(request, response) {
   
   const values = [
-    request.body.userId,
-    request.body.followerId,
-    request.body.testimony_content
+    request.body.testimonyContent,
+    request.body.testimonyId,
   ];
 
-  const query = "UPDATE depositions SET isLiked = 0 WHERE post_id = ? AND user_id = ?
-  
-  INSERT INTO depositions (user_id, follower_id, testimony_content) VALUES (?, ?, ?)";
-
-  try {
-    const results = await new Promise((resolve, reject) => {
-        connection.query(query, values, (err, results) => {
-            if (err) {
-                reject(err);
-            } else {
-                resolve(results);
-            }
-        });
-    });
-
-    response.status(201).json({
-        success: true,
-        message: "Success! Created testimony",
-        data: results
-    });
-    } catch (err) {
-        response.status(400).json({
+    try {
+      connection.query('UPDATE depositions SET testimony_content = ? WHERE testimony_id = ?', values, (err, results) => {
+        if (err) {
+          response.status(400).json({
             success: false,
-            message: "Unable to create testimony.",
-            query: query,
+            message: "An error has occurred. Unable to update testimony.",
+            query: err.sql,
             sqlMessage: err.sqlMessage
-        });
+          });
+        } else if (results.affectedRows > 0) {
+          response.status(200).json({
+            success: true,
+            message: 'Success to update testimony.',
+            data: results
+          });
+        } else {
+          response.status(400).json({
+            success: false,
+            message: `Unable to update testimony.`,
+          });
+        }
+      });
+    } catch (error) {
+      response.status(500).json({
+        success: false,
+        message: `Internal Server Error.`,
+        error: error.message,
+      });
     }
 }
 
@@ -145,5 +144,6 @@ module.exports = {
     findDepositions,
     findDepositionsToUser,
     newTestimony,
-    selectTestimonyInfos
+    selectTestimonyInfos,
+    updateTestimony
 }

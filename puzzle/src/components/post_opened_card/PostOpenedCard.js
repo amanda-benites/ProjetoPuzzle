@@ -47,8 +47,6 @@ function PostOpenedCard(props) {
       setIsOpen(!isOpen);
     };
 
-    console.log('aaaaaaaaaa', comments)
-
     return (
         <DivPostContainer>
             {props.userId == userIdLogin ? 

@@ -39,11 +39,8 @@ function Auth() {
     
                 localStorage.setItem("@Auth:user", JSON.stringify(response.data.data[0].user_email));
                 localStorage.setItem("@Auth:token", response.data.data[0].token);
-                const userName = response.data.data[0].user_name;
-                const userId = response.data.data[0].user_id;
-
-                localStorage.setItem("@Auth:user_name", userName);
-                localStorage.setItem("@Auth:user_id", userId);
+                localStorage.setItem("@Auth:user_name", response.data.data[0].user_name);
+                localStorage.setItem("@Auth:user_id", response.data.data[0].user_id);
 
                 setUser(response.data.data[0]);
     

@@ -6,7 +6,6 @@ import { ButtonSeeMore, ImgInputDiv, InputImgProfile, PostsProfile, PostsProfile
 import imgExemp from "../../assets/user_img.svg"
 import genericImg_user from "../../assets/genericImg_user.jpg"
 import InfoProfile from "../../components/info_profile/InfoProfile"
-import exemplePost from "../../assets/exemploImagem.svg"
 import { useNavigate } from "react-router"
 import axios from "axios"
 import { useEffect, useState } from "react"
@@ -30,9 +29,9 @@ function Profile() {
     }
     
       useEffect(() => {
-        const userEmail = localStorage.getItem("@Auth:user").replace(/"/g, '');
+        const userId = parseInt(localStorage.getItem("@Auth:user_id"), 10);
         
-        axios.get(`${api.defaults.baseURL}/user/information/${userEmail}`)
+        axios.get(`${api.defaults.baseURL}/user/information/${userId}`)
         .then(response => {
             const userDataFromServer = response.data; 
             setUserData(userDataFromServer.data);
@@ -57,14 +56,14 @@ function Profile() {
     
         fetchPosts();
     }, []);
-    
+
     return(
         <>
             <HeaderProfile/>
             <div>
                 <ImgInputDiv>
                     {userData.img_profile === null ? <InputImgProfile background={genericImg_user} id="divInputFile">
-                    </InputImgProfile> : <InputImgProfile background={imgExemp} id="divInputFile">
+                    </InputImgProfile> : <InputImgProfile background={images + userData.img_profile} id="divInputFile">
                     </InputImgProfile>}
                     <h3>Meu perfil</h3>
                 </ImgInputDiv>

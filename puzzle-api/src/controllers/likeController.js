@@ -1,7 +1,7 @@
-// Importa as configurações do banco de dados na variável connection
+
 const connection = require('../config/db');
 const mysql = require('mysql2/promise');
-// Importar o pacote dotenv, gerenciador de variáveis de ambiente
+
 require("dotenv").config();
 
 async function likePost(request, response) {
@@ -82,7 +82,7 @@ async function isLiked(request, response) {
                 sqlMessage: error.sqlMessage
             });
         }
-    } catch (error) { // Caso aconteça qualquer erro no processo na requisição, retorna uma mensagem amigável
+    } catch (error) { 
         response.status(500).json({
             success: false,
             message: "Ocorreu um erro. Não foi possível realizar sua requisição!",

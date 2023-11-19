@@ -38,10 +38,10 @@ async function listUsers(request, response) {
 }
 
 async function listUserInfos(request, response) {
-    const userEmail = request.params.user_email;// Recupere o email do parâmetro da rota
+    const userId = request.params.user_id;// Recupere o email do parâmetro da rota
   
     // Preparar o comando de execução no banco
-    connection.query('SELECT * FROM users WHERE user_email = ?', [userEmail], (err, results) => {
+    connection.query('SELECT * FROM users WHERE user_id = ?', [userId], (err, results) => {
       if (err) {
         response.status(400).json({
           success: false,
@@ -137,51 +137,6 @@ async function storeUser(request, response) {
     });
 }
 
-// Função que atualiza o usuário no banco
-async function updateUser(request, response) {
-    // Preparar o comando de execução no banco
-    const query = "UPDATE users SET `user_name` = ?, `user_email` = ?, `user_password` = ? WHERE `id_user` = ?";
-
-    // Recuperar os dados enviados na requisição respectivamente
-    const params = Array(
-        request.body.user_name,
-        request.body.user_email,
-        bcrypt.hashSync(request.body.user_password, 10),
-        request.params.id  // Recebimento de parametro da rota
-    );
-
-    // Executa a ação no banco e valida os retornos para o client que realizou a solicitação
-    connection.query(query, params, (err, results) => {
-        try {
-            if (results) {
-                response
-                    .status(200)
-                    .json({
-                        success: true,
-                        message: `Success! Updated user.`,
-                        data: results
-                    });
-            } else {
-                response
-                    .status(400)
-                    .json({
-                        success: false,
-                        message: `Unable to update user. Check your information.`,
-                        query: err.sql,
-                        sqlMessage: err.sqlMessage
-                    });
-            }
-        } catch (e) { // Caso aconteça algum erro na execução
-            response.status(400).json({
-                    succes: false,
-                    message: "An error has occurred. Unable to update user.",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
-        }
-    });
-}
-
 // Função que remove usuário no banco
 async function deleteUser(request, response) {
     // Preparar o comando de execução no banco
@@ -224,11 +179,94 @@ async function deleteUser(request, response) {
     });
 }
 
+async function updateUser(request, response) {
+    // Preparar o comando de execução no banco
+
+    // Recuperar os dados enviados na requisição respectivamente
+
+    if(request.file) {
+        const passwordToHash = request.body.userPassoword || ''; // Use um valor padrão se for undefined
+        const query = `UPDATE users
+        SET user_name = ?, user_email = ?, img_profile = ?
+        WHERE user_id = ?;`;
+        const params = Array(
+            request.body.userEditName,
+            request.body.userEditEmail, 
+            request.file.filename,
+            request.body.userId
+            );
+
+            connection.query(query, params, (err, results) => {
+                console.log('params :', params);
+                console.log('query :', query);
+                    try {
+                        if (results.affectedRows > 0) {
+                            response.status(200).json({
+                                success: true,
+                                message: `Sucesso! Usuário atualizado.`,
+                                data: results
+                            });
+                        } else {
+                            response.status(400).json({
+                                success: false,
+                                message: `Não foi possível realizar a atualização. Verifique os dados informados`,
+                                query: err,
+                                sqlMessage: err
+                            });
+                        }
+                    } catch (e) {
+                        response.status(400).json({
+                            success: false,
+                            message: "Ocorreu um erro. Não foi possível atualizar usuário!",
+                            query: err,
+                            sqlMessage: err
+                        });
+                    }
+                });
+    } else {
+        const query = `UPDATE users
+        SET user_name = ?, user_email = ? WHERE user_id = ?;`;
+        const params = Array(
+            request.body.userEditName,
+            request.body.userEditEmail, 
+            request.body.userId
+            );
+
+            connection.query(query, params, (err, results) => {
+                console.log('params :', params);
+                console.log('query :', query);
+                    try {
+                        if (results.affectedRows > 0) {
+                            response.status(200).json({
+                                success: true,
+                                message: `Sucesso! Usuário atualizado.`,
+                                data: results
+                            });
+                        } else {
+                            response.status(400).json({
+                                success: false,
+                                message: `Não foi possível realizar a atualização. Verifique os dados informados`,
+                                query: err,
+                                sqlMessage: err
+                            });
+                        }
+                    } catch (e) {
+                        response.status(400).json({
+                            success: false,
+                            message: "Ocorreu um erro. Não foi possível atualizar usuário!",
+                            query: err,
+                            sqlMessage: err
+                        });
+                    }
+                });
+    }
+}
+
 module.exports = {
     listUsers,
     listUserInfos,
     listPeopleInfos,
     storeUser,
-    updateUser,
-    deleteUser
+    deleteUser,
+    updateUser
 }

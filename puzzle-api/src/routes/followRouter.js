@@ -11,7 +11,7 @@ const {
 
 router.post('/create', followUser);
 router.put('/unfollow', unfollowUser)
-router.get('/informations/contact/:contactId', selectFollowContact)
+router.post('/informations/contact/', selectFollowContact)
 router.get('/all', selectAllFollows)
 
 

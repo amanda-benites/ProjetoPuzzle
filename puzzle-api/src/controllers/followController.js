@@ -97,10 +97,13 @@ async function unfollowUser(request, response) {
 }
 
 async function selectFollowContact(request, response) {
-  const userIdLogin = request.params.contactId;
+  const values = [
+    request.body.user_id,
+    request.body.follower_id
+  ];
 
   try {
-    const [results] = await connection.query('SELECT * FROM follows WHERE follower_id = ?', [userIdLogin]);
+    const [results] = await connection.query('SELECT * FROM follows WHERE user_id = ? AND follower_id = ?', values);
 
     if (results.length > 0) {
       response.status(200).json({
@@ -122,6 +125,7 @@ async function selectFollowContact(request, response) {
     });
   }
 }
+
 
 async function selectAllFollows(request, response) {
 

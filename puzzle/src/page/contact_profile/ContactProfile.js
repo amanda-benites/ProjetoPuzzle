@@ -44,7 +44,11 @@ function ContactProfile() {
     }, []);
     
     useEffect(() => {
-        axios.get(`${api.defaults.baseURL}/follow/informations/contact/${contactId}`)
+        const paramValues = {
+            user_id: userIdLogin,
+            follower_id: contactId
+        }
+        axios.post(`${api.defaults.baseURL}/follow/informations/contact/`, paramValues)
         .then(function (response) {
                 const followInformations = response.data
 
@@ -53,7 +57,7 @@ function ContactProfile() {
             .catch(function (error) {
                 console.log(error);
               });
-    }, [contactId]);
+    }, [userIdLogin, contactId]);
 
     const handleFollow = async (e) => {
 
@@ -66,11 +70,11 @@ function ContactProfile() {
             axios.post(`${api.defaults.baseURL}/follow/create`, data)
             .then(response => {
                 const followDataFromServer = response.data.data;
-                window.location.reload();
             })
             .catch(error => {
                 console.log('Erro ao seguir usuário', error)
             })
+            window.location.reload();
         } catch (error) {
             console.log('Erro ao seguir usuário', error)
         }

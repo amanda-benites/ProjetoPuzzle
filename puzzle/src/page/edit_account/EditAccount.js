@@ -1,12 +1,17 @@
 import GerenalFooter from "../../components/general_footer/GeneralFoter"
 
-import { ImgInputDiv, InputImgProfile, ProfileInfos, InputFileContainer, EditButtonSaveDiv, ButtonSaveEdit } from "./style"
+import { ImgInputDiv, InputImgProfile, ProfileInfos, EditButtonSaveDiv, ButtonSaveEdit, DivInfoProfileEdit, H4InfoProfileEdit, InputProfileEdit } from "./style"
 
-import imgExemp from "../../assets/user_img.svg"
-import InfoProfileEdit from "../../components/info_profile_edit/InfoProfileEdit"
 import HeaderProfileEdit from "../../components/header_profile_edit/HeaderProfileEdit"
+import genericImg_user from "../../assets/genericImg_user.jpg"
+import { api } from "../../services/api"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
 function EditAccount() {
+    const userId = parseInt(localStorage.getItem("@Auth:user_id"), 10)
+    const navigate = useNavigate()
 
     function changePassword(password, changeCharacter) {
         changeCharacter = '*'
@@ -16,82 +21,135 @@ function EditAccount() {
         return changedPassword;
     }
 
-    const password = 'minhaSenha1234561'
-
     const topicIdent = {
         identName: 'Nome de usuário',
         identEmail: 'Email',
         identPassword: 'Senha',
         identPosts: 'Postagens'
     }
-    const topicValues = {
-        userName: 'Amanda Moraes Benites',
-        userEmail: 'amanda@teste.com',
-        userPassword: changePassword(password),
-    }
 
-    const handleFileChange = (e) => {
-        const selectedFile = e.target.files[0];
-        if (selectedFile) {
+    const [image, setImage] = useState('');
+    const [preview, setPreview] = useState('');
+    const [userEditName, setEditUserName] = useState('');
+    const [userEditEmail, setEditUserEmail] = useState('');
+    const [userEditPassword, setEditUserPassword] = useState('');
     
-          const reader = new FileReader();
-    
-          reader.onload = function (e) {
-            const fileUrl = e.target.result;
-            const divInputFile = document.getElementById("divInputFile");
-            if (divInputFile) {
-              divInputFile.style.backgroundImage = `url(${fileUrl})`;
-              divInputFile.style.backgroundSize = "cover";
-              divInputFile.style.backgroundPosition = "center";
-            }
-          };
-    
-          reader.readAsDataURL(selectedFile);
-        }
+    const handleInputChange = (e) => {
+        setEditUserName(e.target.value);
       };
+  
+      const handleInputChange2 = (e) => {
+        setEditUserEmail(e.target.value);
+      };
+  
+    useEffect(() => {
+        // Define a imagem inicial.
+        const initialImageUrl = genericImg_user;
+        setPreview(initialImageUrl);
+    }, []); 
+    
+    function handleImageChange(e) {
+        setImage(e.target.files[0]);
+        setPreview(URL.createObjectURL(e.target.files[0]));
+    }
+    
+    useEffect(() => {
+        console.log('image', image);
+    }, [image]);
+    
+    useEffect(() => {
+        console.log('preview', preview);
+    }, [preview]);
+
+    const handleImageClick = () => {
+        // Ativar click no input que está oculto.
+        document.getElementById('imageInput').click();        
+    };
+
+    useEffect(() => {
+
+        const fetchData = async () => {                 
+            axios.get(`${api.defaults.baseURL}/user/information/${userId}`)
+            .then(response => {
+                const userDataFromServer = response.data.data;
+                setEditUserName(userDataFromServer.user_name);
+                setEditUserEmail(userDataFromServer.user_email);
+                setEditUserPassword(userDataFromServer.user_password);
+                setImage(userDataFromServer.img_profile)
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados do usuário:', error);
+            });
+        };
+
+        fetchData();
+      }, []); 
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+                            
+        const userId = parseInt(localStorage.getItem('@Auth:user_id'));
+                      
+        let formData = new FormData();
+        formData.append('userId', userId)
+        formData.append('userEditName', userEditName)
+        formData.append('userEditEmail', userEditEmail)
+        formData.append('file', image)
+    
+        try{
+            const response = await api.post("/user/update", formData);
+            console.log('Usuário editado com sucesso:', response.data);
+            navigate('/profile')
+        } catch (error) {
+            console.error('Erro ao criar o post:', error);
+        }
+    };
+
 
     return(
         <>
             <HeaderProfileEdit/>
-            <div>
-                <ImgInputDiv>
-                    <InputImgProfile background={imgExemp} id="divInputFile">
+            <form>
+                <ImgInputDiv onClick={handleImageClick}>
+                    <InputImgProfile background={preview && (preview)} id="divInputFile">
                         <input 
                             type="file"
-                            id="fileInput"
-                            style={{ display: "none" }}
-                            onChange={handleFileChange}
+                            name="image"
+                            accept="image/*"
+                            id="imageInput"
+                            multiple={false}
+                            onChange={handleImageChange}
                         />
-                        <InputFileContainer
-                            onClick={() => {
-                                const fileInput = document.getElementById('fileInput');
-                                if (fileInput) {
-                                fileInput.click();
-                                }
-                            }}>
-                        Editar
-                        </InputFileContainer>
                     </InputImgProfile>
                     <h3>Editar meu perfil</h3>
                 </ImgInputDiv>
                 <ProfileInfos>
-                    <InfoProfileEdit 
-                        topicProfile={topicIdent.identName} 
-                        itemProfile={topicValues.userName}
-                    />
-                    <InfoProfileEdit 
-                        topicProfile={topicIdent.identEmail} 
-                        itemProfile={topicValues.userEmail}
-                    />
-                    <InfoProfileEdit 
-                        topicProfile={topicIdent.identPassword} 
-                        itemProfile={topicValues.userPassword}
-                    />
+                    <DivInfoProfileEdit>
+                        <H4InfoProfileEdit>{topicIdent.identName}</H4InfoProfileEdit>
+                            <InputProfileEdit 
+                                placeholder='1'
+                                value={userEditName}
+                                onChange={handleInputChange}
+                            />
+                    </DivInfoProfileEdit>
+                    <DivInfoProfileEdit>
+                        <H4InfoProfileEdit>{topicIdent.identEmail}</H4InfoProfileEdit>
+                            <InputProfileEdit 
+                                placeholder='2'
+                                value={userEditEmail}
+                                onChange={handleInputChange2}/>
+                    </DivInfoProfileEdit>
+                    <DivInfoProfileEdit>
+                        <H4InfoProfileEdit>{topicIdent.identPassword}</H4InfoProfileEdit>
+                            <InputProfileEdit 
+                                placeholder='3'
+                                value={userEditPassword}/>
+                    </DivInfoProfileEdit>
                 </ProfileInfos>
                 <EditButtonSaveDiv>
-                    <ButtonSaveEdit>Salvar alterações</ButtonSaveEdit>
+                    <ButtonSaveEdit onClick={handleSubmit}>Salvar alterações</ButtonSaveEdit>
                 </EditButtonSaveDiv>
-            </div>
+            </form>
             <GerenalFooter/>
         </>
     )

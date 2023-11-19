@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 
 import userImg from "../../assets/user_img.svg"
 import { api } from "../../services/api"
-import axios from "axios"
 
 function PostCard({posts}) {
     const images = 'http://localhost:8000/uploads/'
@@ -85,8 +84,6 @@ function PostCard({posts}) {
                 const isLiked = response.data.data;
                 setIsLikedInfo(isLiked);
             }
-            // const isLiked = response.data.data[0].isLiked.data[0];
-            // setIsLiked(!!isLiked);
         } catch (error) {
             console.error('erro:', error);
         }

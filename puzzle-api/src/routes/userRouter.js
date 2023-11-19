@@ -20,11 +20,12 @@ const {
 } = require('../controllers/userController')
 
 // Criar os endpoints (rotas) que serão acessados a partir dos métodos HTTP (get,post,put,delete)
+const upload = require('../config/multer');
 router.get('/all/:user_id', listUsers);
-router.get('/information/:user_email', listUserInfos);
+router.get('/information/:user_id', listUserInfos);
 router.get('/contact/:user_id', listPeopleInfos)
 router.post('/create', storeUser);
-router.put('/update/:id', updateUser);
-router.delete('/delete/:id', deleteUser);
+router.post('/update', upload.single('file'), updateUser);
+router.delete('/delete/:userId', deleteUser);
 
 module.exports = router;

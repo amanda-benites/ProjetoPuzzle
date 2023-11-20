@@ -69,7 +69,7 @@ async function newArticle(request, response) {
 
 
 async function findArticle(request, response) {
-    const articleId = request.params.article_id;
+    const articleId = request.params.articleId;
   
     connection.query('SELECT * FROM articles WHERE article_id = ?', [articleId], (err, results) => {
       if (err) {

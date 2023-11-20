@@ -12,7 +12,7 @@ const {
 router.post('/create', followUser);
 router.put('/unfollow', unfollowUser)
 router.post('/informations/contact/', selectFollowContact)
-router.get('/all', selectAllFollows)
+router.get('/all/:user_id', selectAllFollows)
 
 
 module.exports = router;

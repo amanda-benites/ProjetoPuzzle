@@ -24,7 +24,7 @@ export const ImgContactProfile = styled.div`
     justify-content: center;
     
     background: ${props => `url(${props.background}) no-repeat center center`};
-    background-size: 20vw;
+    background-size: cover;
 
     &:focus {
         outline: 0;

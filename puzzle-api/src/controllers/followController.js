@@ -128,9 +128,10 @@ async function selectFollowContact(request, response) {
 
 
 async function selectAllFollows(request, response) {
+  const userId = parseInt(request.params.user_id, 10)
 
   try {
-    const [results] = await connection.query('SELECT f.user_id, f.follower_id, f.isFollowed, u.user_id, u.user_name, u.img_profile FROM follows f, users u WHERE u.user_id = f.follower_id AND f.isFollowed = 1');
+    const [results] = await connection.query('SELECT f.user_id, f.follower_id, f.isFollowed, u.user_id, u.user_name, u.img_profile FROM follows f, users u WHERE f.user_id = ? AND u.user_id = f.follower_id AND f.isFollowed = 1;', userId);
 
     if (results.length > 0) {
       response.status(200).json({

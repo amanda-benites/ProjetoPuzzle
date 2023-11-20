@@ -190,6 +190,30 @@ async function getAllPosts(req, res) {
     });
   }
 
+  async function getImagePost (request, response) {
+    const postId = request.params.post_id;
+    
+    const query = `SELECT img_post FROM posts WHERE post_id = ?`;
+  
+    connection.query(query, [postId], (error, results) => {
+      if (error) {
+        console.error('Erro ao recuperar a imagem do post: ' + error.message);
+        return response.status(500).json({ error: 'Erro ao recuperar a imagem do post' });
+      }
+
+      results.forEach((post) => {
+        if (post.post_image) {
+          const base64Data = post.post_image;
+          // Define o nome do arquivo.
+          const postImg = `post_${post.post_id}.jpeg`; 
+          base64_decode(base64Data, postImg);
+        }
+      });
+  
+      response.json(results);
+    });
+  }
+
   async function updatePost(request, response) {
 
     if(request.file) {
@@ -276,5 +300,6 @@ async function getAllPosts(req, res) {
       getPostInformations,
       getSixtUserPosts,
       getUserPosts,
+      getImagePost,
       updatePost
   }

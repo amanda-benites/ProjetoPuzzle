@@ -31,7 +31,7 @@ function PostCard({posts}) {
     }
 
     function goToDeletePostPage() {
-        navigate("/delete-post");
+        navigate(`/delete-post/${posts.post_id}`);
     }
 
     function goToPostOpened() {

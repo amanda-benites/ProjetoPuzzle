@@ -11,6 +11,9 @@ export const DivImgArticle = styled.div`
 `
 
 export const DivContentArticle = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
     padding-top: 2vh;
     padding-left: 5vw;
     width: 100vw;
@@ -41,6 +44,16 @@ export const InputContentArticle = styled.input`
         outline: 0;
         padding-left: 0.5vw;
     }
+`
+
+export const TextContainer = styled.p`
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow: auto;
+    justify-content: left;
+    white-space: break-spaces;
 `
 
 export const DivButtonsArticle = styled.div`

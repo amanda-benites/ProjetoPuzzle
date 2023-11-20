@@ -20,6 +20,7 @@ export const ContactImg = styled.div`
 `
 export const ImgContactContainer = styled.img`
     width: 11vw;
+    height: 5vh;
     border-radius: 100px;
 `
 

@@ -12,7 +12,8 @@ import { api } from "../../services/api"
 
 function Profile() {
     const images = 'http://localhost:8000/uploads/'
-    const [userData, setUserData] = useState('');
+    const [userData, setUserData] = useState({});
+    const [imgProfile, setImgProfile] = useState('');
     const [postUserInfos, setPostUserInfos] = useState([]);
 
     const navigate = useNavigate()
@@ -34,6 +35,7 @@ function Profile() {
         .then(response => {
             const userDataFromServer = response.data; 
             setUserData(userDataFromServer.data);
+            setImgProfile(images + userDataFromServer.data.img_profile)
         })
         .catch(error => {
             console.error('Erro ao buscar dados do usuário:', error);
@@ -47,6 +49,7 @@ function Profile() {
             try {
                 const response = await api.get(`post/six/user/${userIdLogin}`); 
                 setPostUserInfos(response.data); 
+
                 
             } catch (error) {
                 console.error('Erro ao recuperar as ifotmações do post:', error);
@@ -62,7 +65,7 @@ function Profile() {
             <div>
                 <ImgInputDiv>
                     {userData.img_profile === null ? <InputImgProfile background={genericImg_user} id="divInputFile">
-                    </InputImgProfile> : <InputImgProfile background={images + userData.img_profile} id="divInputFile">
+                    </InputImgProfile> : <InputImgProfile background={imgProfile} id="divInputFile">
                     </InputImgProfile>}
                     <h3>Meu perfil</h3>
                 </ImgInputDiv>

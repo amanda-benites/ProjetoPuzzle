@@ -73,7 +73,7 @@ function RoutesPage() {
         <Route path="delete-account" element={<PrivateRoutes redirectTo='/'>
           <DeleteAccount/>
         </PrivateRoutes>}/>
-        <Route path="delete-post" element={<PrivateRoutes redirectTo='/'>
+        <Route path="delete-post/:postId" element={<PrivateRoutes redirectTo='/'>
           <DeletePost/>
         </PrivateRoutes>}/>
         <Route path="edit-account" element={<PrivateRoutes redirectTo='/'>

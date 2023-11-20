@@ -13,6 +13,8 @@ import axios from "axios";
 import { api } from "../../services/api";
 
 function Contacts() {
+    const images = 'http://localhost:8000/uploads/'
+    const user_id = parseInt(localStorage.getItem("@Auth:user_id"), 10);
     const [followData, setFollowData] = useState([]);
     const [inputValue, setInputValue] = useState('');
 
@@ -21,7 +23,7 @@ function Contacts() {
     };
 
     useEffect(() => {
-        axios.get(`${api.defaults.baseURL}/follow/all`)
+        axios.get(`${api.defaults.baseURL}/follow/all/${user_id}`)
         .then(function (response) {
                 const followedPeople = response.data.data
 
@@ -57,7 +59,7 @@ function Contacts() {
                         filteredContacts.map((contact) => (
                             <ContactLayout
                                 userId={contact.follower_id}
-                                imgContact={contact.img_profile || genericImg_user}
+                                imgContact={contact.img_profile ? images + contact.img_profile : genericImg_user}
                                 nameContact={contact.user_name}
                             />
                         ))

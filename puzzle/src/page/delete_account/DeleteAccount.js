@@ -5,7 +5,6 @@ import { api } from "../../services/api";
 
 function DeleteAccount() {
     const user_id = parseInt(localStorage.getItem("@Auth:user_id"), 10)
-
     const navigate = useNavigate()
 
     function goBack() {
@@ -19,7 +18,8 @@ function DeleteAccount() {
     const deleteUserAccount = async () => {
         try {
             const response = await api.delete(`delete/values/${user_id}`)
-            console.log('###########', response)
+            localStorage.clear();
+            goToCoverPage()
         } catch (error) {
             console.log('Erro ao excluir usuário: ', error)
         }

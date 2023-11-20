@@ -3,8 +3,8 @@ const connection = require('../config/db');
 // Importar o pacote dotenv, gerenciador de variáveis de ambiente
 require("dotenv").config();
 
-async function deleteUser(request, response) {
-  const userId = parseInt(request.params.user_id, 10);
+async function deletePost(request, response) {
+  const postId = parseInt(request.params.post_id, 10);
 
   // Iniciar a transação
   connection.beginTransaction(async function (err) {
@@ -19,19 +19,13 @@ async function deleteUser(request, response) {
 
       try {
           // Consultar e excluir registros associados em outras tabelas
-          await executeQuery("DELETE FROM postlikes WHERE user_id = ?;", [userId]);
-          await executeQuery("DELETE FROM comments WHERE user_id = ?;", [userId]);
-          await executeQuery("DELETE FROM articles WHERE user_id = ?;", [userId]);
-          await executeQuery("DELETE FROM depositions WHERE user_id = ?;", [userId]);
-          await executeQuery("DELETE FROM follows WHERE user_id = ?;", [userId]);
-          await executeQuery("DELETE FROM posts WHERE user_id = ?;", [userId]);
-          await executeQuery("DELETE FROM depositions WHERE follower_id = ?;", [userId]);
-          await executeQuery("DELETE FROM follows WHERE follower_id = ?;", [userId]);
+          await executeQuery("DELETE FROM comments WHERE post_id = ?;", [postId]);
+          await executeQuery("DELETE FROM postlikes WHERE post_id = ?;", [postId]);
           // Adicione mais consultas conforme necessário para outras tabelas
 
           // Excluir o usuário da tabela principal
-          const mainDeleteQuery = "DELETE FROM users WHERE user_id = ?;";
-          const mainResult = await executeQuery(mainDeleteQuery, [userId]);
+          const mainDeleteQuery = "DELETE FROM posts WHERE post_id = ?;";
+          const mainResult = await executeQuery(mainDeleteQuery, [postId]);
 
           // Commit a transação se todas as consultas foram bem-sucedidas
           connection.commit(function (err) {
@@ -81,5 +75,5 @@ function executeQuery(query, params) {
 }
 
 module.exports = {
-  deleteUser
+    deletePost
 };

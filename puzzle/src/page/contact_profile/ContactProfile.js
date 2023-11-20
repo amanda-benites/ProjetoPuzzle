@@ -124,7 +124,7 @@ function ContactProfile() {
             />
             <div>
                 <ImgProfileDiv>
-                    <ImgContactProfile background={contactData.img_profile === null ? genericImg_user : contactData.img_profile}>
+                    <ImgContactProfile background={contactData.img_profile === null ? genericImg_user : images + contactData.img_profile}>
                     </ImgContactProfile>
                         <h3>{contactData.user_name}</h3>
                     {followData && followData.data.isFollowed ? (

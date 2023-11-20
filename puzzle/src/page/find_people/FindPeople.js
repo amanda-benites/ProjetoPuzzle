@@ -10,6 +10,8 @@ import iconSearch from "../../assets/search.svg";
 import removeImg from "../../assets/remove.svg";
 
 function FindPeople() {
+    const images = 'http://localhost:8000/uploads/'
+
     const [inputValue, setInputValue] = useState('');
     const [users, setUsers] = useState([]);
     
@@ -52,7 +54,7 @@ function FindPeople() {
                     {filteredContacts.map((contact) => (
                         <ContactLayout
                             key={contact.user_id}
-                            imgContact={contact.img_profile !== null ? contact.img_profile : genericImg_user}
+                            imgContact={contact.img_profile !== null ? images + contact.img_profile : genericImg_user}
                             nameContact={contact.user_name}
                             userId = {contact.user_id}
                         />

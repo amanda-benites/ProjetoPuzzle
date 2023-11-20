@@ -53,3 +53,10 @@ export const ButtonDelete = styled(ButtonCancel)`
     background-color: #EF5261;
     color: #FFFF;
 `
+
+export const ImgPostContainer = styled.img`
+    width: 80vw;
+    height: 37vh;
+
+    object-fit: cover;
+`

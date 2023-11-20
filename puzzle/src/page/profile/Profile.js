@@ -3,7 +3,6 @@ import HeaderProfile from "../../components/header_profile/HeaderProfile"
 
 import { ButtonSeeMore, ImgInputDiv, InputImgProfile, PostsProfile, PostsProfileDiv, PostsProfileIdent, ProfileInfos, ProfilePosts } from "./style"
 
-import imgExemp from "../../assets/user_img.svg"
 import genericImg_user from "../../assets/genericImg_user.jpg"
 import InfoProfile from "../../components/info_profile/InfoProfile"
 import { useNavigate } from "react-router"

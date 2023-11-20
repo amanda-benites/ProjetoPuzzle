@@ -79,7 +79,7 @@ function RoutesPage() {
         <Route path="edit-account" element={<PrivateRoutes redirectTo='/'>
           <EditAccount/>
         </PrivateRoutes>}/>
-        <Route path="edit-post" element={<PrivateRoutes redirectTo='/'>
+        <Route path="edit-post/:postId" element={<PrivateRoutes redirectTo='/'>
           <EditPost/>
         </PrivateRoutes>}/>
         <Route path="edit-testimony/:testimonyId" element={<PrivateRoutes redirectTo='/'>

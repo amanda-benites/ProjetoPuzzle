@@ -64,6 +64,33 @@ async function listUserInfos(request, response) {
     });
   }
 
+  async function getUserImage(request, response) {
+    const userId = request.params.user_id;// Recupere o email do parâmetro da rota
+  
+    // Preparar o comando de execução no banco
+    connection.query('SELECT img_profile FROM users WHERE user_id = ?', [userId], (err, results) => {
+      if (err) {
+        response.status(400).json({
+          success: false,
+          message: "An error has occurred. Unable to return user informations.",
+          query: err.sql,
+          sqlMessage: err.sqlMessage
+        });
+      } else if (results.length > 0) {
+        response.status(200).json({
+          success: true,
+          message: 'Success in returning user informations.',
+          data: results[0] // Suponhamos que você deseja retornar apenas o primeiro resultado
+        });
+      } else {
+        response.status(400).json({
+          success: false,
+          message: `Unable to return user informations. User not found.`,
+        });
+      }
+    });
+  }
+
 
   async function listPeopleInfos(request, response) {
     const userId = request.params.user_id;// Recupere o email do parâmetro da rota
@@ -137,47 +164,6 @@ async function storeUser(request, response) {
     });
 }
 
-// Função que remove usuário no banco
-async function deleteUser(request, response) {
-    // Preparar o comando de execução no banco
-    const query = "DELETE FROM users WHERE `id_user` = ?";
-
-    // Recebimento de parametro da rota
-    const params = Array(
-        request.params.id
-    );
-
-    // Executa a ação no banco e valida os retornos para o client que realizou a solicitação
-    connection.query(query, params, (err, results) => {
-        try {
-            if (results) {
-                response
-                    .status(200)
-                    .json({
-                        success: true,
-                        message: `Success! Deleted user.`,
-                        data: results
-                    });
-            } else {
-                response
-                    .status(400)
-                    .json({
-                        success: false,
-                        message: `Unable to delete user. Check your information.`,
-                        query: err.sql,
-                        sqlMessage: err.sqlMessage
-                    });
-            }
-        } catch (e) { // Caso aconteça algum erro na execução
-            response.status(400).json({
-                    succes: false,
-                    message: "An error has occurred. Unable to delete user.",
-                    query: err.sql,
-                    sqlMessage: err.sqlMessage
-                });
-        }
-    });
-}
 
 async function updateUser(request, response) {
     // Preparar o comando de execução no banco
@@ -265,8 +251,8 @@ async function updateUser(request, response) {
 module.exports = {
     listUsers,
     listUserInfos,
+    getUserImage,
     listPeopleInfos,
     storeUser,
-    deleteUser,
     updateUser
 }

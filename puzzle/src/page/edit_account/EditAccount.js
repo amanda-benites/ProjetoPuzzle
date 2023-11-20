@@ -13,14 +13,6 @@ function EditAccount() {
     const userId = parseInt(localStorage.getItem("@Auth:user_id"), 10)
     const navigate = useNavigate()
 
-    function changePassword(password, changeCharacter) {
-        changeCharacter = '*'
-        const values = /[a-zA-Z-0-1-2-3-4-5-6-7-8-9]/g;
-        const changedPassword = password.replace(values, changeCharacter);
-        
-        return changedPassword;
-    }
-
     const topicIdent = {
         identName: 'Nome de usuário',
         identEmail: 'Email',

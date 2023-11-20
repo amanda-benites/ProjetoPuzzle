@@ -15,9 +15,71 @@ function PostOpened() {
     const images = 'http://localhost:8000/uploads/'
     const param = useParams()
     const postId = parseInt(param.post_id, 10)
+    const userLoginId = parseInt(localStorage.getItem("@Auth:user_id"), 10)
 
+    const [isLikedInfo, setIsLikedInfo] = useState([]);
     const [postInformations, setPostInformations] = useState('');
     const [commentContent, setCommentConent] = useState('');
+
+    const fetchLikeStatus = async () => {
+        try {
+          const formData = {
+            postId: postInformations.post_id,
+            userId: userLoginId
+          };
+      
+          const response = await api.post('/like/action', formData);
+      
+          const isLiked = response.data.data;
+      
+          if (isLiked.length > 0 && response.data.data[0].isLiked === 1) {
+            // Post is already liked, update the like status to 0
+            const unlikeResponse = await api.put('/like/delete', formData);            
+            if (unlikeResponse.data.success) {
+              setIsLikedInfo([]);
+            } else {
+              console.error("Failed to update like status:", unlikeResponse.data.message);
+            } 
+          } else {
+            // Post is not liked, like the post
+            // You may need to adjust the endpoint and data structure based on your server implementation
+            const likeResponse = await api.post('/like/action', formData);
+      
+            if (likeResponse.data.success) {
+              setIsLikedInfo(likeResponse.data.data);
+            } else {
+              console.error("Failed to like post:", likeResponse.data.message);
+            }
+          }
+        } catch (err) {
+          console.error(err);
+        }
+      };
+      
+
+    const likeStatus = async () => {
+        try {
+            const paramValues = {
+                post_id: postInformations.post_id,
+                user_id: userLoginId
+            };
+    
+            const response = await api.post('/verifity/informations', paramValues);
+        
+            if (response.data.data) {
+                const isLiked = response.data.data;
+                setIsLikedInfo(isLiked);
+            }
+        } catch (error) {
+            console.error('erro:', error);
+        }
+    };  
+
+    useEffect(() => {
+        // Chama a função de busca ao montar o componente
+        likeStatus();
+      }, [userLoginId, postInformations.post_id]); 
+  
 
     useEffect(() => {
         async function fetchPosts() {
@@ -31,6 +93,8 @@ function PostOpened() {
 
         fetchPosts();
     }, []);
+
+    console.log('11111111111111', postInformations)
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -57,9 +121,10 @@ function PostOpened() {
                 <PostOpenedCard 
                     userId={postInformations.user_id}
                     postId={postInformations.post_id}
-                    userImg={postInformations.img_profile === null ? genericImg_user : postInformations.img_profile}
+                    userImg={postInformations.img_profile === null ? genericImg_user : images + postInformations.img_profile}
                     userName={postInformations.user_name}
-                    ImgContent={images + postInformations.img_post}/>
+                    ImgContent={images + postInformations.img_post}
+                    isLikedInfoValue={isLikedInfo}/>
             </MainHomeContainer>
             <DivFooterPostOpened>
                 <DivAddComment>

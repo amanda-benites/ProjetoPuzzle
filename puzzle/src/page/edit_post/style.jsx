@@ -37,8 +37,6 @@ export const DivInputFile = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 3vh;
-
-    background-image: url(${backgroundImg});
     background-size: cover;
     background-repeat: no-repeat;
 

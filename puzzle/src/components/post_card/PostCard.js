@@ -7,13 +7,16 @@ import threePoints from "../../assets/three-points.svg"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import genericImg_user from "../../assets/genericImg_user.jpg"
 import userImg from "../../assets/user_img.svg"
 import { api } from "../../services/api"
+import axios from "axios"
 
 function PostCard({posts}) {
     const images = 'http://localhost:8000/uploads/'
     const [isOpen, setIsOpen] = useState(false);
     const [isLikedInfo, setIsLikedInfo] = useState([]);
+    const [userImage, setUserImage] = useState('')
     const userLoginId = parseInt(localStorage.getItem("@Auth:user_id"), 10)
 
     const navigate = useNavigate()
@@ -24,7 +27,7 @@ function PostCard({posts}) {
     };
 
     function goToEditPostPage() {
-        navigate("/edit-post");
+        navigate(`/edit-post/${posts.post_id}`);
     }
 
     function goToDeletePostPage() {
@@ -35,6 +38,18 @@ function PostCard({posts}) {
         navigate(`/post-opened/${posts.post_id}`)
     }
   
+
+    useEffect(() => {        
+        axios.get(`${api.defaults.baseURL}/user/image/${posts.user_id}`)
+        .then(response => {
+            const userImageFromServer = response.data; 
+            setUserImage(userImageFromServer.data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados do usuário:', error);
+        });
+    }, []);
+
     const fetchLikeStatus = async () => {
         try {
           const formData = {
@@ -99,7 +114,7 @@ function PostCard({posts}) {
                 {posts.user_id == userLoginId ?
                     <HeaderPost>
                         <ImgHeader>
-                            <ImgUser src={userImg} alt="Imagem de exemplo Usuário" />
+                            <ImgUser src={userImage.img_profile === null ? genericImg_user : images + userImage.img_profile} alt="Imagem de exemplo Usuário" />
                         </ImgHeader>
                         <ProfileButton>
                             <ButtonIconsPost>
@@ -121,7 +136,7 @@ function PostCard({posts}) {
                 :
                     <HeaderPost>
                         <ImgHeader>
-                            <ImgUser src={userImg} alt="Imagem de exemplo Usuário" />
+                            <ImgUser src={userImage.img_profile === null ? genericImg_user : images + userImage.img_profile} alt="Imagem de exemplo Usuário" />
                         </ImgHeader>
                         <ProfileButton>
                             <ButtonIconsPost>

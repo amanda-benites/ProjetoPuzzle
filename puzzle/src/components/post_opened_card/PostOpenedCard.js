@@ -1,6 +1,7 @@
 import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, ImgPostContainer, ImgHeader, ProfileButton, ThreePoints, ImgUser, DropDownMenu, ItemsMenu, ImgThreePoints, DivComments, DivMainComments, DivEndComments } from "./style"
 
 import likeImg from "../../assets/like_img.svg"
+import imgLiked from "../../assets/imgLiked.svg"
 import commentsImg from "../../assets/comments_post.svg"
 import threePoints from "../../assets/three-points.svg"
 import { useEffect, useState } from "react";
@@ -88,7 +89,7 @@ function PostOpenedCard(props) {
             </BodyPost>
             <FooterPost>
                 <ButtonIconsPost>
-                    <img src={likeImg} alt="Curtida" />
+                    <img src={props.isLikedInfoValue.length > 0 ? imgLiked : likeImg} alt="Curtida" />
                 </ButtonIconsPost>
                 <ButtonIconsPost onClick={goBack}>
                     <img src={commentsImg} alt="Comentários" />

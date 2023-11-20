@@ -83,7 +83,9 @@ export const ImgThreePoints = styled.img`
 `
 
 export const ImgUser = styled.img`
+    height: 3.5vh;
     width: 8vw;
+    border-radius: 100px;
 `
 
 

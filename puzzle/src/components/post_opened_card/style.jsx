@@ -90,8 +90,10 @@ export const ImgThreePoints = styled.img`
 `
 
 export const ImgUser = styled.img`
-    width: 8vw;
+    width: 9vw;
+    height: 4vh;
     border-radius: 100px;
+    object-fit: cover;
 `
 
 

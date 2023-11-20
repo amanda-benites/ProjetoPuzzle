@@ -189,6 +189,84 @@ async function getAllPosts(req, res) {
       response.json(results);
     });
   }
+
+  async function updatePost(request, response) {
+
+    if(request.file) {
+        const query = `UPDATE posts
+        SET img_post = ?, legend_post = ?
+        WHERE post_id = ?;`;
+        const params = Array(
+            request.file.filename,
+            request.body.postLegend,
+            request.body.postId
+            );
+
+            connection.query(query, params, (err, results) => {
+                console.log('params :', params);
+                console.log('query :', query);
+                    try {
+                        if (results.affectedRows > 0) {
+                            response.status(200).json({
+                                success: true,
+                                message: `Sucesso! Post atualizado.`,
+                                data: results
+                            });
+                        } else {
+                            response.status(400).json({
+                                success: false,
+                                message: `Não foi possível realizar a atualização. Verifique os dados informados`,
+                                query: err,
+                                sqlMessage: err
+                            });
+                        }
+                    } catch (e) {
+                        response.status(400).json({
+                            success: false,
+                            message: "Ocorreu um erro. Não foi possível atualizar post!",
+                            query: err,
+                            sqlMessage: err
+                        });
+                    }
+                });
+    } else {
+        const query = `UPDATE posts
+        SET legend_post = ?
+        WHERE post_id = ?;`;
+        const params = Array(
+            request.body.postLegend,
+            request.body.postId
+        );
+
+            connection.query(query, params, (err, results) => {
+                console.log('params :', params);
+                console.log('query :', query);
+                    try {
+                        if (results.affectedRows > 0) {
+                            response.status(200).json({
+                                success: true,
+                                message: `Sucesso! Post atualizado.`,
+                                data: results
+                            });
+                        } else {
+                            response.status(400).json({
+                                success: false,
+                                message: `Não foi possível realizar a atualização. Verifique os dados informados`,
+                                query: err,
+                                sqlMessage: err
+                            });
+                        }
+                    } catch (e) {
+                        response.status(400).json({
+                            success: false,
+                            message: "Ocorreu um erro. Não foi possível atualizar post!",
+                            query: err,
+                            sqlMessage: err
+                        });
+                    }
+                });
+    }
+}
   
   
   
@@ -197,5 +275,6 @@ async function getAllPosts(req, res) {
       getAllPosts,
       getPostInformations,
       getSixtUserPosts,
-      getUserPosts
+      getUserPosts,
+      updatePost
   }

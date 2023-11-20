@@ -21,10 +21,9 @@ export const InputImgProfile = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    
-    background: ${props => `url(${props.background}) no-repeat center center`};
-    background-size: 22vw;
+    justify-content: contain;
+    background: ${props => `url(${props.background}) center center no-repeat`};
+    background-size: cover;
 
     &:focus {
         outline: 0;

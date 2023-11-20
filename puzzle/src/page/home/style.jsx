@@ -67,3 +67,9 @@ export const DivNoPosts = styled.div`
     width: 100vw;
     height: 80vh;
 `
+
+export const ImgMyPicture = styled.img`
+    height: 6vh;
+    width: 13vw;
+    border-radius: 100px;
+`

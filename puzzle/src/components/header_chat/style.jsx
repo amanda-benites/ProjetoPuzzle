@@ -40,6 +40,12 @@ export const DivImgContact = styled.div`
 
 export const ImgContactChat = styled.img`
     width: 13vw;
+    height: 6vh;
+
+    border-radius: 100px;
+    object-fit: cover;
+
+    
 `
 
 export const DivTitle = styled.div`

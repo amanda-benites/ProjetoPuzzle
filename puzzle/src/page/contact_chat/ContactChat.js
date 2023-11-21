@@ -1,48 +1,65 @@
+import axios from "axios";
 import ContactMensage from "../../components/contact_mensage/ContactMensage";
 import DateLine from "../../components/date_line/DateLine";
 import FooterChat from "../../components/footer_chat/FooterChat";
 import HeaderChat from "../../components/header_chat/HeaderChat";
 import ProfileMensage from "../../components/profile_mensage/ProfileMensage";
+import genericImg_user from "../../assets/genericImg_user.jpg"
+
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
+import { useNavigate, useParams } from 'react-router-dom';
+import { ButtonBack, EffectChat, PopUp, PopUpOverlay } from "./style";
 
 function ContactChat() {
-    const msgValues = {
-        msg1: ['Você', 'Oi Maurício! Como vai?', '9:00 AM'],
-        msg2: ['Maurício Costa', 'Boa tarde! Tudo bem!', '9:25 AM'],
-        msg3: ['Você', 'Achei aquilo que você falou na última foto muito interessante!', '9:25 AM'],
-        msg4: ['Maurício Costa', 'Posso te dar mais algumas dicas se quiser!' ,'10:00 AM'],
-        msg5: ['Maurício Costa', 'Fico feliz aque gostou' ,'10:00 AM']
-    }
-    
-    let arrayValues = []
+    const images = 'http://localhost:8000/uploads/'
 
-    for(let i = 0; i < Object.keys(msgValues).length; i++) {
-        if(msgValues[`msg${i + 1}`][0] === 'Você') {
-            arrayValues.push(
-                <ProfileMensage
-                    key={`msg${i + 1}`}
-                    msgIdent={msgValues[`msg${i + 1}`][0]}
-                    profileMsg={msgValues[`msg${i + 1}`][1]}
-                    timeMsg={msgValues[`msg${i + 1}`][2]}
-                />
-        )} else {
-            arrayValues.push(
-                <ContactMensage
-                        key={`msg${i + 1}`}
-                        msgIdent={msgValues[`msg${i + 1}`][0]}
-                        profileMsg={msgValues[`msg${i + 1}`][1]}
-                        timeMsg={msgValues[`msg${i + 1}`][2]}
-                />
-        )};
+    const [contactData, setContactData] = useState('');
+    const [showDevelopmentPopup, setShowDevelopmentPopup] = useState(true);
+
+    const param = useParams()
+    const contactIdValue = parseInt(param.contactId, 10)
+    const navigate = useNavigate()
+
+    function goBack() {
+        navigate(-1);
     }
+
+    useEffect(() => {
+        axios.get(`${api.defaults.baseURL}/user/contact/${contactIdValue}`)
+        .then(response => {
+            const contactDataFromServer = response.data; 
+            setContactData(contactDataFromServer.data);
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados do artigo:', error);
+        });
+    }, []);
+
+    const closeDevelopmentPopup = () => {
+        setShowDevelopmentPopup(false);
+    };
 
     return(
         <>
-            <HeaderChat titleChat={'Maurício Costa'}/>
+        {showDevelopmentPopup && (
+                <PopUpOverlay>
+                    <PopUp>
+                        
+                        <p>Em desenvolvimento</p>
+                        <ButtonBack onClick={goBack}>Voltar</ButtonBack>
+                    </PopUp>
+                </PopUpOverlay>
+            )}
+        <EffectChat>
+            <HeaderChat 
+                imgUser={contactData.img_profile === null ? genericImg_user : images + contactData.img_profile}
+                titleChat={contactData.user_name}/>
             <div>
                 <DateLine/>
-                {arrayValues}
             </div>
             <FooterChat/>
+        </EffectChat>
         </>
     )
 }

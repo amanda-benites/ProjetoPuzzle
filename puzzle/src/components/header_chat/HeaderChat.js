@@ -1,7 +1,8 @@
 import { DivImgButtonBack, DivImgContact, DivTitle, ImgButtonBack, ImgContactChat, ScreenButtonHeader, ScreenHeaderContainer } from "./style"
 
-import imgBack from "../../assets/back.svg"
 import { useNavigate } from "react-router-dom"
+
+import imgBack from "../../assets/back.svg"
 
 function HeaderChat(props) {
 

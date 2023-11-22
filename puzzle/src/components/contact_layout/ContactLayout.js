@@ -1,5 +1,6 @@
-import { useNavigate } from "react-router";
 import { ContactButton, ContactImg, ContactLayoutContainer, ContactName, ImgContactContainer, NameContactText } from "./style";
+
+import { useNavigate } from "react-router";
 
 
 function ContactLayout(props) {

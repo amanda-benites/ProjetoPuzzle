@@ -1,23 +1,28 @@
+import { ButtonArticleAdd, ButtonArticleBack, DivButtonsArticle, DivContentArticle, DivImgArticle, H4ArticleIdent1, H4ArticleIdent2, InputContentArticle } from "./style"
 import ScreenHeader from "../../components/sreen_header/ScreenHeader"
 
-import imgArticle from "../../assets/article_gray.svg"
-import { ButtonArticleAdd, ButtonArticleBack, DivButtonsArticle, DivContentArticle, DivImgArticle, H4ArticleIdent1, H4ArticleIdent2, InputContentArticle } from "./style"
 import { useNavigate } from "react-router";
-import axios from "axios";
-import { api } from "../../services/api";
 import { useState } from "react";
+import { api } from "../../services/api";
+
+import imgArticle from "../../assets/article_gray.svg"
 
 function AddArticle() {
+    // ----------- HOOKS -----------
     const [article_name, setArticleName] = useState("");
     const [article_link, setArticleLink] = useState("");
     const [error, setError] = useState(""); 
 
+    
+    // ----------- NAVIGATE -----------
     const navigate = useNavigate()
 
     function goToHomePage() {
         navigate("/home");
     }
 
+
+    // ----------- CRIAÇÃO DE ARTIGO -----------
     const handleSubmit = async (e) => {
       e.preventDefault();
       const data = {

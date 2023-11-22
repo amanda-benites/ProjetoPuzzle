@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { ButtonBack, EffectChat, PopUp, PopUpOverlay } from "./style"
+
 import ChatLayout from "../../components/chat_layout/ChatLayout"
 import GerenalFooter from "../../components/general_footer/GeneralFooter"
 import ScreenHeader from "../../components/sreen_header/ScreenHeader"
-import { ButtonBack, EffectChat, PopUp, PopUpOverlay } from "./style"
+
+import { useNavigate } from "react-router-dom";
 
 function Chats() {
     const showDevelopmentPopup = true;

@@ -1,6 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import ButtonBack from "../button_back/ButtonBack"
 import { AnchorColor, AuthHeaderContainer } from "./style"
+import ButtonBack from "../button_back/ButtonBack"
+
+import { useNavigate } from "react-router-dom";
+
 
 function AuthHeader() {
 

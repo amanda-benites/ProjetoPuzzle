@@ -1,7 +1,8 @@
 import { ButtonChatContact, ChatLayoutContainer, DivContactImg, DivContactName, DivDateChat, DivInfosChat, DivNumberMensages, DivValueMensage, ImgContact, ValueDateLayout, ValueMensagesLayout } from "./style"
 
-import imgMarcelo from "../../assets/MauricioExemplo.svg"
 import { useNavigate } from "react-router-dom";
+
+import imgMarcelo from "../../assets/MauricioExemplo.svg"
 
 function ChatLayout(props) {
 
@@ -17,15 +18,9 @@ function ChatLayout(props) {
                 <ImgContact src={imgMarcelo} alt="Imagem de exemplo"/>
             </DivContactImg>
             <DivContactName>
-                {props.chatName === 'Maurício Costa' ? (
                     <ButtonChatContact onClick={goToChatContactPage}>
                         {props.chatName}
                     </ButtonChatContact>
-                ) : (
-                    <ButtonChatContact>
-                        {props.chatName}
-                    </ButtonChatContact>
-                )}
             </DivContactName>
             <DivInfosChat>
                 <DivDateChat>

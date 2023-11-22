@@ -1,14 +1,14 @@
 import { ButtonDivHeaderContainer, ButtonHeaderContainer, HomeHeaderContainer, LogoHeaderContainer } from "./style"
 
+import { useNavigate } from "react-router"
+
 import logoHome from "../../assets/logo_home.svg"
 import search from "../../assets/search.svg"
 import icRepository from "../../assets/icRepository.svg"
 import config from "../../assets/config.svg"
-import { useNavigate } from "react-router"
 
 function HomeHeader() {
 
-        
     const navigate = useNavigate()
 
     function goToFindPage() {

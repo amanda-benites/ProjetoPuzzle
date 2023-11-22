@@ -3,7 +3,6 @@ import { ButtonSend, DivInputContainer, FooterChatContainer, ImgSendMensage, Inp
 import imgSend from "../../assets/send_mensage.svg"
 
 function FooterChat() {
-
     return(
         <FooterChatContainer>
             <DivInputContainer>

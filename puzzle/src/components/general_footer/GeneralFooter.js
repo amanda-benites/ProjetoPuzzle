@@ -1,11 +1,12 @@
 import { ButtonFooterContainer, FooterContainer, ImgAddContainer, ImgChatContainer, ImgContactsContainer } from "./style"
 
+import { useNavigate } from "react-router-dom"
+
 import imgContacts from "../../assets/imgContacts.svg"
 import imgContactsColored from "../../assets/contacts_colored.svg"
 import imgAdd from "../../assets/imgAdd.svg"
 import imgChat from "../../assets/imgChat.svg"
 import imgChatColored from "../../assets/chat_colored.svg"
-import { useNavigate } from "react-router-dom"
 
 function GerenalFooter(props) {
     const navigate = useNavigate()

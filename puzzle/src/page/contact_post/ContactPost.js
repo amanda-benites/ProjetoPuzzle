@@ -1,8 +1,8 @@
+import { BodyImgsContacts, DivPostsContactImgs, DivNotPosts, TextNotPosts } from "./style"
+
 import PostImageContact from "../../components/post_image_contact/PostImageContact"
 import ScreenHeader from "../../components/sreen_header/ScreenHeader"
 
-import imgExemp from "../../assets/exemploImagem.svg"
-import { BodyImgsContacts, DivPostsContactImgs, DivNotPosts, TextNotPosts } from "./style"
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom';
 import { api } from "../../services/api"
@@ -11,33 +11,14 @@ function ContactPosts() {
     const param = useParams()
     const contactId = parseInt(param.contactId, 10)
 
-    const postValues = {
-        post1: imgExemp,
-        post2: imgExemp,
-        post3: imgExemp,
-        post4: imgExemp,
-        post5: imgExemp,
-        post6: imgExemp,
-        post7: imgExemp,
-        post8: imgExemp,
-        post9: imgExemp,
-        post10: imgExemp
-    }
-
-    let arrayValues = []
-
-    for(let i = 0; i < Object.keys(postValues).length; i++) {
-         arrayValues.push(
-            <PostImageContact
-                key={`post${i + 1}`}
-                postImageContact={postValues[`post${i + 1}`]}
-            />
-        );
-    }
-
     const images = 'http://localhost:8000/uploads/'
+
+
+    // ----------- HOOK -----------
     const [postUserInfos, setPostUserInfos] = useState([]);
 
+
+    // ----------- LISTAGEM DE POSTS DO CONTATO -----------
     useEffect(() => {
         async function fetchPosts() {
             try {

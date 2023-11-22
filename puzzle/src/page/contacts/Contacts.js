@@ -1,20 +1,23 @@
+import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer } from "./style";
 import GerenalFooter from "../../components/general_footer/GeneralFooter";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
-import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer } from "./style";
+import ContactLayout from "../../components/contact_layout/ContactLayout";
+
+import { useEffect, useState } from "react";
+import { api } from "../../services/api";
+
+import axios from "axios";
 
 import genericImg_user from "../../assets/genericImg_user.jpg"
-import ContactLayout from "../../components/contact_layout/ContactLayout";
-import { useEffect, useState } from "react";
-
-
 import iconSearch from "../../assets/search.svg"
 import removeImg from "../../assets/remove.svg"
-import axios from "axios";
-import { api } from "../../services/api";
 
 function Contacts() {
     const images = 'http://localhost:8000/uploads/'
+
     const user_id = parseInt(localStorage.getItem("@Auth:user_id"), 10);
+
+    // ----------- HOOKS -----------
     const [followData, setFollowData] = useState([]);
     const [inputValue, setInputValue] = useState('');
 
@@ -22,36 +25,39 @@ function Contacts() {
         setInputValue('');
     };
 
+    // ----------- LISTAGEM DE PESSOAS QUE O USUÁRIO SEGUE -----------
     useEffect(() => {
         axios.get(`${api.defaults.baseURL}/follow/all/${user_id}`)
-        .then(function (response) {
+            .then(function (response) {
                 const followedPeople = response.data.data
 
                 setFollowData(followedPeople);
             })
             .catch(function (error) {
                 console.log(error);
-              });
+            });
     }, []);
 
+
+    // ----------- PESQUISAR -----------
     const filteredContacts = followData.filter((follow) =>
         follow.user_name.toLowerCase().includes(inputValue.toLowerCase())
     );
-    
-    return(
+
+    return (
         <>
-            <ScreenHeader titlePage={"Meus Contatos"}/>
+            <ScreenHeader titlePage={"Meus Contatos"} />
             <div>
                 <DivSearchContainerMain>
                     <DivSearchContainer>
-                        <img src={iconSearch} alt="Ícone de busca"/>
+                        <img src={iconSearch} alt="Ícone de busca" />
                         <InputSearchContainer
                             type='text'
                             value={inputValue}
                             onChange={(v) => setInputValue(v.target.value)}
                         />
 
-                        {inputValue && (<SpanSearchContainer onClick={clearInput}><img src={removeImg} alt="Ícone X"/></SpanSearchContainer>)}
+                        {inputValue && (<SpanSearchContainer onClick={clearInput}><img src={removeImg} alt="Ícone X" /></SpanSearchContainer>)}
                     </DivSearchContainer>
                 </DivSearchContainerMain>
                 <div>
@@ -65,10 +71,10 @@ function Contacts() {
                         ))
                     ) : (
                         <p>Nenhum dado disponível ou erro na requisição da API.</p>
-                    )} 
+                    )}
                 </div>
             </div>
-            <GerenalFooter idColor='Contacts'/>
+            <GerenalFooter idColor='Contacts' />
         </>
     )
 }

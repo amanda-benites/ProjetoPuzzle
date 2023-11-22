@@ -1,9 +1,9 @@
 import { ButtonHeaderContact, HeadeContactContainer, ImgBackContact } from "./style";
 
+import { useNavigate } from "react-router-dom";
+
 import imgBack from "../../assets/back.svg"
 import tetemIcon from "../../assets/testemIcon.svg"
-
-import { useNavigate } from "react-router-dom";
 
 function HeaderContact(props) {
 

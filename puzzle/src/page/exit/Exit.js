@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { FontH1Container } from "../../styleGlobal"
 import { DivTitleContainer, DivButtonsExit, ButtonCancel, ButtonLogout } from "./style"
+import { FontH1Container } from "../../styleGlobal"
+
+import { useNavigate } from "react-router-dom";
 
 function Exit() {
     const navigate = useNavigate();
-
 
     function goBack() {
         navigate(-1);
@@ -12,7 +12,7 @@ function Exit() {
 
     function signOut() {
         localStorage.clear();
-        navigate('/auth')
+        navigate('/')
     }
 
     return(

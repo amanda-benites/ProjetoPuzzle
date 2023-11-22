@@ -1,6 +1,5 @@
 import { DivInfoProfileEdit, H4InfoProfileEdit, InputProfileEdit } from "./style"
 
-
 function InfoProfileEdit(props) {
     return(
         <DivInfoProfileEdit>

@@ -1,4 +1,5 @@
 import { DivImgContainer, ImgContainer } from './style'
+
 import logo from '../../assets/logo.svg'
 
 function CoverImg() {

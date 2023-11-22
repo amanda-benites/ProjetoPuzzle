@@ -7,12 +7,11 @@ const {
     unfollowUser,
     selectFollowContact,
     selectAllFollows
-} = require('../controllers/followController')
+} = require('../controllers/followController');
 
 router.post('/create', followUser);
-router.put('/unfollow', unfollowUser)
-router.post('/informations/contact/', selectFollowContact)
-router.get('/all/:user_id', selectAllFollows)
-
+router.put('/unfollow', unfollowUser);
+router.post('/informations/contact/', selectFollowContact);
+router.get('/all/:user_id', selectAllFollows);
 
 module.exports = router;

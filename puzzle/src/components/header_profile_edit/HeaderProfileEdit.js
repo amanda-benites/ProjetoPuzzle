@@ -1,10 +1,10 @@
 import { ButtonHeaderProfile, DropDownMenu, HeadeProfileContainer, ImgBackProfile, ItemsMenu } from "./style";
 
-import imgBack from "../../assets/back.svg"
-import threePoints from "../../assets/three-points.svg"
-
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
+import imgBack from "../../assets/back.svg"
+import threePoints from "../../assets/three-points.svg"
 
 function HeaderProfileEdit() {
 

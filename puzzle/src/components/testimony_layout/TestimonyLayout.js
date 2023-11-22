@@ -1,11 +1,12 @@
-import { useNavigate } from "react-router";
 import { TestimonyButton, TestimonyTitle } from "./style";
 
+import { useNavigate } from "react-router";
 
 function TestimonyLayout(props) {
-    
-    const navigate = useNavigate()
     const userIdLogin = localStorage.getItem('@Auth:user_id')
+    
+    // ----------- NAVIGATES -----------
+    const navigate = useNavigate()
 
     function goToTestimonyToMe() {
         navigate(`/testimony-to-me/${props.testimonyId}`);

@@ -1,18 +1,24 @@
 import { DivPostContainer, HeaderPost, BodyPost, FooterPost, ButtonIconsPost, ImgPostContainer, ImgHeader, ProfileButton, ThreePoints, ImgUser, DropDownMenu, ItemsMenu, ImgThreePoints, DivComments, DivMainComments, DivEndComments } from "./style"
+import CommentLayout from "../comments_layout/CommentsLayout";
+
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { api } from "../../services/api";
 
 import likeImg from "../../assets/like_img.svg"
 import imgLiked from "../../assets/imgLiked.svg"
 import commentsImg from "../../assets/comments_post.svg"
 import threePoints from "../../assets/three-points.svg"
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import CommentLayout from "../comments_layout/CommentsLayout";
-import { api } from "../../services/api";
 
 function PostOpenedCard(props) {
     const userIdLogin = localStorage.getItem("@Auth:user_id")
-    const [comments, setComments ] = useState([]);
 
+    // ----------- HOOK -----------
+    const [comments, setComments ] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+
+
+    // ----------- NAVIGATES -----------
     const navigate = useNavigate()
 
     function goToEditPostPage() {
@@ -27,7 +33,8 @@ function PostOpenedCard(props) {
         navigate(-1);
     }
 
-    
+
+    // ----------- LISTAGEM DE COMENTÁRIOS -----------
     useEffect(() => {
         const fetchData = async () => {
 
@@ -42,8 +49,7 @@ function PostOpenedCard(props) {
     }, [props.postId]);
 
 
-    const [isOpen, setIsOpen] = useState(false);
-
+    // ----------- VALIDAÇÃO DE ABERTURA DO MENU -----------
     const openMenu = () => {
       setIsOpen(!isOpen);
     };

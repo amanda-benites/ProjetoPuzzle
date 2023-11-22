@@ -1,6 +1,5 @@
 import { DivInfoProfile, H4InfoProfile } from "./style"
 
-
 function InfoProfile(props) {
     return(
         <DivInfoProfile>

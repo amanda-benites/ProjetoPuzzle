@@ -1,7 +1,8 @@
 import { DivAlign, DivImgButtonBack, DivTitle, H2ContainerHeader, ImgButtonBack, ScreenButtonHeader, ScreenHeaderContainer } from "./style"
 
-import imgBack from "../../assets/back.svg"
 import { useNavigate } from "react-router-dom"
+
+import imgBack from "../../assets/back.svg"
 
 function ScreenHeader(props) {
 

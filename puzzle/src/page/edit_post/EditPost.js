@@ -1,29 +1,34 @@
-import { useNavigate } from "react-router";
-import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 import { ButtonCancel, ButtonOk, DivButtonsContainer, DivInputFile, DivInputsContainer, InputFileContainer, InputLegendContainer, SpanInsertPost } from "./style";
+import ScreenHeader from "../../components/sreen_header/ScreenHeader";
+
+import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { api } from "../../services/api";
-import genericImg_user from "../../assets/genericImg_user.jpg"
 
 function EditPost() {
   const images = 'http://localhost:8000/uploads/'
+
   const param = useParams()
   const post_id = parseInt(param.postId, 10)
 
-  
+
+  // ----------- HOOKS -----------
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState('');
   const [editLegend, setEditLegend] = useState('');
   const [postInformations, setPostInformations] = useState('')
   const [initialImageUrl, setInitialImageUrl] = useState('');
 
+  // ----------- NAVIGATE -----------
   const navigate = useNavigate()
 
   function goToHomePage() {
     navigate("/home");
   }
 
+
+  // ----------- USEEFFECTS -----------
   useEffect(() => {
     async function fetchPosts() {
       try {
@@ -34,7 +39,7 @@ function EditPost() {
         console.error('Erro ao recuperar as informações do post:', error);
       }
     }
-  
+
     fetchPosts();
   }, [post_id]);
 
@@ -43,12 +48,10 @@ function EditPost() {
     if (initialImageUrl) {
       setPreview(images + initialImageUrl);
     } else {
-      setPreview(initialImageUrl);  // Se não houver imagem inicial, pode ser uma string vazia ou algo do tipo
+      setPreview(initialImageUrl);
     }
   }, [postInformations]);
-  
-  
-  
+
   useEffect(() => {
     const initialImageUrl = images + postInformations.img_post;
     if (initialImageUrl) {
@@ -56,6 +59,16 @@ function EditPost() {
     }
   }, [postInformations]);
 
+  useEffect(() => {
+    console.log('image', image);
+  }, [image]);
+
+  useEffect(() => {
+    console.log('preview', preview);
+  }, [preview]);
+
+
+  // ----------- EDIÇÃO DO POST -----------
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -73,13 +86,14 @@ function EditPost() {
     }
   };
 
+
   const handleInputChange = (e) => {
     setEditLegend(e.target.value);
   };
 
-  function handleImageChange(e) {
+  const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
-  
+
     if (selectedImage) {
       setImage(selectedImage);
       setPreview(URL.createObjectURL(selectedImage));  // Correção aqui
@@ -88,16 +102,7 @@ function EditPost() {
     }
   }
 
-  useEffect(() => {
-    console.log('image', image);
-  }, [image]);
-
-  useEffect(() => {
-    console.log('preview', preview);
-  }, [preview]);
-
   const handleImageClick = () => {
-    // Ativar click no input que está oculto.
     document.getElementById('imageInput').click();
   };
 
@@ -124,10 +129,10 @@ function EditPost() {
           </InputFileContainer>
         </DivInputFile>
         <SpanInsertPost>Alterar legenda</SpanInsertPost>
-        <InputLegendContainer 
-          type="text" 
+        <InputLegendContainer
+          type="text"
           value={editLegend}
-          onChange={handleInputChange}/>
+          onChange={handleInputChange} />
       </DivInputsContainer>
       <DivButtonsContainer>
         <ButtonCancel onClick={goToHomePage}>Cancelar</ButtonCancel>

@@ -1,15 +1,19 @@
+import { BodyImgsContacts, DivNotPosts, DivPostsContactImgs, TextNotPosts } from "./style"
+
 import PostImage from "../../components/post_image/PostImage"
 import ScreenHeader from "../../components/sreen_header/ScreenHeader"
 
-import imgExemp from "../../assets/exemploImagem.svg"
-import { BodyImgsContacts, DivNotPosts, DivPostsContactImgs, TextNotPosts } from "./style"
 import { useEffect, useState } from "react"
 import { api } from "../../services/api"
 
 function ProfilePosts() {
     const images = 'http://localhost:8000/uploads/'
+
+    // ----------- HOOK -----------
     const [postUserInfos, setPostUserInfos] = useState([]);
 
+
+    // ----------- LISTA DE TODOS OS POSTS DO USUÁRIO LOGADO -----------
     useEffect(() => {
         const userIdLogin = parseInt(localStorage.getItem("@Auth:user_id"), 10)
         async function fetchPosts() {

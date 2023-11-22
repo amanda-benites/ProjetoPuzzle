@@ -1,24 +1,28 @@
+import { ButtonBack, EffectChat, PopUp, PopUpOverlay } from "./style";
+
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from 'react-router-dom';
+import { api } from "../../services/api";
+
 import axios from "axios";
-import ContactMensage from "../../components/contact_mensage/ContactMensage";
+
 import DateLine from "../../components/date_line/DateLine";
 import FooterChat from "../../components/footer_chat/FooterChat";
 import HeaderChat from "../../components/header_chat/HeaderChat";
-import ProfileMensage from "../../components/profile_mensage/ProfileMensage";
 import genericImg_user from "../../assets/genericImg_user.jpg"
 
-import { useEffect, useState } from "react";
-import { api } from "../../services/api";
-import { useNavigate, useParams } from 'react-router-dom';
-import { ButtonBack, EffectChat, PopUp, PopUpOverlay } from "./style";
-
 function ContactChat() {
-    const images = 'http://localhost:8000/uploads/'
-
-    const [contactData, setContactData] = useState('');
-    const showDevelopmentPopup = true;
-
     const param = useParams()
     const contactIdValue = parseInt(param.contactId, 10)
+    
+    const images = 'http://localhost:8000/uploads/'
+    const showDevelopmentPopup = true;
+    
+    // ----------- HOOK -----------
+    const [contactData, setContactData] = useState('');
+    
+    
+    // ----------- NAVIGATE -----------
     const navigate = useNavigate()
 
     function goBack() {

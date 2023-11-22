@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { api } from "../../services/api";
+import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, MainFindPeople } from "./style";
+
 import GerenalFooter from "../../components/general_footer/GeneralFooter";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
-import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, MainFindPeople } from "./style";
-import genericImg_user from "../../assets/genericImg_user.jpg";
 import ContactLayout from "../../components/contact_layout/ContactLayout";
+
+import React, { useEffect, useState } from "react";
+import { api } from "../../services/api";
+
+import genericImg_user from "../../assets/genericImg_user.jpg";
 import iconSearch from "../../assets/search.svg";
 import removeImg from "../../assets/remove.svg";
 
 function FindPeople() {
     const images = 'http://localhost:8000/uploads/'
 
+    // ----------- HOOKS -----------
     const [inputValue, setInputValue] = useState('');
     const [users, setUsers] = useState([]);
-    
-    const clearInput = () => {
-        setInputValue('');
-    };
-    
+
+
+    // ----------- LISTA DE TODOS OS USUÁRIOS -----------
     useEffect(() => {
         const userId = localStorage.getItem("@Auth:user_id")
         api.get(`${api.defaults.baseURL}/user/all/${userId}`)
@@ -30,6 +31,12 @@ function FindPeople() {
                 console.log('Erro ao buscar usuários: ', error);
             });
     }, []);
+
+
+    // ----------- PESQUISAR -----------
+    const clearInput = () => {
+        setInputValue('');
+    };
 
     const filteredContacts = users.filter((contact) =>
         contact.user_name.toLowerCase().includes(inputValue.toLowerCase())
@@ -56,7 +63,7 @@ function FindPeople() {
                             key={contact.user_id}
                             imgContact={contact.img_profile !== null ? images + contact.img_profile : genericImg_user}
                             nameContact={contact.user_name}
-                            userId = {contact.user_id}
+                            userId={contact.user_id}
                         />
                     ))}
                 </MainFindPeople>

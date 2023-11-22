@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
-
 import { DivButton, DivImg, AnchorContainer } from "./style";
 
 import CoverImg from "../../components/cover_img/CoverImg";
 import LoginButton from "../../components/login_button/LoginButton";
+
+import { useNavigate } from "react-router-dom";
 
 function Cover() {
     const navigate = useNavigate()
@@ -12,13 +12,13 @@ function Cover() {
         navigate("/create");
     }
 
-    return(
+    return (
         <>
             <DivImg>
-                <CoverImg/>
+                <CoverImg />
             </DivImg>
             <DivButton>
-                <LoginButton/>
+                <LoginButton />
                 <AnchorContainer onClick={goToCoverPage}>Criar conta</AnchorContainer>
             </DivButton>
         </>

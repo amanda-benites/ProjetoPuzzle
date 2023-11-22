@@ -1,6 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { FontH1Container } from "../../styleGlobal"
 import { DivTitleContainer, DivButtonsExit, ButtonCancel, ButtonDelete } from "./style"
+import { FontH1Container } from "../../styleGlobal"
+
+import { useNavigate } from "react-router-dom";
 
 function ForgotPassword() {
 
@@ -10,7 +11,7 @@ function ForgotPassword() {
         navigate(-1);
     }
 
-    return(
+    return (
         <>
             <DivTitleContainer>
                 <FontH1Container>Esqueceu a senha?</FontH1Container>

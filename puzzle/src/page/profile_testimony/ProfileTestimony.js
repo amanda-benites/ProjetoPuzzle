@@ -1,21 +1,25 @@
+import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, BodyTestimonyProfile } from "./style";
+
 import GerenalFooter from "../../components/general_footer/GeneralFooter";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 import TestimonyLayout from "../../components/testimony_layout/TestimonyLayout";
 
-import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, BodyTestimonyProfile } from "./style";
-
 import { useEffect, useState } from "react";
-
+import { api } from "../../services/api";
+import axios from "axios";
 
 import iconSearch from "../../assets/search.svg"
 import removeImg from "../../assets/remove.svg"
-import axios from "axios";
-import { api } from "../../services/api";
 
 function ProfileTestimony() {
-    const [depositions, setDepositions] = useState([]);
     const userId = parseInt(localStorage.getItem('@Auth:user_id'), 10)
 
+    // ----------- HOOKS -----------
+    const [depositions, setDepositions] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+
+
+    // ----------- DEPOIMENTOS PARA O USUÁRIO LOGADO -----------
     useEffect(() => {
         axios.get(`${api.defaults.baseURL}/depositions/profile/${userId}`)
             .then(function (response) {
@@ -33,9 +37,7 @@ function ProfileTestimony() {
     }, []);
     
 
-
-    const [inputValue, setInputValue] = useState('');
-
+    // ----------- PESQUISAR -----------
     const clearInput = () => {
         setInputValue('');
     };

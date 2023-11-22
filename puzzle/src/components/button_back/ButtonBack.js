@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
-
 import { ButtonBackContainer, ImgBackContainer } from "./style"
+
+import { useNavigate } from "react-router-dom";
 
 import back from "../../assets/back.svg"
 

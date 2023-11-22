@@ -1,6 +1,11 @@
+// Configurações do banco de dados
 const connection = require('../config/db');
+
+// Gerenciador de variáveis de ambiente
 require("dotenv").config();
 
+
+// ------------------ LISTA DOS DEPOIMENTOS CONFORME O ID DO CONTATO ------------------
 async function findDepositions(request, response) {
     const followerId = request.params.followerId;
   
@@ -22,6 +27,8 @@ async function findDepositions(request, response) {
     });
 }
 
+
+// ------------------ LISTA DOS DEPOIMENTOS CONFORME O ID DO USUÁRIO ------------------
 async function findDepositionsToUser(request, response) {
   const userId = request.params.userId;
 
@@ -43,6 +50,8 @@ async function findDepositionsToUser(request, response) {
   });
 }
 
+
+// ------------------ LISTA DAS INFORMAÇÕES DO DEPOIMENTO ------------------
 async function selectTestimonyInfos (request, response) {
   const testimonyId = request.params.testimonyId;
 
@@ -64,7 +73,8 @@ async function selectTestimonyInfos (request, response) {
   });
 }
 
-// Função que cria um novo depoimento
+
+// ------------------ CRIAÇÃO DE DEPOIMENTO ------------------
 async function newTestimony(request, response) {
   
   const values = [
@@ -101,6 +111,8 @@ async function newTestimony(request, response) {
     }
 }
 
+
+// ------------------ ATUALIZAÇÃO DE DEPOIMENTO ------------------
 async function updateTestimony(request, response) {
   
   const values = [
@@ -140,6 +152,7 @@ async function updateTestimony(request, response) {
 }
 
   
+// ------------------ EXPORTAÇÃO DAS FUNÇÕES QUE VÃO SER ACESSADAS NAS ROTAS ------------------
 module.exports = {
     findDepositions,
     findDepositionsToUser,

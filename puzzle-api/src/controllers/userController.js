@@ -1,22 +1,22 @@
-// Importa as configurações do banco de dados na variável connection
+// Configurações do banco de dados
 const connection = require('../config/db');
 
 // Pacote para criptografar a senha de usuario
 const bcrypt = require('bcrypt');
 
-// Função que retorna todos usuários no banco de dados
+
+// ------------------ LISTAR TODOS OS USUÁRIOS QUE NÃO ESTIVEREM LOGADOS ------------------
 async function listUsers(request, response) {
-    const userId = request.params.user_id;// Recupere o email do parâmetro da rota
-    // Preparar o comando de execução no banco
+    const userId = request.params.user_id;
     connection.query('SELECT * FROM users WHERE user_id != ?', [userId], (err, results) => { 
-        try {  // Tenta retornar as solicitações requisitadas
-            if (results) {  // Se tiver conteúdo 
+        try { 
+            if (results) { 
                 response.status(200).json({
                     success: true,
                     message: 'Success in returning users.',
                     data: results
                 });
-            } else {  // Retorno com informações de erros
+            } else { 
                 response
                     .status(400)
                     .json({
@@ -26,7 +26,7 @@ async function listUsers(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) {  // Caso aconteça qualquer erro no processo na requisição, retorna uma mensagem amigável
+        } catch (e) {  
             response.status(400).json({
                 succes: false,
                 message: "An error has occurred. Unable to return user.",
@@ -37,10 +37,10 @@ async function listUsers(request, response) {
     });
 }
 
+// ------------------ LISTAR INFORMAÇÕES DO USUÁRIO LOGADO ------------------
 async function listUserInfos(request, response) {
-    const userId = request.params.user_id;// Recupere o email do parâmetro da rota
+    const userId = request.params.user_id;
   
-    // Preparar o comando de execução no banco
     connection.query('SELECT * FROM users WHERE user_id = ?', [userId], (err, results) => {
       if (err) {
         response.status(400).json({
@@ -53,7 +53,7 @@ async function listUserInfos(request, response) {
         response.status(200).json({
           success: true,
           message: 'Success in returning user informations.',
-          data: results[0] // Suponhamos que você deseja retornar apenas o primeiro resultado
+          data: results[0]
         });
       } else {
         response.status(400).json({
@@ -64,10 +64,10 @@ async function listUserInfos(request, response) {
     });
   }
 
+  // ------------------ PEGAR IMAGEM DE PERFIL DO USUÁRIO ------------------
   async function getUserImage(request, response) {
-    const userId = request.params.user_id;// Recupere o email do parâmetro da rota
+    const userId = request.params.user_id;
   
-    // Preparar o comando de execução no banco
     connection.query('SELECT img_profile FROM users WHERE user_id = ?', [userId], (err, results) => {
       if (err) {
         response.status(400).json({
@@ -80,7 +80,7 @@ async function listUserInfos(request, response) {
         response.status(200).json({
           success: true,
           message: 'Success in returning user informations.',
-          data: results[0] // Suponhamos que você deseja retornar apenas o primeiro resultado
+          data: results[0]
         });
       } else {
         response.status(400).json({
@@ -92,10 +92,10 @@ async function listUserInfos(request, response) {
   }
 
 
+  // ------------------ LISTAR AS INFORMAÇÕES DO USUÁRIO ------------------
   async function listPeopleInfos(request, response) {
-    const userId = request.params.user_id;// Recupere o email do parâmetro da rota
+    const userId = request.params.user_id;
   
-    // Preparar o comando de execução no banco
     connection.query('SELECT * FROM users WHERE user_id = ?', [userId], (err, results) => {
       if (err) {
         response.status(400).json({
@@ -108,7 +108,7 @@ async function listUserInfos(request, response) {
         response.status(200).json({
           success: true,
           message: 'Success in returning user informations.',
-          data: results[0] // Suponhamos que você deseja retornar apenas o primeiro resultado
+          data: results[0]
         });
       } else {
         response.status(400).json({
@@ -120,19 +120,16 @@ async function listUserInfos(request, response) {
   }
   
 
-// Função que cria um novo usuário 
+  // ------------------ CRIAÇÃO DE NOVO USUÁRIO ------------------
 async function storeUser(request, response) {
-    // Preparar o comando de execução no banco
     const query = 'INSERT INTO users(user_name, user_email, user_password) VALUES(?, ?, ?);';
 
-    // Recuperar os dados enviados na requisição
     const params = Array(
         request.body.user_name,
         request.body.user_email,
         bcrypt.hashSync(request.body.user_password, 10)
     );
 
-    // Executa a ação no banco e valida os retornos para o client que realizou a solicitação
     connection.query(query, params, (err, results) => {
         try {
             if (results) {
@@ -153,7 +150,7 @@ async function storeUser(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) { // Caso aconteça algum erro na execução
+        } catch (e) { 
             response.status(400).json({
                     succes: false,
                     message: "An error has occurred. Unable to register user.",
@@ -165,11 +162,8 @@ async function storeUser(request, response) {
 }
 
 
+// ------------------ ATUALIZAÇÃO DE INFORMAÇÕES DO USUÁRIO ------------------
 async function updateUser(request, response) {
-    // Preparar o comando de execução no banco
-
-    // Recuperar os dados enviados na requisição respectivamente
-
     if(request.file) {
         const query = `UPDATE users
         SET user_name = ?, user_email = ?, img_profile = ?
@@ -247,6 +241,8 @@ async function updateUser(request, response) {
     }
 }
 
+
+// ------------------ EXPORTAÇÃO DAS FUNÇÕES QUE VÃO SER ACESSADAS NAS ROTAS ------------------
 module.exports = {
     listUsers,
     listUserInfos,

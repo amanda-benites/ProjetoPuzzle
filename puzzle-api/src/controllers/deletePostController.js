@@ -1,12 +1,15 @@
-// Importa as configurações do banco de dados na variável connection
+// Configurações do banco de dados
 const connection = require('../config/db');
-// Importar o pacote dotenv, gerenciador de variáveis de ambiente
+
+// Gerenciador de variáveis de ambiente
 require("dotenv").config();
 
+
+// ------------------ EXCLUSÃO DE POSTAGENS ------------------
 async function deletePost(request, response) {
   const postId = parseInt(request.params.post_id, 10);
 
-  // Iniciar a transação
+  // Início da transação no banco de dados para excluir uma série de informações como uma unidade
   connection.beginTransaction(async function (err) {
       if (err) {
           response.status(500).json({
@@ -15,19 +18,18 @@ async function deletePost(request, response) {
               error: err
           });
           return;
-      }
+      } // Se ocorrer erro ao iniciar a transação
 
       try {
-          // Consultar e excluir registros associados em outras tabelas
+          // Exclusão de registros associados com as postagens
           await executeQuery("DELETE FROM comments WHERE post_id = ?;", [postId]);
           await executeQuery("DELETE FROM postlikes WHERE post_id = ?;", [postId]);
-          // Adicione mais consultas conforme necessário para outras tabelas
 
-          // Excluir o usuário da tabela principal
+          // Exclusão na tabela principal
           const mainDeleteQuery = "DELETE FROM posts WHERE post_id = ?;";
           const mainResult = await executeQuery(mainDeleteQuery, [postId]);
 
-          // Commit a transação se todas as consultas foram bem-sucedidas
+          // Se todas as ações forem executadas com sucesso a transação é confirmada
           connection.commit(function (err) {
               if (err) {
                   return connection.rollback(function () {
@@ -37,43 +39,42 @@ async function deletePost(request, response) {
                           error: err
                       });
                   });
-              }
-
+              } // Se houver erro com alguma ação a transação vai ser revertida
               response.status(200).json({
                   success: true,
                   message: `Sucesso! Usuário e registros associados deletados.`,
                   data: {
                       mainResult
-                      // Adicione mais resultados conforme necessário
                   }
-              });
+              }); // Se tudo funcionar
           });
       } catch (error) {
-          // Rollback da transação em caso de erro
           connection.rollback(function () {
               response.status(500).json({
                   success: false,
                   message: "Erro ao executar exclusão em cascata",
                   error
               });
-          });
+          }); // Caso ocorra algum erro
       }
   });
 }
 
-// Função utilitária para executar consultas
+// Cria uma PROMISE, promentendo um valor em algum momento ou nunca
 function executeQuery(query, params) {
   return new Promise((resolve, reject) => {
       connection.query(query, params, (err, result) => {
           if (err) {
-              reject(err);
+              reject(err); // Caso ocorra erro a PROMISE é rejeitada
           } else {
-              resolve(result);
+              resolve(result); // Se tudo funcionar a PROMISE é resolvida
           }
       });
   });
 }
 
+
+// ------------------ EXPORTAÇÃO DAS FUNÇÕES QUE VÃO SER ACESSADAS NAS ROTAS ------------------
 module.exports = {
     deletePost
 };

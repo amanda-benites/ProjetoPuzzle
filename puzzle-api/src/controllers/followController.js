@@ -1,6 +1,11 @@
-const connection = require('../config/db').promise();
+// Configurações do banco de dados
+const connection = require('../config/db');
+
+// Gerenciador de variáveis de ambiente
 require("dotenv").config();
 
+
+// ------------------ SEGUIR USUÁRIO ------------------
 async function followUser(request, response) {
   const values = [
     request.body.userIdLogin,
@@ -8,12 +13,10 @@ async function followUser(request, response) {
   ];
 
   try {
-    // Verificar se a relação de seguidor já existe
     const [existingFollow] = await connection.query('SELECT * FROM follows WHERE user_id = ? AND follower_id = ?', values);
 
     if (existingFollow.length > 0) {
       await connection.query('UPDATE follows SET isFollowed = 1 WHERE user_id = ? AND follower_id = ?', values);
-      // Se já estiver seguindo, retornar um sucesso sem fazer mais nada
       return response.status(200).json({
         success: true,
         message: 'User is already being followed.',
@@ -57,6 +60,8 @@ async function followUser(request, response) {
   }
 }
 
+
+// ------------------ UNFOLLOW ------------------
 async function unfollowUser(request, response) {
   const values = [
     request.body.userIdLogin,
@@ -96,6 +101,8 @@ async function unfollowUser(request, response) {
   }
 }
 
+
+// ------------------ SELEÇÃO DAS INFORMAÇÕES DO CONTATO ------------------
 async function selectFollowContact(request, response) {
   const values = [
     request.body.user_id,
@@ -127,6 +134,7 @@ async function selectFollowContact(request, response) {
 }
 
 
+// ------------------ SELEÇÃO DAS PESSOAS QUE O USUÁRIO SEGUE ------------------
 async function selectAllFollows(request, response) {
   const userId = parseInt(request.params.user_id, 10)
 
@@ -154,6 +162,8 @@ async function selectAllFollows(request, response) {
   }
 }
 
+
+// ------------------ EXPORTAÇÃO DAS FUNÇÕES QUE VÃO SER ACESSADAS NAS ROTAS ------------------
 module.exports = {
   followUser,
   unfollowUser,

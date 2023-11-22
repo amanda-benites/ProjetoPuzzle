@@ -1,9 +1,11 @@
-
+// Configurações do banco de dados
 const connection = require('../config/db');
-const mysql = require('mysql2/promise');
 
+// Gerenciador de variáveis de ambiente
 require("dotenv").config();
 
+
+// ------------------ REALIZAÇÃO DE LIKE OU UNLIKE ------------------
 async function likePost(request, response) {
   const values = [
     request.body.postId,
@@ -11,11 +13,11 @@ async function likePost(request, response) {
   ];
 
   try {
-    // Verificar se a relação de like já existe
+    // Verifica se a relação de like já existe
     connection.query('SELECT * FROM postlikes where post_id = ? and user_id = ?', values, (err, results) => {
       if (results.length > 0) {
         connection.query('UPDATE postlikes SET isLiked = 1 WHERE post_id = ? AND user_id = ?', values);
-        // Se já estiver curtido, retornar um sucesso sem fazer mais nada
+        // Se já estiver curtido, retorna um sucesso sem fazer mais nada
         return response.status(200).json({
           success: true,
           message: 'Post is already being liked.',
@@ -58,6 +60,8 @@ async function likePost(request, response) {
   }
 }
 
+
+// ------------------ SELECIONA O ESTADO DAS CURTIDAS ------------------
 async function isLiked(request, response) {
   const params = [
       request.body.post_id,
@@ -92,6 +96,7 @@ async function isLiked(request, response) {
 });
 }
 
+// ------------------ UNLIKE ------------------
 async function unlikePost(request, response) {
   const values = [
     request.body.postId,
@@ -129,6 +134,8 @@ async function unlikePost(request, response) {
   }
 }
 
+
+// ------------------ EXPORTAÇÃO DAS FUNÇÕES QUE VÃO SER ACESSADAS NAS ROTAS ------------------
 module.exports = {
     likePost,
     isLiked,

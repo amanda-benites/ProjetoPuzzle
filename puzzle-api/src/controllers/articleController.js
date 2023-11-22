@@ -15,7 +15,7 @@ async function listArticles(request, response) {
                     message: 'Retorno de posts com sucesso!',
                     data: results
                 });
-            } else {  // Se houver resultado com erro
+            } else { 
                 response
                     .status(400)
                     .json({
@@ -25,7 +25,7 @@ async function listArticles(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) {  // Se ocorrer qualquer erro na requisição
+        } catch (e) { 
             response.status(400).json({
                 succes: false,
                 message: "Ocorreu um erro. Não foi possível realizar sua requisição!",
@@ -60,14 +60,14 @@ async function newArticle(request, response) {
             success: true,
             message: "Sucesso! Post criado",
             data: results
-        }); // Se o artigo for criado com sucesso
+        });
     } catch (err) {
         response.status(400).json({
             success: false,
             message: "Não foi possível criar o post",
             query: query,
             sqlMessage: err.sqlMessage
-        }); // Se houver erro para criar o artigo
+        });
     }
 }
 
@@ -90,12 +90,7 @@ async function findArticle(request, response) {
           message: 'Success in returning article informations.',
           data: results[0] 
         });
-      } else {
-        response.status(400).json({
-          success: false,
-          message: `Unable to return article informations. User not found.`,
-        });
-      }
+      } 
     });
   }
   

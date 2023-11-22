@@ -18,7 +18,7 @@ async function listComment(request, response) {
                     message: 'Success to list comments!',
                     data: results
                 });
-            } else { // Retorno com informações de erros
+            } else {
                 response.status(400).json({
                     success: false,
                     message: `Unable to list comments`,
@@ -67,13 +67,13 @@ async function createComment(request, response) {
                         sqlMessage: err.sqlMessage
                     });
             }
-        } catch (e) { // Caso aconteça algum erro na execução
+        } catch (e) {
             response.status(400).json({
                     succes: false,
                     message: "An error ocurred. Unable to create comment.",
                     query: err.sql,
                     sqlMessage: err.sqlMessage
-                });
+            });
         }
     });
 }

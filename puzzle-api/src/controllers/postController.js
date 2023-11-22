@@ -1,15 +1,15 @@
-// Importa as configurações do banco de dados na variável connection
+// Configurações do banco de dados
 const connection = require('../config/db');
-// Importar o pacote dotenv, gerenciador de variáveis de ambiente
-require("dotenv").config();
 
-// Create post
+// Gerenciador de variáveis de ambiente
+require("dotenv").config();
 
 var fs = require('fs');
 
-// Função que rcebe dois argumentos: base64str, que é uma string em formato base64 a ser decodificada, e fileName, que é o nome do arquivo onde a decodificação será salva.
+// Função que rcebe dois argumentos: 
+// ----> base64str: uma string em formato base64 (vai ser decotificada)
+// ----> fileName: nome do arquivo (vai armazenar a decotificação)
 function base64_decode(base64str, fileName){
-console.log('base64_decode :', base64_decode);
   var bitmap = Buffer.from(base64str, 'base64');
 
   // O conteúdo decodificado é escrito no arquivo especificado por fileName.
@@ -20,6 +20,8 @@ console.log('base64_decode :', base64_decode);
   } );
 }
 
+
+// ------------------ CRIAÇÃO DE POSTAGEM ------------------
 async function createPost(request, response) {
     const query = 'INSERT INTO posts (user_id, img_post, legend_post) VALUES (?, ?, ?)'
 
@@ -37,9 +39,8 @@ async function createPost(request, response) {
     });
 }
 
-// -------------- Get posts --------------------
 
-// Consultar todos os posts com JOIN para obter informações do autor
+// ------------------ LISTAGEM DE TODAS AS POSTAGENS ------------------
 async function getAllPosts(req, res) {
     const query = `
     SELECT
@@ -75,6 +76,8 @@ async function getAllPosts(req, res) {
     });
   }
 
+
+  // ------------------ LISTA AS INFORMAÇÕES DE UM POST PELO ID ------------------
   async function getPostInformations(request, response) {
     const postId = request.params.post_id;
     
@@ -113,6 +116,8 @@ async function getAllPosts(req, res) {
     });
   }
 
+
+  // ------------------ LISTA OS PRIMEIROS 6 POSTS DO USUÁRIO ------------------
   async function getSixtUserPosts (request, response) {
     const postId = request.params.user_id;
     
@@ -152,6 +157,8 @@ async function getAllPosts(req, res) {
     });
   }
 
+
+  // ------------------ LISTA TODOS OS POSTS DO USUÁRIO ------------------
   async function getUserPosts (request, response) {
     const postId = request.params.user_id;
     
@@ -190,6 +197,8 @@ async function getAllPosts(req, res) {
     });
   }
 
+
+  // ------------------ PEGA A IMAGEM DA POSTAGEM CONFORME O ID ------------------
   async function getImagePost (request, response) {
     const postId = request.params.post_id;
     
@@ -214,9 +223,10 @@ async function getAllPosts(req, res) {
     });
   }
 
-  async function updatePost(request, response) {
 
-    if(request.file) {
+  // ------------------ ATUALIZAÇÃO DA POSTAGEM ------------------
+  async function updatePost(request, response) {
+    if(request.file) { // Caso a imagem seja atualizada
         const query = `UPDATE posts
         SET img_post = ?, legend_post = ?
         WHERE post_id = ?;`;
@@ -227,8 +237,6 @@ async function getAllPosts(req, res) {
             );
 
             connection.query(query, params, (err, results) => {
-                console.log('params :', params);
-                console.log('query :', query);
                     try {
                         if (results.affectedRows > 0) {
                             response.status(200).json({
@@ -253,7 +261,7 @@ async function getAllPosts(req, res) {
                         });
                     }
                 });
-    } else {
+    } else { // Caso a imagem não for atualizada
         const query = `UPDATE posts
         SET legend_post = ?
         WHERE post_id = ?;`;
@@ -261,10 +269,7 @@ async function getAllPosts(req, res) {
             request.body.postLegend,
             request.body.postId
         );
-
             connection.query(query, params, (err, results) => {
-                console.log('params :', params);
-                console.log('query :', query);
                     try {
                         if (results.affectedRows > 0) {
                             response.status(200).json({
@@ -288,12 +293,12 @@ async function getAllPosts(req, res) {
                             sqlMessage: err
                         });
                     }
-                });
+            });
     }
 }
   
   
-  
+  // ------------------ EXPORTAÇÃO DAS FUNÇÕES QUE VÃO SER ACESSADAS NAS ROTAS ------------------
   module.exports = {
       createPost,
       getAllPosts,

@@ -1,7 +1,11 @@
+// Configurações do banco de dados
 const connection = require('../config/db');
+
+// Gerenciador de variáveis de ambiente
 require("dotenv").config();
 
-// BUCAR COMENTÁRIOS
+
+// ------------------ LISTA DE TODOS OS COMENTÁRIOS CONFORME O ID DO POST ------------------
 async function listComment(request, response) {
     const postID = request.params.post_id
     const query = "SELECT C.comment_id, C.post_id, C.comment_content, U.user_name AS UserName FROM comments AS C INNER JOIN users AS U ON U.user_id = C.user_id WHERE C.post_id = ?";
@@ -32,7 +36,8 @@ async function listComment(request, response) {
     });
 }
 
-// CRIAR COMENTÁRIO
+
+// ------------------ CRIAÇÃO DE COMENTÁRIOS ------------------
 async function createComment(request, response) {
     const query = "INSERT INTO comments(post_id, user_id, comment_content) VALUES (?, ?, ?);";
 
@@ -73,6 +78,8 @@ async function createComment(request, response) {
     });
 }
 
+
+// ------------------ EXPORTAÇÃO DAS FUNÇÕES QUE VÃO SER ACESSADAS NAS ROTAS ------------------
 module.exports = {
     listComment,
     createComment

@@ -1,4 +1,4 @@
-import GerenalFooter from "../../components/general_footer/GeneralFoter";
+import GerenalFooter from "../../components/general_footer/GeneralFooter";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 import TestimonyLayout from "../../components/testimony_layout/TestimonyLayout";
 

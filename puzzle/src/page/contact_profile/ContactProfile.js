@@ -1,4 +1,4 @@
-import GerenalFooter from "../../components/general_footer/GeneralFoter"
+import GerenalFooter from "../../components/general_footer/GeneralFooter"
 
 import { ButtonSeeMore, ImgContactProfile, PostsProfile, PostsProfileDiv, PostsProfileIdent, ProfileInfos, ProfilePosts, ButtonUnfollow, ButtonTalkWith, ImgProfileDiv, DivButtonsActions, DivButtonFollow, ButtonFollow, ButtonSeeMoreDisable, MessageUnfollow } from "./style"
 

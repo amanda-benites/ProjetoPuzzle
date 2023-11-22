@@ -15,7 +15,7 @@ function ContactChat() {
     const images = 'http://localhost:8000/uploads/'
 
     const [contactData, setContactData] = useState('');
-    const [showDevelopmentPopup, setShowDevelopmentPopup] = useState(true);
+    const showDevelopmentPopup = true;
 
     const param = useParams()
     const contactIdValue = parseInt(param.contactId, 10)
@@ -35,10 +35,6 @@ function ContactChat() {
             console.error('Erro ao buscar dados do artigo:', error);
         });
     }, []);
-
-    const closeDevelopmentPopup = () => {
-        setShowDevelopmentPopup(false);
-    };
 
     return(
         <>

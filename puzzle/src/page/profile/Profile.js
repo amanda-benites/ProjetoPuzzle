@@ -1,4 +1,4 @@
-import GerenalFooter from "../../components/general_footer/GeneralFoter"
+import GerenalFooter from "../../components/general_footer/GeneralFooter"
 import HeaderProfile from "../../components/header_profile/HeaderProfile"
 
 import { ButtonSeeMore, ImgInputDiv, InputImgProfile, PostsProfile, PostsProfileDiv, PostsProfileIdent, ProfileInfos, ProfilePosts } from "./style"

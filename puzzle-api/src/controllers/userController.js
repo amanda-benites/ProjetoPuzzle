@@ -171,7 +171,6 @@ async function updateUser(request, response) {
     // Recuperar os dados enviados na requisição respectivamente
 
     if(request.file) {
-        const passwordToHash = request.body.userPassoword || ''; // Use um valor padrão se for undefined
         const query = `UPDATE users
         SET user_name = ?, user_email = ?, img_profile = ?
         WHERE user_id = ?;`;

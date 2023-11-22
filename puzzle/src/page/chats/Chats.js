@@ -1,8 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import ChatLayout from "../../components/chat_layout/ChatLayout"
-import GerenalFooter from "../../components/general_footer/GeneralFoter"
+import GerenalFooter from "../../components/general_footer/GeneralFooter"
 import ScreenHeader from "../../components/sreen_header/ScreenHeader"
+import { ButtonBack, EffectChat, PopUp, PopUpOverlay } from "./style"
 
 function Chats() {
+    const showDevelopmentPopup = true;
+    const navigate = useNavigate()
+
+    function goBack() {
+        navigate(-1);
+    }
 
     const chatValues = {
         chat1: ['Maurício Costa', 3, 1],
@@ -25,11 +33,22 @@ function Chats() {
 
     return(
         <>
-            <ScreenHeader titlePage={'Conversas'}/>
-            <div>
-                {arrayValues}
-            </div>
-            <GerenalFooter idColor='Chat'/>
+            {showDevelopmentPopup && (
+                <PopUpOverlay>
+                    <PopUp>
+                        
+                        <p>Em desenvolvimento</p>
+                        <ButtonBack onClick={goBack}>Voltar</ButtonBack>
+                    </PopUp>
+                </PopUpOverlay>
+            )}
+            <EffectChat>
+                <ScreenHeader titlePage={'Conversas'}/>
+                <div>
+                    {arrayValues}
+                </div>
+                <GerenalFooter idColor='Chat'/>
+            </EffectChat>
         </>
     )
 }

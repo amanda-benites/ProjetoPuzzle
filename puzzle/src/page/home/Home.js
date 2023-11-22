@@ -1,4 +1,4 @@
-import GerenalFooter from "../../components/general_footer/GeneralFoter"
+import GerenalFooter from "../../components/general_footer/GeneralFooter"
 import HomeHeader from "../../components/home_header/HomeHeader"
 import PostCard from "../../components/post_card/PostCard"
 import { BodyHomeContainer, ButtonUserContainer, DivProfileAccess, FinalDiv, FinalText, MainHomeContainer, MyNameText, MyPicture, MyProfile, ImgMyPicture } from "./style"

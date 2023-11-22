@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { api } from "../../services/api";
-import GerenalFooter from "../../components/general_footer/GeneralFoter";
+import GerenalFooter from "../../components/general_footer/GeneralFooter";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 import { DivSearchContainerMain, DivSearchContainer, InputSearchContainer, SpanSearchContainer, MainFindPeople } from "./style";
 import genericImg_user from "../../assets/genericImg_user.jpg";

@@ -1,4 +1,4 @@
-import GerenalFooter from "../../components/general_footer/GeneralFoter"
+import GerenalFooter from "../../components/general_footer/GeneralFooter"
 import HomeHeader from "../../components/home_header/HomeHeader"
 import PostOpenedCard from "../../components/post_opened_card/PostOpenedCard"
 import { BodyHomeContainer, DivAddComment, DivFooterPostOpened, InputAddComment, MainHomeContainer, SendMensage } from "./style"

@@ -1,4 +1,4 @@
-import GerenalFooter from "../../components/general_footer/GeneralFoter"
+import GerenalFooter from "../../components/general_footer/GeneralFooter"
 
 import { ImgInputDiv, InputImgProfile, ProfileInfos, EditButtonSaveDiv, ButtonSaveEdit, DivInfoProfileEdit, H4InfoProfileEdit, InputProfileEdit } from "./style"
 

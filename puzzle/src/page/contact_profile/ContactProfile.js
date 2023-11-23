@@ -176,7 +176,10 @@ function ContactProfile() {
                         </PostsProfileIdent>
                         <PostsProfileDiv>
                             {postUserInfos.map(postUser => (
-                                <PostsProfile key={postUser.post_id} src={images + postUser.img_post} alt="Exemplo de imagem 1" />
+                                <PostsProfile 
+                                    key={postUser.post_id} 
+                                    src={images + postUser.img_post} 
+                                    alt="Exemplo de imagem 1" />
                             ))}
                         </PostsProfileDiv>
                     </ProfilePosts>

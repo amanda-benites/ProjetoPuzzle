@@ -13,7 +13,6 @@ function ContactPosts() {
 
     const images = 'http://localhost:8000/uploads/'
 
-
     // ----------- HOOK -----------
     const [postUserInfos, setPostUserInfos] = useState([]);
 
@@ -39,7 +38,11 @@ function ContactPosts() {
             <DivPostsContactImgs>
                 {postUserInfos.length > 0 ?
                         postUserInfos.map(postUser => (
-                            <PostImageContact key={postUser.post_id} postImageContact={images + postUser.img_post} alt="Exemplo de imagem 1" />
+                            <PostImageContact 
+                                key={postUser.post_id} 
+                                postImageContact={images + postUser.img_post} 
+                                alt="Exemplo de imagem 1"  
+                                postIdValue={postUser.post_id}/>
                         ))
                     : 
                         <DivNotPosts>

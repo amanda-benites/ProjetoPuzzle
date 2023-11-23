@@ -35,7 +35,11 @@ function ProfilePosts() {
             <DivPostsContactImgs>
                 {postUserInfos.length > 0 ?
                     postUserInfos.map(postUser => (
-                        <PostImage key={postUser.post_id} postImageProfile={images + postUser.img_post} alt="Exemplo de imagem 1" />
+                        <PostImage 
+                            key={postUser.post_id} 
+                            postImageProfile={images + postUser.img_post} 
+                            alt="Exemplo de imagem 1"
+                            postIdValue={postUser.post_id} />
                     ))
                 : 
                     <DivNotPosts>

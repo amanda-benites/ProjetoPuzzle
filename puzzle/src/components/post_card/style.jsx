@@ -122,6 +122,6 @@ export const ItemsMenu = styled.button`
 
 export const DivLegendContainer = styled.div`
     width: 93vw;
-    height: 3vh;
     padding-left: 5vw;
+    padding-bottom: 1vh
 `

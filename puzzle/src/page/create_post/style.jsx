@@ -87,3 +87,8 @@ export const PostImg = styled.img`
     width: 90vw;
     height: 40vh;
 `
+
+export const LabelImage = styled.label`
+    color: #aaafae;
+    font-weight: bold;
+`

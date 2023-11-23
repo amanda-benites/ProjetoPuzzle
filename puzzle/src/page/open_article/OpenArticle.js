@@ -39,17 +39,15 @@ function OpenArticle() {
     }, []);
 
 
-    // ----------- ABRIR ARTIGO EM OUTRA PÁGINA -----------
+    // ----------- ABRIR ARTIGO EM OUTRA ABA -----------
     const copyToClipboard = () => {
         const textField = document.createElement('textarea');
         textField.innerText = articleData.article_link;
-        document.body.appendChild(textField);
+        document.body.appendChild(textField); // anexa o text field no documento, possibilitando que ele seja selecionado
         textField.select();
         document.execCommand('copy');
         textField.remove();
-        console.log('Link copied to clipboard!');
-
-        window.open(articleData.article_link, '_blank');
+        window.open(articleData.article_link, '_blank'); // abre nova aba no navegador com o link
     };
 
     return (

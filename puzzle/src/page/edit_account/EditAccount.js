@@ -1,4 +1,4 @@
-import { ImgInputDiv, InputImgProfile, ProfileInfos, EditButtonSaveDiv, ButtonSaveEdit, DivInfoProfileEdit, H4InfoProfileEdit, InputProfileEdit } from "./style"
+import { ImgInputDiv, InputImgProfile, ProfileInfos, EditButtonSaveDiv, ButtonSaveEdit, DivInfoProfileEdit, H4InfoProfileEdit, InputProfileEdit, LabelImage } from "./style"
 
 import GerenalFooter from "../../components/general_footer/GeneralFooter"
 import HeaderProfileEdit from "../../components/header_profile_edit/HeaderProfileEdit"
@@ -105,12 +105,14 @@ function EditAccount() {
             <form>
                 <ImgInputDiv onClick={handleImageClick}>
                     <InputImgProfile background={preview && (preview)} id="divInputFile">
+                    <LabelImage for="image">Alterar imagem</LabelImage>
                         <input
                             type="file"
                             name="image"
                             accept="image/*"
                             id="imageInput"
                             multiple={false}
+                            style={{display: "none"}}
                             onChange={handleImageChange}
                         />
                     </InputImgProfile>

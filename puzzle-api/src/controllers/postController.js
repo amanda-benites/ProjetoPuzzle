@@ -4,22 +4,6 @@ const connection = require('../config/db');
 // Gerenciador de variáveis de ambiente
 require("dotenv").config();
 
-var fs = require('fs');
-
-// Função que rcebe dois argumentos: 
-// ----> base64str: uma string em formato base64 (vai ser decotificada)
-// ----> fileName: nome do arquivo (vai armazenar a decotificação)
-function base64_decode(base64str, fileName){
-  var bitmap = Buffer.from(base64str, 'base64');
-
-  // O conteúdo decodificado é escrito no arquivo especificado por fileName.
-  fs.writeFileSync(fileName+'',bitmap, 'binary', function (err){
-    if(err){
-      console.log('Conversion error');
-    }
-  } );
-}
-
 
 // ------------------ CRIAÇÃO DE POSTAGEM ------------------
 async function createPost(request, response) {
@@ -102,15 +86,6 @@ async function getAllPosts(req, res) {
         console.error('Erro ao recuperar as informações do post: ' + error.message);
         return response.status(500).json({ error: 'Erro ao recuperar as informações do post' });
       }
-
-      results.forEach((post) => {
-        if (post.post_image) {
-          const base64Data = post.post_image;
-          // Define o nome do arquivo.
-          const postImg = `post_${post.post_id}.jpeg`; 
-          base64_decode(base64Data, postImg);
-        }
-      });
   
       response.json(results);
     });
@@ -143,16 +118,7 @@ async function getAllPosts(req, res) {
         console.error('Erro ao recuperar as informações do post: ' + error.message);
         return response.status(500).json({ error: 'Erro ao recuperar as informações do post' });
       }
-
-      results.forEach((post) => {
-        if (post.post_image) {
-          const base64Data = post.post_image;
-          // Define o nome do arquivo.
-          const postImg = `post_${post.post_id}.jpeg`; 
-          base64_decode(base64Data, postImg);
-        }
-      });
-  
+ 
       response.json(results);
     });
   }
@@ -183,15 +149,6 @@ async function getAllPosts(req, res) {
         console.error('Erro ao recuperar as informações do post: ' + error.message);
         return response.status(500).json({ error: 'Erro ao recuperar as informações do post' });
       }
-
-      results.forEach((post) => {
-        if (post.post_image) {
-          const base64Data = post.post_image;
-          // Define o nome do arquivo.
-          const postImg = `post_${post.post_id}.jpeg`; 
-          base64_decode(base64Data, postImg);
-        }
-      });
   
       response.json(results);
     });
@@ -209,15 +166,6 @@ async function getAllPosts(req, res) {
         console.error('Erro ao recuperar a imagem do post: ' + error.message);
         return response.status(500).json({ error: 'Erro ao recuperar a imagem do post' });
       }
-
-      results.forEach((post) => {
-        if (post.post_image) {
-          const base64Data = post.post_image;
-          // Define o nome do arquivo.
-          const postImg = `post_${post.post_id}.jpeg`; 
-          base64_decode(base64Data, postImg);
-        }
-      });
   
       response.json(results);
     });

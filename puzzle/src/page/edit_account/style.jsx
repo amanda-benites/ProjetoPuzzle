@@ -24,7 +24,7 @@ export const InputImgProfile = styled.div`
     justify-content: center;
     
     background: ${props => `url(${props.background}) no-repeat center center`};
-    background-size: 22vw;
+    background-size: cover;
     filter: brightness(50%);
 
     &:focus {
@@ -141,4 +141,11 @@ export const InputProfileEdit = styled.input`
         outline: 0;
         padding-left: 0.5vw;
     }
+`
+
+export const LabelImage = styled.label`
+    color: black;
+    font-weight: bold;
+    font-size: small;
+    text-align: center;
 `

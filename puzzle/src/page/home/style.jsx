@@ -72,4 +72,5 @@ export const ImgMyPicture = styled.img`
     height: 6vh;
     width: 13vw;
     border-radius: 100px;
+    object-fit: cover;;
 `

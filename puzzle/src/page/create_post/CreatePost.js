@@ -1,4 +1,4 @@
-import { ButtonCancel, ButtonOk, DivButtonsContainer, DivInputFile, DivInputsContainer, InputFileContainer, InputLegendContainer, SpanInsertPost, ImgPost } from "./style";
+import { ButtonCancel, ButtonOk, DivButtonsContainer, DivInputFile, DivInputsContainer, InputFileContainer, InputLegendContainer, SpanInsertPost, ImgPost, LabelImage } from "./style";
 import ScreenHeader from "../../components/sreen_header/ScreenHeader";
 
 import { useNavigate } from "react-router";
@@ -6,10 +6,13 @@ import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 
 function CreatePost() {
+  // ----------- HOOKS -----------
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState('');
   const [legend, setLegend] = useState('');
 
+
+  // ----------- NAVIGATES -----------
   const navigate = useNavigate()
 
   function goToHomePage() {
@@ -52,6 +55,8 @@ function CreatePost() {
     // Ativar click no input que está oculto.
     document.getElementById('imageInput').click();        
   };
+
+
   
   return (
     <form>
@@ -59,12 +64,14 @@ function CreatePost() {
       <DivInputsContainer>
         <SpanInsertPost>Inserir imagem</SpanInsertPost>
         <DivInputFile onClick={handleImageClick}>
+          {preview ? <LabelImage for="image" style={{display: "none"}}>Clique para adicionar</LabelImage> : <LabelImage for="image">Clique para adicionar</LabelImage>}
           <input
             type="file"
             name="image"
             accept="image/*"
             id="imageInput"
             multiple={false}
+            style={{display: "none"}}
             onChange={handleImageChange}
           />
           {preview && (

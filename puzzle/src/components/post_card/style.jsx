@@ -86,6 +86,7 @@ export const ImgUser = styled.img`
     height: 3.5vh;
     width: 8vw;
     border-radius: 100px;
+    object-fit: cover;
 `
 
 

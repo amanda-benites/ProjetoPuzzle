@@ -90,7 +90,12 @@ async function findArticle(request, response) {
           message: 'Success in returning article informations.',
           data: results[0] 
         });
-      } 
+      } else {	     
+      response.status(400).json({	
+        success: false,	
+        message: `Unable to return article informations. User not found.`,	
+      });	
+    }
     });
   }
   

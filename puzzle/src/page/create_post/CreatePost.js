@@ -6,61 +6,53 @@ import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 
 function CreatePost() {
-
-  // ----------- HOOKS -----------
   const [image, setImage] = useState('');
   const [preview, setPreview] = useState('');
   const [legend, setLegend] = useState('');
 
-
-  // ----------- NAVIGATE -----------
   const navigate = useNavigate()
 
   function goToHomePage() {
-    navigate("/home");
+      navigate("/home");
   }
-
-
-  // ----------- USEEFFECT -----------
-  useEffect(() => {
-    console.log('image', image);
-  }, [image]);
-
-  useEffect(() => {
-    console.log('-------------preview', preview);
-  }, [preview]);
-
 
   function handleImageChange(e) {
     setImage(e.target.files[0]);
     setPreview(URL.createObjectURL(e.target.files[0]));
   }
 
+  useEffect(() => {
+    console.log('image', image);
+  }, [image]);
 
-  // ----------- CRIAÇÃO DE POST -----------
+  useEffect(() => {
+      console.log('-------------preview', preview);
+  }, [preview]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    
     let formData = new FormData();
     formData.append('legend', legend);
     formData.append('userId', localStorage.getItem('@Auth:user_id'));
     formData.append('file', image);
-
+        
     try {
       const response = await api.post('/post/create', formData);
       navigate('/home')
-
+      
       console.log('Post criado com sucesso:', response.data);
     } catch (error) {
       console.error('Erro ao criar o post:', error);
     }
-
+    
   };
-
+  
   const handleImageClick = () => {
-    document.getElementById('imageInput').click();
+    // Ativar click no input que está oculto.
+    document.getElementById('imageInput').click();        
   };
-
+  
   return (
     <form>
       <ScreenHeader titlePage={"Criar Publicação"} />

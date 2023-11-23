@@ -8,6 +8,6 @@ const {
 } = require('../controllers/likeController');
 
 router.post('/action', likePost);
-router.put('/delete', unlikePost);
+router.put('/delete', unlikePost)
 
 module.exports = router;

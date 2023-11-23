@@ -15,14 +15,16 @@ import genericImg_user from "../../assets/genericImg_user.jpg"
 function ContactProfile() {
     const images = 'http://localhost:8000/uploads/'
 
-    const userIdLogin = parseInt(localStorage.getItem('@Auth:user_id'), 10)
-    const param = useParams()
-    const contactId = parseInt(param.userId, 10)
-
     // ----------- HOOKS -----------
     const [contactData, setContactData] = useState('');
     const [followData, setFollowData] = useState('');
     const [postUserInfos, setPostUserInfos] = useState([]);
+
+    
+    const userIdLogin = parseInt(localStorage.getItem('@Auth:user_id'), 10)
+    const param = useParams()
+    const contactId = parseInt(param.userId, 10)
+
 
 
     // ----------- NAVIGATES -----------

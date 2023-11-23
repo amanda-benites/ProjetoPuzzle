@@ -12,7 +12,7 @@ function Exit() {
 
     function signOut() {
         localStorage.clear();
-        navigate('/')
+        navigate('/auth')
     }
 
     return(

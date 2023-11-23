@@ -4,7 +4,7 @@ const router = Router();
 
 const { 
     deletePost
-} = require('../controllers/deletePostController');
+} = require('../controllers/deletePostController')
 
 
 router.delete('/values/:post_id', deletePost);

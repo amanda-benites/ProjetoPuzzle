@@ -1,6 +1,6 @@
 // Configurações do banco de dados
 const connection = require('../config/db');
-
+const mysql = require('mysql2/promise')
 // Gerenciador de variáveis de ambiente
 require("dotenv").config();
 

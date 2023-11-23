@@ -1,5 +1,5 @@
 // Configurações do banco de dados
-const connection = require('../config/db');
+const connection = require('../config/db').promise();
 
 // Gerenciador de variáveis de ambiente
 require("dotenv").config();

@@ -59,15 +59,6 @@ function EditPost() {
     }
   }, [postInformations]);
 
-  useEffect(() => {
-    console.log('image', image);
-  }, [image]);
-
-  useEffect(() => {
-    console.log('preview', preview);
-  }, [preview]);
-
-
   // ----------- EDIÇÃO DO POST -----------
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,7 +82,7 @@ function EditPost() {
     setEditLegend(e.target.value);
   };
 
-  const handleImageChange = (e) => {
+  function handleImageChange(e) {
     const selectedImage = e.target.files[0];
 
     if (selectedImage) {
@@ -101,6 +92,14 @@ function EditPost() {
       setPreview(initialImageUrl);
     }
   }
+
+  useEffect(() => {
+    console.log('image', image);
+  }, [image]);
+
+  useEffect(() => {
+    console.log('preview', preview);
+  }, [preview]);
 
   const handleImageClick = () => {
     document.getElementById('imageInput').click();

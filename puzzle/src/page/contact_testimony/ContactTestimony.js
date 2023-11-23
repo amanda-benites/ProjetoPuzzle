@@ -16,12 +16,12 @@ import iconSearch from "../../assets/search.svg"
 import removeImg from "../../assets/remove.svg"
 
 function ContactTestimony() {
-    const param = useParams()
-    const followerId = param.followerId
-
     // ----------- HOOKS -----------
     const [depositions, setDepositions] = useState([]);
     const [inputValue, setInputValue] = useState('');
+    
+    const param = useParams()
+    const followerId = param.followerId
 
 
     // ----------- NAVIGATE -----------

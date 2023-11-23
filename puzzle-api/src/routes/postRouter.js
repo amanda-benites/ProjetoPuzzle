@@ -1,7 +1,5 @@
 const { Router } = require('express');
 
-const router = Router();
-
 const { 
     createPost, 
     getAllPosts,
@@ -11,6 +9,7 @@ const {
     getImagePost,
     updatePost
 } = require('../controllers/postController');
+const router = Router();
 
 const upload = require('../config/multer');
 

@@ -8,7 +8,7 @@ const {
     selectTestimonyInfos,
     newTestimony,
     updateTestimony
-} = require('../controllers/depositionsController');
+} = require('../controllers/depositionsController')
 
 router.get('/find/:followerId', findDepositions);
 router.get('/profile/:userId', findDepositionsToUser);

@@ -12,10 +12,11 @@ import HeaderChat from "../../components/header_chat/HeaderChat";
 import genericImg_user from "../../assets/genericImg_user.jpg"
 
 function ContactChat() {
+    const images = 'http://localhost:8000/uploads/'
+    
     const param = useParams()
     const contactIdValue = parseInt(param.contactId, 10)
     
-    const images = 'http://localhost:8000/uploads/'
     const showDevelopmentPopup = true;
     
     // ----------- HOOK -----------

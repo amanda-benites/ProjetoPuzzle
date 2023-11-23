@@ -6,7 +6,7 @@ const {
     listArticles,
     newArticle,
     findArticle
-} = require('../controllers/articleController');
+} = require('../controllers/articleController')
 
 router.get('/articles', listArticles);
 router.post('/create', newArticle);

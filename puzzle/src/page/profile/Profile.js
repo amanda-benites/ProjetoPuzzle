@@ -35,17 +35,17 @@ function Profile() {
     // ----------- INFORMAÇÕES DO USUÁRIO LOGADO -----------
     useEffect(() => {
         const userId = parseInt(localStorage.getItem("@Auth:user_id"), 10);
-
+        
         axios.get(`${api.defaults.baseURL}/user/information/${userId}`)
-            .then(response => {
-                const userDataFromServer = response.data;
-                setUserData(userDataFromServer.data);
-                setImgProfile(images + userDataFromServer.data.img_profile)
-            })
-            .catch(error => {
-                console.error('Erro ao buscar dados do usuário:', error);
-            });
-    }, []);
+        .then(response => {
+            const userDataFromServer = response.data; 
+            setUserData(userDataFromServer.data);
+            setImgProfile(images + userDataFromServer.data.img_profile)
+        })
+        .catch(error => {
+            console.error('Erro ao buscar dados do usuário:', error);
+        });
+      }, []);
 
 
     // ----------- SEIS PRIMEIROS POSTS DO USUÁRIO -----------
@@ -53,7 +53,7 @@ function Profile() {
         const userIdLogin = parseInt(localStorage.getItem("@Auth:user_id"), 10)
         async function fetchPosts() {
             try {
-                const response = await api.get(`post/six/user/${userIdLogin}`);
+                const response = await api.get(`post/six/user/${userIdLogin}`); 
                 setPostUserInfos(response.data);
 
 

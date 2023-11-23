@@ -11,16 +11,15 @@ import { api } from "../../services/api"
 function CreateAccount() {
 
     const navigate = useNavigate()
-    const isButtonDisabled = user_password !== confirmPassword;
-
+    
     // ----------- HOOKS -----------
     const [user_name, setName] = useState("");
     const [user_email, setEmail] = useState("");
     const [user_password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
-
-
+    
+    
     // ----------- CRIAÇÃO DE USUÁRIO -----------
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,14 +31,16 @@ function CreateAccount() {
         try {
             await api.post("/user/create", data);
             console.log("Usuário criado com sucesso!");
-
+            
             navigate('/auth')
         } catch (error) {
             console.error("Erro ao fazer login:", error);
             setError("Credenciais inválidas. Verifique seu email e senha.");
         }
     };
-
+    
+    const isButtonDisabled = user_password !== confirmPassword;
+    
     return (
         <>
             <CreateHeader />
